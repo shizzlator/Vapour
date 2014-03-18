@@ -1,7 +1,7 @@
 Vapour
 ======
 
-Web application testing harness
+Web application testing controller
 
 - Upload tesing dll
 - Administer environmental variables
