@@ -1,6 +1,8 @@
 Vapour
 ======
 
+IDEAS STAGE!
+
 Web application testing controller
 
 - Upload test dll
