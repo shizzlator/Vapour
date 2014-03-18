@@ -3,7 +3,7 @@ Vapour
 
 Web application testing controller
 
-- Upload tesing dll
+- Upload test dll
 - Administer environmental variables
 - Runs tests in headless browser
 - Uses chosen set of saved variables to execute DEV/UAT/PROD URLs
