@@ -115,6 +115,9 @@
       <Project>{5D9C4651-7E27-422A-B574-C9FC2CE3F5AB}</Project>
       <Name>Vapour.Domain</Name>
     </ProjectReference>
+    <Compile Include="Host.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SmokeTestingController.cs" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
