@@ -1,8 +1,6 @@
 Vapour
 ======
 
-IDEAS STAGE!
-
 Web application testing controller
 
 - Upload test dll
@@ -12,7 +10,7 @@ Web application testing controller
 - Returns result(s)
 - Logs runs
  
-Maybe?
+Tech
 
 - Katana app
 - WebAPI service layer
