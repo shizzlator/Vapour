@@ -7,7 +7,7 @@ using Vapour.Domain;
 namespace Vapour.Integration.Tests
 {
     [TestFixture]
-    public class FakeTests
+    public class ProjectConfigurationRepositoryTests
     {
         private DatabaseSession _databaseSession;
         private MongoCollection _collection;
