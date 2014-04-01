@@ -16,7 +16,7 @@ namespace Vapour.Integration.Tests
         [TestFixtureSetUp]
         public void FixtureSetUp()
         {
-            _databaseSession = new DatabaseSession(ConfigurationManager.AppSettings["ConnectionString"]);
+            _databaseSession = new DatabaseSession();
             _collection = _databaseSession.GetCollection<ProjectConfiguration>("projectconfigurations");
             _projectConfigurationRepository = new ProjectConfigurationRepository(_databaseSession);
         }

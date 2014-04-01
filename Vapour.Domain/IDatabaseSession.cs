@@ -1,5 +1,4 @@
-﻿using System.Configuration;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 
 namespace Vapour.Domain
 {
@@ -10,17 +9,22 @@ namespace Vapour.Domain
 
     public class DatabaseSession : IDatabaseSession
     {
+        private readonly IConfig _config;
         private static MongoClient _mongoClient;
 
-        public DatabaseSession(string connectionString)
+        public DatabaseSession() : this(new Config()) { }
+
+        public DatabaseSession(IConfig config)
         {
-            _mongoClient = new MongoClient(connectionString);
+            _config = config;
+            _mongoClient = new MongoClient(config.ConnectionString);
         }
+
 
         public MongoCollection GetCollection<T>(string collectionName)
         {
             var server = _mongoClient.GetServer();
-            var database = server.GetDatabase(ConfigurationManager.AppSettings["DatabaseName"]);
+            var database = server.GetDatabase(_config.DatabaseName);
 
             return database.GetCollection<T>(collectionName);
         }

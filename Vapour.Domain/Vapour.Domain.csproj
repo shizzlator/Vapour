@@ -52,6 +52,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config.cs" />
+    <Compile Include="IConfig.cs" />
     <Compile Include="IDatabaseSession.cs" />
     <Compile Include="IProjectConfigurationRepository.cs" />
     <Compile Include="Interfaces\ITestRunner.cs" />

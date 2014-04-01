@@ -6,18 +6,18 @@ using Vapour.Domain.Interfaces;
 
 namespace Vapour.Web
 {
-    public class SmokeTestingController : ApiController
+    public class TestingController : ApiController
     {
         private readonly ITestRunner _testRunner;
         private readonly IProjectConfigurationRepository _projectConfigurationRepository;
 
-        public SmokeTestingController(ITestRunner testRunner, IProjectConfigurationRepository projectConfigurationRepository)
+        public TestingController(ITestRunner testRunner, IProjectConfigurationRepository projectConfigurationRepository)
         {
             _testRunner = testRunner;
             _projectConfigurationRepository = projectConfigurationRepository;
         }
 
-        public SmokeTestingController() : this(new NunitTestRunner(), new ProjectConfigurationRepository(new DatabaseSession(ConfigurationManager.AppSettings["ConnectionString"])))
+        public TestingController() : this(new NunitTestRunner(), new ProjectConfigurationRepository(new DatabaseSession()))
         {
             //TODO: IoC
         }
