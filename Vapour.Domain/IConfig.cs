@@ -4,6 +4,6 @@
     {
         string DatabaseName { get; }
         string ConnectionString { get; }
-        string DllStorePath { get; }
+        string AssemblyStorePath { get; }
     }
 }

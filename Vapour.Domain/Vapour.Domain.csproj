@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Vapour.Domain</RootNamespace>
     <AssemblyName>Vapour.Domain</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,11 +53,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="IAssemblyInfoRepository.cs" />
     <Compile Include="IConfig.cs" />
     <Compile Include="IDatabaseSession.cs" />
     <Compile Include="IProjectConfigurationRepository.cs" />
     <Compile Include="Interfaces\ITestRunner.cs" />
+    <Compile Include="ITestConfigWriter.cs" />
     <Compile Include="NunitTestRunner.cs" />
     <Compile Include="ProjectConfiguration.cs" />
     <Compile Include="ProjectConfigurationRepository.cs" />
