@@ -1,4 +1,6 @@
-﻿namespace Vapour.Web
+﻿using Vapour.Web.Interfaces;
+
+namespace Vapour.Web
 {
     public class AssemblyPathFinder : IAssemblyPathFinder
     {

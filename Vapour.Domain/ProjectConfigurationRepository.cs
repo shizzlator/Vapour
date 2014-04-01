@@ -1,5 +1,6 @@
 ﻿using MongoDB.Driver.Linq;
 using System.Linq;
+using Vapour.Domain.Interfaces;
 
 namespace Vapour.Domain
 {

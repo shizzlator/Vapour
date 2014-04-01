@@ -1,6 +1,7 @@
 ﻿using System.Web.Http;
 using Vapour.Domain;
 using Vapour.Domain.Interfaces;
+using Vapour.Web.Interfaces;
 
 namespace Vapour.Web
 {

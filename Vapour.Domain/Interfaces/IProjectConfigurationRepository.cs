@@ -1,8 +1,4 @@
-﻿using System.Linq;
-using MongoDB.Driver;
-using MongoDB.Driver.Linq;
-
-namespace Vapour.Domain
+﻿namespace Vapour.Domain.Interfaces
 {
     public interface IProjectConfigurationRepository
     {

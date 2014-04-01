@@ -4,6 +4,7 @@ using NUnit.Framework;
 using Vapour.Domain;
 using Vapour.Domain.Interfaces;
 using Vapour.Web;
+using Vapour.Web.Interfaces;
 
 namespace Vapour.Unit.Tests
 {
@@ -12,6 +13,7 @@ namespace Vapour.Unit.Tests
     {
         private const string ASSEMBLY_PATH = "D:\\vapour\\assemblies";
         private const string APP_NAME = "MyProject";
+
         private Mock<IAssemblyPathFinder> _fakeAssemblyPathFinder;
         private Mock<IProjectConfigurationRepository> _fakeProjConfigRepository;
         private Mock<ITestRunner> _fakeTestRunner;

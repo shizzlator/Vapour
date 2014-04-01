@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using Vapour.Domain.Interfaces;
 
 namespace Vapour.Domain
 {

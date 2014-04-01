@@ -1,6 +1,6 @@
 ﻿using MongoDB.Driver;
 
-namespace Vapour.Domain
+namespace Vapour.Domain.Interfaces
 {
     public interface IDatabaseSession
     {

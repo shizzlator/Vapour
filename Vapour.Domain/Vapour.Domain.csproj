@@ -53,31 +53,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="AssemblyDetails.cs" />
     <Compile Include="Config.cs" />
-    <Compile Include="IAssemblyInfoRepository.cs" />
-    <Compile Include="IConfig.cs" />
-    <Compile Include="IDatabaseSession.cs" />
-    <Compile Include="IProjectConfigurationRepository.cs" />
+    <Compile Include="Interfaces\IAssemblyInfoRepository.cs" />
+    <Compile Include="Interfaces\IConfig.cs" />
+    <Compile Include="Interfaces\IDatabaseSession.cs" />
+    <Compile Include="Interfaces\IProjectConfigurationRepository.cs" />
+    <Compile Include="Interfaces\ITestConfigWriter.cs" />
     <Compile Include="Interfaces\ITestRunner.cs" />
-    <Compile Include="ITestConfigWriter.cs" />
     <Compile Include="NunitTestRunner.cs" />
     <Compile Include="ProjectConfiguration.cs" />
     <Compile Include="ProjectConfigurationRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="NUnit\results.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="NUnit\example-results.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="NUnit\Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

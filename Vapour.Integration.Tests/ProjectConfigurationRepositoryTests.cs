@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Configuration;
 using MongoDB.Driver;
 using NUnit.Framework;
 using Vapour.Domain;
+using Vapour.Domain.Interfaces;
 
 namespace Vapour.Integration.Tests
 {
