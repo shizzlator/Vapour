@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Web.Http;
 using Microsoft.Owin.Hosting;
-using Owin;
 using Vapour.Web;
 
 namespace Vapour.Host
