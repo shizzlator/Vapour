@@ -1,10 +1,8 @@
 ﻿using Moq;
 using NUnit.Core;
 using NUnit.Framework;
-using Vapour.Domain;
 using Vapour.Domain.Interfaces;
 using Vapour.Web;
-using Vapour.Web.Interfaces;
 
 namespace Vapour.Unit.Tests
 {
@@ -14,7 +12,7 @@ namespace Vapour.Unit.Tests
         private const string ASSEMBLY_PATH = "D:\\vapour\\assemblies";
         private const string APP_NAME = "MyProject";
 
-        private Mock<IAssemblyPathFinder> _fakeAssemblyPathFinder;
+        private Mock<IAssemblyDetailsRepository> _fakeAssemblyDetailsRepository;
         private Mock<IProjectConfigurationRepository> _fakeProjConfigRepository;
         private Mock<ITestRunner> _fakeTestRunner;
         private TestingController _testingController;
@@ -25,18 +23,18 @@ namespace Vapour.Unit.Tests
         {
             _fakeTestRunner = new Mock<ITestRunner>();
             _fakeProjConfigRepository = new Mock<IProjectConfigurationRepository>();
-            _fakeAssemblyPathFinder = new Mock<IAssemblyPathFinder>();
+            _fakeAssemblyDetailsRepository = new Mock<IAssemblyDetailsRepository>();
             _fakeTestConfigWriter = new Mock<ITestConfigWriter>();
 
             _fakeTestRunner.Setup(x => x.RunTests(ASSEMBLY_PATH)).Returns(new TestResult(new TestName()));
 
-            _testingController = new TestingController(_fakeTestRunner.Object, _fakeProjConfigRepository.Object, _fakeAssemblyPathFinder.Object, _fakeTestConfigWriter.Object);
+            _testingController = new TestingController(_fakeTestRunner.Object, _fakeProjConfigRepository.Object, _fakeAssemblyDetailsRepository.Object, _fakeTestConfigWriter.Object);
         }
 
         [Test]
         public void ShouldGetAndUseAssemblyPathForGivenApplication()
         {
-            _fakeAssemblyPathFinder.Setup(x => x.GetPathFor(APP_NAME)).Returns(ASSEMBLY_PATH);
+            _fakeAssemblyDetailsRepository.Setup(x => x.GetPathFor(APP_NAME)).Returns(ASSEMBLY_PATH);
 
             _testingController.Get(APP_NAME, "Development");
 

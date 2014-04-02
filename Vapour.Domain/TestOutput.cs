@@ -1,6 +1,6 @@
 ﻿using NUnit.Core;
 
-namespace Vapour.Web
+namespace Vapour.Domain
 {
     public class TestOutput
     {

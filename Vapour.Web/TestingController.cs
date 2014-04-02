@@ -1,7 +1,7 @@
 ﻿using System.Web.Http;
 using Vapour.Domain;
+using Vapour.Domain.DataAccess;
 using Vapour.Domain.Interfaces;
-using Vapour.Web.Interfaces;
 
 namespace Vapour.Web
 {
@@ -9,18 +9,18 @@ namespace Vapour.Web
     {
         private readonly ITestRunner _testRunner;
         private readonly IProjectConfigurationRepository _projectConfigurationRepository;
-        private readonly IAssemblyPathFinder _assemblyPathFinder;
+        private readonly IAssemblyDetailsRepository _assemblyDetailsRepository;
         private readonly ITestConfigWriter _testConfigWriter;
 
-        public TestingController(ITestRunner testRunner, IProjectConfigurationRepository projectConfigurationRepository, IAssemblyPathFinder assemblyPathFinder, ITestConfigWriter testConfigWriter)
+        public TestingController(ITestRunner testRunner, IProjectConfigurationRepository projectConfigurationRepository, IAssemblyDetailsRepository assemblyDetailsRepository, ITestConfigWriter testConfigWriter)
         {
             _testRunner = testRunner;
             _projectConfigurationRepository = projectConfigurationRepository;
-            _assemblyPathFinder = assemblyPathFinder;
+            _assemblyDetailsRepository = assemblyDetailsRepository;
             _testConfigWriter = testConfigWriter;
         }
 
-        public TestingController(ITestConfigWriter testConfigWriter) : this(new NunitTestRunner(), new ProjectConfigurationRepository(new DatabaseSession()), new AssemblyPathFinder(), testConfigWriter)
+        public TestingController() : this(new NunitTestRunner(), new ProjectConfigurationRepository(new DatabaseSession()), new AssemblyDetailsRepository(), new TestConfigWriter())
         {
             //TODO: IoC?
         }
@@ -34,7 +34,7 @@ namespace Vapour.Web
             //TODO: Chill out
 
             _testConfigWriter.WriteConfigFor(appName);
-            var result = _testRunner.RunTests(_assemblyPathFinder.GetPathFor(appName));
+            var result = _testRunner.RunTests(_assemblyDetailsRepository.GetPathFor(appName));
             return new TestOutput() { TestResult = result };
         }
     }

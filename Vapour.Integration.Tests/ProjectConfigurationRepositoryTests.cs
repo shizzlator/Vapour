@@ -2,7 +2,7 @@
 using MongoDB.Driver;
 using NUnit.Framework;
 using Vapour.Domain;
-using Vapour.Domain.Interfaces;
+using Vapour.Domain.DataAccess;
 
 namespace Vapour.Integration.Tests
 {
@@ -10,25 +10,23 @@ namespace Vapour.Integration.Tests
     public class ProjectConfigurationRepositoryTests
     {
         private DatabaseSession _databaseSession;
-        private MongoCollection _collection;
         private ProjectConfigurationRepository _projectConfigurationRepository;
 
         [TestFixtureSetUp]
         public void FixtureSetUp()
         {
             _databaseSession = new DatabaseSession();
-            _collection = _databaseSession.GetCollection<ProjectConfiguration>("projectconfigurations");
             _projectConfigurationRepository = new ProjectConfigurationRepository(_databaseSession);
         }
 
         [TestFixtureTearDown]
         public void FixtureTearDown()
         {
-            _collection.RemoveAll();
+            _databaseSession.GetCollection<ProjectConfiguration>(VapourCollections.ProjectConfigurations).RemoveAll();
         }
 
         [Test]
-        public void ShouldInsertProjectConfiguration()
+        public void ShouldInsertAndRetrieveProjectConfiguration()
         {
             var configCollection = new Dictionary<string, string>() { { "baseUrl", "blah.com" }, { "someothersetting", "someothervalue" } };
             var projectConfiguration = new ProjectConfiguration(){ProjectName = "TestProject", Environment = "Development", ConfigurationCollection = configCollection};
@@ -36,6 +34,7 @@ namespace Vapour.Integration.Tests
             _projectConfigurationRepository.Insert(projectConfiguration);
 
             var retrievedConfig = _projectConfigurationRepository.GetConfig("TestProject", "Development");
+
             Assert.That(retrievedConfig.ConfigurationCollection["baseUrl"], Is.EqualTo("blah.com"));
             Assert.That(retrievedConfig.ConfigurationCollection["someothersetting"], Is.EqualTo("someothervalue"));
         }
