@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using MongoDB.Driver;
 using NUnit.Framework;
 using Vapour.Domain;
 using Vapour.Domain.DataAccess;
@@ -11,10 +10,15 @@ namespace Vapour.Integration.Tests
     {
         private DatabaseSession _databaseSession;
         private ProjectConfigurationRepository _projectConfigurationRepository;
+        private ProjectConfiguration _projectConfiguration;
+        private Dictionary<string, string> _configurationCollection;
 
         [TestFixtureSetUp]
         public void FixtureSetUp()
         {
+            _configurationCollection = new Dictionary<string, string>() { { "baseUrl", "blah.com" }, { "someothersetting", "someothervalue" } };
+            _projectConfiguration = new ProjectConfiguration() { ProjectName = "TestProject", Environment = "Development", ConfigurationCollection = _configurationCollection };
+
             _databaseSession = new DatabaseSession();
             _projectConfigurationRepository = new ProjectConfigurationRepository(_databaseSession);
         }
@@ -28,15 +32,12 @@ namespace Vapour.Integration.Tests
         [Test]
         public void ShouldInsertAndRetrieveProjectConfiguration()
         {
-            var configCollection = new Dictionary<string, string>() { { "baseUrl", "blah.com" }, { "someothersetting", "someothervalue" } };
-            var projectConfiguration = new ProjectConfiguration(){ProjectName = "TestProject", Environment = "Development", ConfigurationCollection = configCollection};
-
-            _projectConfigurationRepository.Insert(projectConfiguration);
+            _projectConfigurationRepository.Insert(_projectConfiguration);
 
             var retrievedConfig = _projectConfigurationRepository.GetConfig("TestProject", "Development");
 
-            Assert.That(retrievedConfig.ConfigurationCollection["baseUrl"], Is.EqualTo("blah.com"));
-            Assert.That(retrievedConfig.ConfigurationCollection["someothersetting"], Is.EqualTo("someothervalue"));
+            Assert.That(retrievedConfig.ConfigurationCollection["baseUrl"], Is.EqualTo(_configurationCollection["baseUrl"]));
+            Assert.That(retrievedConfig.ConfigurationCollection["someothersetting"], Is.EqualTo(_configurationCollection["someothersetting"]));
         }
     }
 }
