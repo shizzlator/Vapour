@@ -12,7 +12,11 @@ namespace Vapour.Domain.DataAccess
             _databaseSession = databaseSession;
         }
 
-        public ProjectConfiguration GetConfig(string projectName, string environment)
+        public ProjectConfigurationRepository() : this(new DatabaseSession())
+        {
+        }
+
+        public ProjectConfiguration GetConfig(string projectName, string environment, string testDescription)
         {
             var jsonObject = new {Environment = environment, ProjectName = projectName};
 

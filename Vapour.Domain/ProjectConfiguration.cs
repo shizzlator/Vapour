@@ -8,6 +8,8 @@ namespace Vapour.Domain
         public ObjectId Id { get; set; }
         public string ProjectName { get; set; }
         public string Environment { get; set; }
+        public string TestDescription { get; set; }
+        public string AssemblyName { get; set; }
         public IDictionary<string, string> ConfigurationCollection { get; set; }
     }
 }

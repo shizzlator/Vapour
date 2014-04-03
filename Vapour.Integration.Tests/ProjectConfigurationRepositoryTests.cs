@@ -17,7 +17,7 @@ namespace Vapour.Integration.Tests
         public void FixtureSetUp()
         {
             _configurationCollection = new Dictionary<string, string>() { { "baseUrl", "blah.com" }, { "someothersetting", "someothervalue" } };
-            _projectConfiguration = new ProjectConfiguration() { ProjectName = "TestProject", Environment = "Development", ConfigurationCollection = _configurationCollection };
+            _projectConfiguration = new ProjectConfiguration() { ProjectName = "TestProject", Environment = "Development", TestDescription = "Smoke", ConfigurationCollection = _configurationCollection };
 
             _databaseSession = new DatabaseSession();
             _projectConfigurationRepository = new ProjectConfigurationRepository(_databaseSession);
@@ -34,7 +34,7 @@ namespace Vapour.Integration.Tests
         {
             _projectConfigurationRepository.Insert(_projectConfiguration);
 
-            var retrievedConfig = _projectConfigurationRepository.GetConfig("TestProject", "Development");
+            var retrievedConfig = _projectConfigurationRepository.GetConfig("TestProject", "Development", "Smoke");
 
             Assert.That(retrievedConfig.ConfigurationCollection["baseUrl"], Is.EqualTo(_configurationCollection["baseUrl"]));
             Assert.That(retrievedConfig.ConfigurationCollection["someothersetting"], Is.EqualTo(_configurationCollection["someothersetting"]));

@@ -2,6 +2,6 @@
 {
     public interface IProjectConfigurationRepository
     {
-        ProjectConfiguration GetConfig(string applicationName, string environment);
+        ProjectConfiguration GetConfig(string applicationName, string environment, string testDescription);
     }
 }

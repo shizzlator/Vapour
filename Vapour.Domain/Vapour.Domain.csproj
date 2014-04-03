@@ -53,22 +53,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyDetails.cs" />
     <Compile Include="Config.cs" />
-    <Compile Include="DataAccess\AssemblyDetailsRepository.cs" />
     <Compile Include="DataAccess\DatabaseSession.cs" />
     <Compile Include="DataAccess\ProjectConfigurationRepository.cs" />
     <Compile Include="DataAccess\VapourCollections.cs" />
-    <Compile Include="Interfaces\IAssemblyDetailsRepository.cs" />
+    <Compile Include="IConfigWriter.cs" />
     <Compile Include="Interfaces\IConfig.cs" />
     <Compile Include="Interfaces\IDatabaseSession.cs" />
     <Compile Include="Interfaces\IProjectConfigurationRepository.cs" />
     <Compile Include="Interfaces\ITestConfigWriter.cs" />
     <Compile Include="Interfaces\ITestRunner.cs" />
+    <Compile Include="IStreamWriterWrapper.cs" />
     <Compile Include="NunitTestRunner.cs" />
     <Compile Include="ProjectConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestConfigWriter.cs" />
+    <Compile Include="ConfigWriter.cs" />
     <Compile Include="TestOutput.cs" />
   </ItemGroup>
   <ItemGroup>
