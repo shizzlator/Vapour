@@ -1,4 +1,4 @@
-﻿namespace Vapour.Domain
+﻿namespace Vapour.Domain.Interfaces
 {
     public interface IAssemblyConfigWriter
     {

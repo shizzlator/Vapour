@@ -1,7 +1,6 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 
-namespace Vapour.Domain
+namespace Vapour.Domain.Interfaces
 {
     public interface IStreamWriterWrapper
     {

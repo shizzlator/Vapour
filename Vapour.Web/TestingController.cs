@@ -8,17 +8,15 @@ namespace Vapour.Web
     public class TestingController : ApiController
     {
         private readonly ITestRunner _testRunner;
-        private readonly IProjectConfigurationRepository _projectConfigurationRepository;
         private readonly IAssemblyConfigWriter _assemblyConfigWriter;
 
-        public TestingController(ITestRunner testRunner, IProjectConfigurationRepository projectConfigurationRepository, IAssemblyConfigWriter assemblyConfigWriter)
+        public TestingController(ITestRunner testRunner, IAssemblyConfigWriter assemblyConfigWriter)
         {
             _testRunner = testRunner;
-            _projectConfigurationRepository = projectConfigurationRepository;
             _assemblyConfigWriter = assemblyConfigWriter;
         }
 
-        public TestingController() : this(new NunitTestRunner(), new ProjectConfigurationRepository(), new AssemblyConfigWriter())
+        public TestingController() : this(new NunitTestRunner(), new AssemblyConfigWriter())
         {
             //TODO: IoC?
         }
