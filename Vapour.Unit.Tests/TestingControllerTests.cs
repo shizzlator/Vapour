@@ -16,14 +16,14 @@ namespace Vapour.Unit.Tests
         private Mock<IProjectConfigurationRepository> _fakeProjConfigRepository;
         private Mock<ITestRunner> _fakeTestRunner;
         private TestingController _testingController;
-        private Mock<IConfigWriter> _fakeTestConfigWriter;
+        private Mock<IAssemblyConfigWriter> _fakeTestConfigWriter;
 
         [SetUp]
         public void SetUp()
         {
             _fakeTestRunner = new Mock<ITestRunner>();
             _fakeProjConfigRepository = new Mock<IProjectConfigurationRepository>();
-            _fakeTestConfigWriter = new Mock<IConfigWriter>();
+            _fakeTestConfigWriter = new Mock<IAssemblyConfigWriter>();
 
             _fakeTestRunner.Setup(x => x.RunTests(ASSEMBLY_PATH)).Returns(new TestResult(new TestName()));
 

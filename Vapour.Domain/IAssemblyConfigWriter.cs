@@ -1,6 +1,6 @@
 ﻿namespace Vapour.Domain
 {
-    public interface IConfigWriter
+    public interface IAssemblyConfigWriter
     {
         void WriteConfigFor(string appNamestring, string environment, string testDescription);
     }

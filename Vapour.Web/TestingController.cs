@@ -9,33 +9,32 @@ namespace Vapour.Web
     {
         private readonly ITestRunner _testRunner;
         private readonly IProjectConfigurationRepository _projectConfigurationRepository;
-        private readonly IConfigWriter _testConfigWriter;
+        private readonly IAssemblyConfigWriter _assemblyConfigWriter;
 
-        public TestingController(ITestRunner testRunner, IProjectConfigurationRepository projectConfigurationRepository, IConfigWriter testConfigWriter)
+        public TestingController(ITestRunner testRunner, IProjectConfigurationRepository projectConfigurationRepository, IAssemblyConfigWriter assemblyConfigWriter)
         {
             _testRunner = testRunner;
             _projectConfigurationRepository = projectConfigurationRepository;
-            _testConfigWriter = testConfigWriter;
+            _assemblyConfigWriter = assemblyConfigWriter;
         }
 
-        public TestingController() : this(new NunitTestRunner(), new ProjectConfigurationRepository(), new ConfigWriter())
+        public TestingController() : this(new NunitTestRunner(), new ProjectConfigurationRepository(), new AssemblyConfigWriter())
         {
             //TODO: IoC?
         }
 
-        [Route("{testDescription}/{appName}/{environment}")]
-        public TestOutput Get(string appName, string environment, string testDescription)
+        [Route("{testDescription}/{projectName}/{environment}")]
+        public TestOutput Get(string testDescription, string projectName, string environment)
         {
-            //TODO: Get path to DLL
             //TODO: copy dll to run path
-            //TODO: Form test.dll.config file from projectConfiguration document saved in mongoDb
             //TODO: save config in run path
             //TODO: run tests
             //TODO: Deal with result!
             //TODO: Chill out
 
-            _testConfigWriter.WriteConfigFor(appName, environment, testDescription);
-            var result = _testRunner.RunTests("PATH TO ASSEMBLY");
+            _assemblyConfigWriter.WriteConfigFor(projectName, environment, testDescription);
+
+            var result = _testRunner.RunTests("");
             return new TestOutput() { TestResult = result };
         }
     }
