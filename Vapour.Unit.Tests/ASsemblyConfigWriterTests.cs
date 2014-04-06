@@ -41,7 +41,7 @@ namespace Vapour.Unit.Tests
         {
             _assemblyConfigWriter.WriteConfigFor("AppYours", "TeamDave", "Smoke");
 
-            _fakeStreamWriter.Verify(x => x.CreateFile("D:\\Vapour\\Projects\\AppYours\\Smoke"), Times.Once);
+            _fakeStreamWriter.Verify(x => x.CreateFile("D:\\Vapour\\Projects\\AppYours\\Smoke\\AppYours.Smoke.Tests.dll.config"), Times.Once);
         }
 
         [Test]
@@ -59,7 +59,7 @@ namespace Vapour.Unit.Tests
             _assemblyConfigWriter.WriteConfigFor("AppYours", "TeamDave", "Smoke");
 
             _fakeStreamWriter.Verify(x => x.WriteLine(@"<?xml version=""1.0"" encoding=""utf-8""?><configuration><appSettings>"), Times.Once);
-            _fakeStreamWriter.Verify(x => x.WriteLine(@"</appSettings>"), Times.Once);
+            _fakeStreamWriter.Verify(x => x.WriteLine(@"</appSettings></configuration>"), Times.Once);
         }
     }
 }

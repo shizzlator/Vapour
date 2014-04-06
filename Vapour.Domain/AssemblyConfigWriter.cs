@@ -37,14 +37,14 @@ namespace Vapour.Domain
                 {
                     _streamWriter.WriteLine(string.Format(@"<add key=""{0}"" value=""{1}"" />", appSetting.Key, appSetting.Value));
                 }
-                _streamWriter.WriteLine(@"</appSettings>");
+                _streamWriter.WriteLine(@"</appSettings></configuration>");
             }
         }
 
         private string GetPathFor(ProjectConfiguration projectConfiguration)
         {
-            return string.Format("{0}\\{1}\\{2}", _vapourConfig.AssemblyStorePath.TrimEnd("\\".ToCharArray()),
-                projectConfiguration.ProjectName, projectConfiguration.TestDescription);
+            return string.Format("{0}\\{1}\\{2}\\{3}.dll.config", _vapourConfig.AssemblyStorePath.TrimEnd("\\".ToCharArray()),
+                projectConfiguration.ProjectName, projectConfiguration.TestDescription, projectConfiguration.AssemblyName);
         }
     }
 }

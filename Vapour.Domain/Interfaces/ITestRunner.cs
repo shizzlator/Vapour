@@ -4,8 +4,8 @@ namespace Vapour.Domain.Interfaces
 {
     public interface ITestRunner
     {
-        TestResult RunTests(string pathToAssembly);
-        TestResult RunTests(string pathToAssembly, string testFixture);
-        TestResult RunTest(string pathToAssembly, string testMethod);
+        TestResult RunTests(string projectName, string environment, string testDescription);
+        TestResult RunTests(string projectName, string environment, string testDescription, string testFixtureName);
+        TestResult RunTest(string projectName, string environment, string testDescription, string testFixtureName, string testMethod);
     }
 }

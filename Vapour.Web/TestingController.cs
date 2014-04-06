@@ -32,8 +32,7 @@ namespace Vapour.Web
 
             _assemblyConfigWriter.WriteConfigFor(projectName, environment, testDescription);
 
-            var result = _testRunner.RunTests("");
-            return new TestOutput() { TestResult = result };
+            return new TestOutput();
         }
     }
 }
