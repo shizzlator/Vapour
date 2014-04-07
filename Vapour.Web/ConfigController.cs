@@ -1,35 +1,28 @@
-﻿using System.Collections.Generic;
-using System.Web.Http;
+﻿using System.Web.Http;
+using Vapour.Domain;
+using Vapour.Domain.DataAccess;
+using Vapour.Domain.Interfaces;
 
 namespace Vapour.Web
 {
     public class ConfigController : ApiController
     {
-        // GET api/<controller>
-        public IEnumerable<string> Get()
+        private readonly IProjectConfigurationRepository _projectConfigurationRepository;
+
+        public ConfigController(IProjectConfigurationRepository projectConfigurationRepository)
         {
-            return new string[] { "value1", "value2" };
+            _projectConfigurationRepository = projectConfigurationRepository;
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
+        public ConfigController() : this(new ProjectConfigurationRepository())
         {
-            return "value";
+            
         }
 
-        // POST api/<controller>
-        public void Post([FromBody]string value)
+        [Route("config/save/")]
+        public void Put([FromUri]ProjectConfiguration projectConfiguration)
         {
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
+            _projectConfigurationRepository.Save(projectConfiguration);
         }
     }
 }
