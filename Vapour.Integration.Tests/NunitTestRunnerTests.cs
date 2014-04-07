@@ -15,6 +15,8 @@ namespace Vapour.Integration.Tests
         private ProjectConfigurationRepository _projectConfigurationRepository;
         private ProjectConfiguration _projectConfiguration;
         private Dictionary<string, string> _configurationCollection;
+        private Mock<IConfig> _config;
+        private NunitTestRunner _nunitTestRunner;
 
         [TestFixtureSetUp]
         public void FixtureSetUp()
@@ -33,17 +35,40 @@ namespace Vapour.Integration.Tests
             _databaseSession.GetCollection<ProjectConfiguration>(VapourCollections.ProjectConfigurations).RemoveAll();
         }
 
+        [SetUp]
+        public void SetUp()
+        {
+            _config = new Mock<IConfig>();
+            _nunitTestRunner = new NunitTestRunner(new AssemblyConfigWriter(new StreamWriterWrapper(), new ProjectConfigurationRepository(), _config.Object), new ProjectConfigurationRepository(), _config.Object);
+
+            _config.Setup(x => x.AssemblyStorePath).Returns(string.Format("{0}\\..\\..\\TestAssemblies", Directory.GetCurrentDirectory()));
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            File.Delete(PathToConfig());
+        }
+
         [Test]
         public void ShouldRunTestsForGivenProject()
         {
-            var config = new Mock<IConfig>();
-            var nunitTestRunner = new NunitTestRunner(new AssemblyConfigWriter(new StreamWriterWrapper(), new ProjectConfigurationRepository(), config.Object), new ProjectConfigurationRepository(), config.Object);
-
-            config.Setup(x => x.AssemblyStorePath).Returns(string.Format("{0}\\..\\..\\TestASsemblies", Directory.GetCurrentDirectory()));
-
-            var testResult = nunitTestRunner.RunTests(_projectConfiguration.ProjectName, _projectConfiguration.Environment, _projectConfiguration.TestDescription);
+            var testResult = _nunitTestRunner.RunTests(_projectConfiguration.ProjectName, _projectConfiguration.Environment, _projectConfiguration.TestDescription);
 
             Assert.That(testResult.IsSuccess, Is.True);
+        }
+
+        [Test]
+        public void ShouldWriteConfigToAssemblyDirectory()
+        {
+            _nunitTestRunner.RunTests(_projectConfiguration.ProjectName, _projectConfiguration.Environment, _projectConfiguration.TestDescription);
+
+            Assert.That(File.Exists(PathToConfig()), Is.True);
+        }
+
+        private string PathToConfig()
+        {
+            return string.Format("{0}\\..\\..\\TestASsemblies\\{1}\\{2}\\{3}.dll.config", Directory.GetCurrentDirectory(), _projectConfiguration.ProjectName, _projectConfiguration.TestDescription, _projectConfiguration.AssemblyName);
         }
     }
 }
