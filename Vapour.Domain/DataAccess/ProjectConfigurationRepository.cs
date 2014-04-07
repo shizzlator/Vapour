@@ -25,12 +25,7 @@ namespace Vapour.Domain.DataAccess
             return result.FirstOrDefault();
         }
 
-        public void Save(ProjectConfiguration projectConfiguration)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public ProjectConfiguration Insert(ProjectConfiguration projectConfiguration)
+        public ProjectConfiguration Save(ProjectConfiguration projectConfiguration)
         {
             _databaseSession.Insert<ProjectConfiguration>(projectConfiguration, VapourCollections.ProjectConfigurations);
 
