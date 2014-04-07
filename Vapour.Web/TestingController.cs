@@ -1,6 +1,5 @@
 ﻿using System.Web.Http;
 using Vapour.Domain;
-using Vapour.Domain.DataAccess;
 using Vapour.Domain.Interfaces;
 
 namespace Vapour.Web
@@ -8,21 +7,19 @@ namespace Vapour.Web
     public class TestingController : ApiController
     {
         private readonly ITestRunner _testRunner;
-        private readonly IAssemblyConfigWriter _assemblyConfigWriter;
 
-        public TestingController(ITestRunner testRunner, IAssemblyConfigWriter assemblyConfigWriter)
+        public TestingController(ITestRunner testRunner)
         {
             _testRunner = testRunner;
-            _assemblyConfigWriter = assemblyConfigWriter;
         }
 
-        public TestingController() : this(new NunitTestRunner(), new AssemblyConfigWriter())
+        public TestingController() : this(new NunitTestRunner())
         {
             //TODO: IoC?
         }
 
-        [Route("{testDescription}/{projectName}/{environment}")]
-        public TestOutput Get(string testDescription, string projectName, string environment)
+        [Route("{projectName}/{environment}/{testDescription}")]
+        public TestOutput Get(string projectName, string environment, string testDescription)
         {
             //TODO: copy dll to run path
             //TODO: save config in run path
@@ -30,9 +27,9 @@ namespace Vapour.Web
             //TODO: Deal with result!
             //TODO: Chill out
 
-            _assemblyConfigWriter.WriteConfigFor(projectName, environment, testDescription);
+            var result = _testRunner.RunTests(projectName, environment, testDescription);
 
-            return new TestOutput();
+            return new TestOutput(){TestResult = result};
         }
     }
 }

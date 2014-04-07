@@ -41,7 +41,7 @@ namespace Vapour.Integration.Tests
             _config = new Mock<IConfig>();
             _nunitTestRunner = new NunitTestRunner(new AssemblyConfigWriter(new StreamWriterWrapper(), new ProjectConfigurationRepository(), _config.Object), new ProjectConfigurationRepository(), _config.Object);
 
-            _config.Setup(x => x.AssemblyStorePath).Returns(string.Format("{0}\\..\\..\\TestAssemblies", Directory.GetCurrentDirectory()));
+            _config.Setup(x => x.AssemblyStorePath).Returns(AssemblyStorePath());
         }
 
         [TearDown]
@@ -66,9 +66,14 @@ namespace Vapour.Integration.Tests
             Assert.That(File.Exists(PathToConfig()), Is.True);
         }
 
+        private static string AssemblyStorePath()
+        {
+            return string.Format("{0}\\..\\..\\TestAssemblies", Directory.GetCurrentDirectory());
+        }
+
         private string PathToConfig()
         {
-            return string.Format("{0}\\..\\..\\TestASsemblies\\{1}\\{2}\\{3}.dll.config", Directory.GetCurrentDirectory(), _projectConfiguration.ProjectName, _projectConfiguration.TestDescription, _projectConfiguration.AssemblyName);
+            return string.Format("{0}\\{1}\\{2}\\{3}.dll.config", AssemblyStorePath(), _projectConfiguration.ProjectName, _projectConfiguration.TestDescription, _projectConfiguration.AssemblyName);
         }
     }
 }
