@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using Vapour.Domain.DataAccess;
 using Vapour.Domain.Interfaces;
 
@@ -43,6 +44,7 @@ namespace Vapour.Domain
 
         private string GetPathFor(ProjectConfiguration projectConfiguration)
         {
+            //TODO: Use Path.Combine
             return string.Format("{0}\\{1}\\{2}\\{3}.dll.config", _vapourConfig.AssemblyStorePath.TrimEnd("\\".ToCharArray()),
                 projectConfiguration.ProjectName, projectConfiguration.TestDescription, projectConfiguration.AssemblyName);
         }
