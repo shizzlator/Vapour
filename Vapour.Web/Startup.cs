@@ -7,8 +7,6 @@ namespace Vapour.Web
     {
         public void Configuration(IAppBuilder app)
         {
-            app.UseStaticFiles("/files");
-
             ConfigureWebApi(app);
         }
 

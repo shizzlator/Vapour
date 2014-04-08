@@ -2,11 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title></title>
+        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
         <script>
-            $(':button').click(function () {
+            $(function (){$('#upload').click(function () {
                 var formData = new FormData($('form')[0]);
-                $.ajax({
-                    url: 'save/assembly/FakeProject/Development/Smoke',  //Server script to process data
+                var request = $.ajax({
+                    url: '../save/assembly/FakeProject/Development/Smoke',  //Server script to process data
                     type: 'POST',
                     xhr: function () {  // Custom XMLHttpRequest
                         var myXhr = $.ajaxSettings.xhr();
@@ -16,13 +17,16 @@
                         return myXhr;
                     },
                     // Form data
+                    error: function () {
+                        alert(request.responseText);
+                    },
                     data: formData,
                     //Options to tell jQuery not to process data or worry about content-type.
                     cache: false,
                     contentType: false,
                     processData: false
                 });
-            });
+            });});
 
             function progressHandlingFunction(e) {
                 if (e.lengthComputable) {
@@ -34,7 +38,7 @@
     <body>
         <form enctype="multipart/form-data">
             <input name="file" type="file" />
-            <input type="button" value="Upload"/>
+            <input id="upload" type="button" value="Upload"/>
         </form>
         <progress></progress>
     </body>

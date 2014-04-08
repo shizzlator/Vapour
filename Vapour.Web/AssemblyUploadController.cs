@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -31,17 +33,26 @@ namespace Vapour.Web
 
             var projectConfiguration = _projectConfigurationRepository.GetConfig(projectName, environment, testDescription);
 
-            var provider = new MultipartFormDataStreamProvider(GetAssemblyPathFor(projectConfiguration));
+            string assemblyPath = GetAssemblyPathFor(projectConfiguration);
+
+            var provider = new MultipartFormDataStreamProvider(assemblyPath);
 
             try
             {
                 await Request.Content.ReadAsMultipartAsync(provider);
+                FixFileName(provider, assemblyPath);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
             catch (Exception e)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
+        }
+
+        private static void FixFileName(MultipartFormDataStreamProvider provider, string assemblyPath)
+        {
+            var assembly = provider.FileData.First();
+            File.Move(assembly.LocalFileName, Path.Combine(assemblyPath, assembly.Headers.ContentDisposition.FileName.Trim('"')));
         }
 
         private void CheckRequestIsMultipartFormData()
