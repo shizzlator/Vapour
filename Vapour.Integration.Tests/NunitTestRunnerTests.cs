@@ -26,7 +26,7 @@ namespace Vapour.Integration.Tests
 
             _databaseSession = new DatabaseSession();
             _projectConfigurationRepository = new ProjectConfigurationRepository(_databaseSession);
-            _projectConfigurationRepository.Insert(_projectConfiguration);
+            _projectConfigurationRepository.Save(_projectConfiguration);
         }
 
         [TestFixtureTearDown]

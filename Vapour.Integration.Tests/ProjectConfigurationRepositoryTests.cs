@@ -32,7 +32,7 @@ namespace Vapour.Integration.Tests
         [Test]
         public void ShouldInsertAndRetrieveProjectConfiguration()
         {
-            _projectConfigurationRepository.Insert(_projectConfiguration);
+            _projectConfigurationRepository.Save(_projectConfiguration);
 
             var retrievedConfig = _projectConfigurationRepository.GetConfig("TestProject", "Development", "Smoke");
 

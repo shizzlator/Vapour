@@ -20,7 +20,7 @@ namespace Vapour.Web
         }
 
         [Route("config/save/")]
-        public void Put([FromUri]ProjectConfiguration projectConfiguration)
+        public void Post(ProjectConfiguration projectConfiguration)
         {
             _projectConfigurationRepository.Save(projectConfiguration);
         }
