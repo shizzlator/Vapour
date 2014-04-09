@@ -7,7 +7,7 @@
             $(function (){$('#upload').click(function () {
                 var formData = new FormData($('form')[0]);
                 var request = $.ajax({
-                    url: '../save/assembly/FakeProject/Development/Smoke',  //Server script to process data
+                    url: 'save/assembly/FakeProject/Development/Smoke',  //Server script to process data
                     type: 'POST',
                     xhr: function () {  // Custom XMLHttpRequest
                         var myXhr = $.ajaxSettings.xhr();

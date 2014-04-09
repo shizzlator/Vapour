@@ -19,10 +19,16 @@ namespace Vapour.Web
             
         }
 
-        [Route("config/save/")]
+        [Route("config/save")]
         public ProjectConfiguration Post(ProjectConfiguration projectConfiguration)
         {
             return _projectConfigurationRepository.Save(projectConfiguration);
+        }
+
+        [Route("config/{projectName}/{environment}/{testDescription}")]
+        public ProjectConfiguration Get(string projectName, string environment, string testDescription)
+        {
+            return _projectConfigurationRepository.GetConfig(projectName, environment, testDescription);
         }
     }
 }
