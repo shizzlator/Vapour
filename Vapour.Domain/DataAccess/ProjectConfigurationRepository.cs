@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Vapour.Domain.Interfaces;
 
 namespace Vapour.Domain.DataAccess
@@ -18,9 +19,9 @@ namespace Vapour.Domain.DataAccess
 
         public ProjectConfiguration GetConfig(string projectName, string environment, string testDescription)
         {
-            var jsonObject = new {Environment = environment, ProjectName = projectName};
+            var queryObject = new {Environment = environment, ProjectName = projectName, TestDescription = testDescription};
 
-            var result = _databaseSession.RunQuery<ProjectConfiguration>(jsonObject, VapourCollections.ProjectConfigurations);
+            var result = _databaseSession.RunQuery<ProjectConfiguration>(queryObject, VapourCollections.ProjectConfigurations);
 
             return result.FirstOrDefault();
         }
@@ -30,6 +31,12 @@ namespace Vapour.Domain.DataAccess
             _databaseSession.Insert<ProjectConfiguration>(projectConfiguration, VapourCollections.ProjectConfigurations);
 
             return projectConfiguration;
+        }
+
+        public List<ProjectConfiguration> GetAll()
+        {
+            return _databaseSession.GetCollection<ProjectConfiguration>(VapourCollections.ProjectConfigurations)
+                .FindAllAs<ProjectConfiguration>().ToList();
         }
     }
 }

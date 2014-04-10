@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vapour.Web", "Vapour.Web\Vapour.Web.csproj", "{1933BB33-C356-4A31-B952-9D7D4AE3B54A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vapour.API", "Vapour.API\Vapour.API.csproj", "{1933BB33-C356-4A31-B952-9D7D4AE3B54A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vapour.Domain", "Vapour.Domain\Vapour.Domain.csproj", "{5D9C4651-7E27-422A-B574-C9FC2CE3F5AB}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vapour.Unit.Tests", "Vapour.Unit.Tests\Vapour.Unit.Tests.csproj", "{BE90C0DF-C4A5-4BEC-BEB9-435AB4176D66}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{73D0E5CB-D4AB-4EF8-A0E7-11913C508040}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vapour.Web", "Vapour.Web\Vapour.Web.csproj", "{DA628967-7630-4C76-BC50-CEE2C90C24CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{BE90C0DF-C4A5-4BEC-BEB9-435AB4176D66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE90C0DF-C4A5-4BEC-BEB9-435AB4176D66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE90C0DF-C4A5-4BEC-BEB9-435AB4176D66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA628967-7630-4C76-BC50-CEE2C90C24CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA628967-7630-4C76-BC50-CEE2C90C24CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA628967-7630-4C76-BC50-CEE2C90C24CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA628967-7630-4C76-BC50-CEE2C90C24CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

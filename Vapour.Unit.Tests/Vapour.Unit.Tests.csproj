@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyConfigWriterTests.cs" />
+    <Compile Include="ProjectsViewModelFactoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -74,7 +75,7 @@
       <Name>Vapour.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\Vapour.Web\Vapour.Web.csproj">
-      <Project>{1933bb33-c356-4a31-b952-9d7d4ae3b54a}</Project>
+      <Project>{da628967-7630-4c76-bc50-cee2c90c24cf}</Project>
       <Name>Vapour.Web</Name>
     </ProjectReference>
   </ItemGroup>

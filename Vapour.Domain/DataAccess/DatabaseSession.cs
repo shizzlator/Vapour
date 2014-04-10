@@ -1,5 +1,6 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
+using ServiceStack.Text;
 using Vapour.Domain.Interfaces;
 
 namespace Vapour.Domain.DataAccess

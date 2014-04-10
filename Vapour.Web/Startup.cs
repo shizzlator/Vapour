@@ -1,20 +1,14 @@
-﻿using System.Web.Http;
+﻿using Microsoft.Owin;
 using Owin;
 
+[assembly: OwinStartupAttribute(typeof(Vapour.Web.Startup))]
 namespace Vapour.Web
 {
-    public class Startup
+    public partial class Startup
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureWebApi(app);
-        }
-
-        private void ConfigureWebApi(IAppBuilder app)
-        {
-            var config = new HttpConfiguration();
-            config.MapHttpAttributeRoutes();
-            app.UseWebApi(config);
+            ConfigureAuth(app);
         }
     }
 }

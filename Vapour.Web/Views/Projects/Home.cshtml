@@ -1,0 +1,28 @@
+﻿@model Vapour.Web.Models.ProjectsViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
+        <h2>Projects</h2>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Example row of columns -->
+    @foreach (var project in Model.Projects)
+    {
+        <div class="row">
+            <div class="col-lg-10">
+                <span>@project.Key</span>
+                @Html.DropDownListFor(x => x.Projects[project.Key].Environments, new SelectList(Model.Projects[project.Key].Environments), new {@class = "dropdown"})
+                @Html.DropDownListFor(x => x.Projects[project.Key].TestDescriptions, new SelectList(Model.Projects[project.Key].TestDescriptions), new { @class = "dropdown" })
+                <a class="btn btn-default" href="#" role="button">Run tests</a>
+            </div>
+        </div>
+    }
+    <hr>
+</div> <!-- /container -->

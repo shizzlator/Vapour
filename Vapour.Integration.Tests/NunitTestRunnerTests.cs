@@ -32,7 +32,7 @@ namespace Vapour.Integration.Tests
         [TestFixtureTearDown]
         public void FixtureTearDown()
         {
-            _databaseSession.GetCollection<ProjectConfiguration>(VapourCollections.ProjectConfigurations).RemoveAll();
+            //_databaseSession.GetCollection<ProjectConfiguration>(VapourCollections.ProjectConfigurations).RemoveAll();
         }
 
         [SetUp]
