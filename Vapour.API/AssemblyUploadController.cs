@@ -9,7 +9,7 @@ using Vapour.Domain;
 using Vapour.Domain.DataAccess;
 using Vapour.Domain.Interfaces;
 
-namespace Vapour.Web
+namespace Vapour.API
 {
     public class AssemblyUploadController : ApiController
     {

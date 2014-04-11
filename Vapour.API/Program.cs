@@ -7,7 +7,7 @@ namespace Vapour.API
     {
         static void Main(string[] args)
         {
-            string uri = "http://localhost:8080";
+            string uri = "http://localhost:8041";
 
             using (WebApp.Start<Startup>(uri))
             {

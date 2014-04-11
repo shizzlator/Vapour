@@ -2,8 +2,7 @@
 using Moq;
 using NUnit.Framework;
 using Vapour.Domain;
-using Vapour.Domain.Interfaces;
-using Vapour.Web.Controllers;
+using Vapour.Web.WebDomain;
 
 namespace Vapour.Unit.Tests
 {
@@ -13,7 +12,7 @@ namespace Vapour.Unit.Tests
         [Test]
         public void ShouldPopulateProjectViewModel()
         {
-            var fakeProjConfigRepo = new Mock<IProjectConfigurationRepository>();
+            var fakeProjConfigRepo = new Mock<IProjectConfigurationService>();
             var projectsViewModelFactory = new ProjectsViewModelFactory(fakeProjConfigRepo.Object);
 
             fakeProjConfigRepo.Setup(x => x.GetAll()).Returns(BuildProjectCollection());

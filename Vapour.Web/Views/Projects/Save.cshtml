@@ -1,0 +1,35 @@
+﻿@model dynamic
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    $(function () {
+        $('#save').click(function (){
+            $.ajax({
+                url: '',
+                type: 'POST',
+                data: $('#projectConfiguration').serializeObject(),
+                success: moveToAssemblyUploadScreen,
+                error: function () {
+                    alert('failure n00b-face!!');
+                }
+            });
+        });
+    });
+
+    function moveToAssemblyUploadScreen() {
+        alert('brap!');
+    }
+</script>
+<form id="projectConfiguration">
+    <fieldset>
+        <legend>Project Configuration</legend>
+        Project Name: <input name="projectName" type="text" /><br />
+        Environment: <input name="environment" type="text" /><br />
+        Test Description: <input name="testDescription" type="text" /><br />
+        Assembly Name: <input name="assemblyName" type="text" /><br />
+    </fieldset>    
+</form>
+<button id="save">Save</button>

@@ -2,7 +2,7 @@
 using Vapour.Domain;
 using Vapour.Domain.Interfaces;
 
-namespace Vapour.Web
+namespace Vapour.API
 {
     public class TestingController : ApiController
     {

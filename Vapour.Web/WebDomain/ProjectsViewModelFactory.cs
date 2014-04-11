@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Web.Compilation;
+using RestSharp;
 using Vapour.Domain.DataAccess;
 using Vapour.Domain.Interfaces;
 using Vapour.Web.Models;
@@ -7,21 +9,21 @@ namespace Vapour.Web.WebDomain
 {
     public class ProjectsViewModelFactory : IProjectsViewModelFactory
     {
-        private readonly IProjectConfigurationRepository _projectConfigurationRepository;
+        private readonly IProjectConfigurationService _projectConfigurationService;
 
-        public ProjectsViewModelFactory(IProjectConfigurationRepository projectConfigurationRepository)
+        public ProjectsViewModelFactory(IProjectConfigurationService projectConfigurationService)
         {
-            _projectConfigurationRepository = projectConfigurationRepository;
+            _projectConfigurationService = projectConfigurationService;
         }
 
-        public ProjectsViewModelFactory() : this(new ProjectConfigurationRepository())
+        public ProjectsViewModelFactory() : this(new ProjectConfigurationService())
         {
         }
 
         public ProjectsViewModel Create()
         {
             var projectsViewModel = new ProjectsViewModel(){Projects = new Dictionary<string, ProjectDetail>()};
-            var configurations = _projectConfigurationRepository.GetAll();
+            var configurations = _projectConfigurationService.GetAll();
 
             foreach (var projectConfiguration in configurations)
             {

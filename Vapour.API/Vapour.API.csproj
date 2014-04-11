@@ -135,9 +135,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyUploadController.cs" />
-    <Compile Include="ConfigController.cs" />
+    <Compile Include="ProjectsController.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="ProjectController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="TestingController.cs" />
@@ -173,7 +172,7 @@
           <CustomServerUrl>
           </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
-          <servers defaultServer="">
+          <servers defaultServer="SelfHostServer">
             <server name="SelfHostServer" exePath="" cmdArgs="" url="http://localhost:55350/" workingDir="" />
           </servers>
         </WebProjectProperties>

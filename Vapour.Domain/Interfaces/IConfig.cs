@@ -5,5 +5,6 @@
         string DatabaseName { get; }
         string ConnectionString { get; }
         string AssemblyStorePath { get; }
+        string VapourApiUrl { get; }
     }
 }
