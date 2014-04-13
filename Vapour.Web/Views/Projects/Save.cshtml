@@ -20,7 +20,11 @@
     });
 
     function moveToAssemblyUploadScreen() {
-        alert('brap!');
+        $('#save').hide();
+        $('#projectConfiguration').fadeOut(function() {
+            $('#assemblyUpload').fadeIn();
+            $('progress').fadeIn();
+        });
     }
 </script>
 <form id="projectConfiguration">
@@ -32,4 +36,9 @@
         Assembly Name: <input name="assemblyName" type="text" /><br />
     </fieldset>    
 </form>
+<form id="assemblyUpload" enctype="multipart/form-data" style="display: none;">
+    <input name="file" type="file" />
+    <input id="upload" type="button" value="Upload" />
+</form>
+<progress style="display: none;" value="0" max="100"></progress>
 <button id="save">Save</button>
