@@ -45,7 +45,7 @@ namespace Vapour.Integration.Tests
         public void ShouldGetAll()
         {
             _projectConfigurationRepository.Save(_projectConfiguration);
-            _projectConfiguration.Id = new ObjectId();
+            _projectConfiguration.Id = string.Empty;
             _projectConfiguration.Environment = "Fire";
             _projectConfigurationRepository.Save(_projectConfiguration);
 

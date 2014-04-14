@@ -194,6 +194,10 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\save.js" />
+    <Content Include="Scripts\save.min.js">
+      <DependentUpon>save.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\_references.js" />
     <Content Include="UploadTest.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -213,6 +217,9 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Projects\Home.cshtml" />
     <Content Include="Views\Projects\Save.cshtml" />
+    <Content Include="Scripts\save.min.js.map">
+      <DependentUpon>save.min.js</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

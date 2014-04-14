@@ -4,29 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<script>
-    $(function () {
-        $('#save').click(function (){
-            $.ajax({
-                url: '',
-                type: 'POST',
-                data: $('#projectConfiguration').serializeObject(),
-                success: moveToAssemblyUploadScreen,
-                error: function () {
-                    alert('failure n00b-face!!');
-                }
-            });
-        });
-    });
-
-    function moveToAssemblyUploadScreen() {
-        $('#save').hide();
-        $('#projectConfiguration').fadeOut(function() {
-            $('#assemblyUpload').fadeIn();
-            $('progress').fadeIn();
-        });
-    }
-</script>
 <form id="projectConfiguration">
     <fieldset>
         <legend>Project Configuration</legend>
@@ -40,5 +17,6 @@
     <input name="file" type="file" />
     <input id="upload" type="button" value="Upload" />
 </form>
-<progress style="display: none;" value="0" max="100"></progress>
+<progress style="display: none;" value="2" max="100"></progress>
 <button id="save">Save</button>
+@Scripts.Render("~/Scripts/save.min.js")
