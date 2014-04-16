@@ -1,8 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Web.Compilation;
-using RestSharp;
-using Vapour.Domain.DataAccess;
-using Vapour.Domain.Interfaces;
 using Vapour.Web.Models;
 
 namespace Vapour.Web.WebDomain
