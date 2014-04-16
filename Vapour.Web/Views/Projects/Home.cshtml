@@ -9,10 +9,14 @@
         <div class="col-lg-4">
             <h1>Projects</h1>
         </div>
-        <div class="col-lg-8">
+        <div class="col-lg-12">
             <a href="save" class="btn btn-default btn-lg" role="button">Create New &raquo;</a>
         </div>
     </div>
+</div>
+
+<div class="container">
+    
 </div>
 
 <div class="container">
@@ -32,7 +36,7 @@
                     @Html.DropDownListFor(x => x.Projects[project.Key].TestDescriptions, new SelectList(Model.Projects[project.Key].TestDescriptions), new { @class = "form-control" })
                 </div>
                 <div class="col-xs-12 col-sm-2">
-                    <span class="btn btn-success btn-run">Run Tests</span>
+                    <span class="btn btn-success btn-run">Run</span>
                 </div>
             </div>
         </div>
@@ -56,9 +60,9 @@
         padding: 20px;
     }
 
-        .jumbotron a {
-            margin-top: 35px;
-        }
+    .jumbotron a {
+        margin-top: 35px;
+    }
 
     .panel-heading h2 {
         font-size: 1.3em;
