@@ -18,7 +18,7 @@ namespace Vapour.API
             //TODO: IoC?
         }
 
-        [Route("{projectName}/{environment}/{testDescription}")]
+        [Route("Test/{projectName}/{environment}/{testDescription}")]
         public TestOutput Get(string projectName, string environment, string testDescription)
         {
             //TODO: copy dll to run path

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Data.Entity.Core.Objects;
-using System.Web.Mvc;
-using System.Web.UI.WebControls;
+﻿using System.Web.Mvc;
 using Vapour.Domain;
 using Vapour.Domain.Interfaces;
 using Vapour.Web.WebDomain;
@@ -11,17 +8,17 @@ namespace Vapour.Web.Controllers
     public class ProjectsController : Controller
     {
         private readonly IProjectsViewModelFactory _projectsViewModelFactory;
-        private readonly IConfig _config;
         private readonly IProjectConfigurationService _projectConfigurationService;
+        private readonly IConfig _config;
 
-        public ProjectsController(IProjectsViewModelFactory projectsViewModelFactory, IConfig config, IProjectConfigurationService projectConfigurationService)
+        public ProjectsController(IProjectsViewModelFactory projectsViewModelFactory, IProjectConfigurationService projectConfigurationService, IConfig config)
         {
             _projectsViewModelFactory = projectsViewModelFactory;
-            _config = config;
             _projectConfigurationService = projectConfigurationService;
+            _config = config;
         }
 
-        public ProjectsController() : this(new ProjectsViewModelFactory(), new Config(), new ProjectConfigurationService())
+        public ProjectsController() : this(new ProjectsViewModelFactory(), new ProjectConfigurationService(), new Config())
         {
         }
 
@@ -40,6 +37,18 @@ namespace Vapour.Web.Controllers
         public JsonResult Save(ProjectConfiguration projectConfiguration)
         {
             return Json(_projectConfigurationService.Save(projectConfiguration));
+        }
+
+        [Route("Test/{projectName}/{environment}/{testDescription}")]
+        public ActionResult RunTest(ProjectConfiguration projectConfiguration)
+        {
+            ViewBag.RunTestApiUrl = CreateApiUrlForTestRun(projectConfiguration);
+            return View(projectConfiguration);
+        }
+
+        private string CreateApiUrlForTestRun(ProjectConfiguration projectConfiguration)
+        {
+            return string.Format("{0}/Test/{1}/{2}/{3}", _config.VapourApiUrl, projectConfiguration.ProjectName, projectConfiguration.Environment, projectConfiguration.TestDescription);
         }
     }
 }

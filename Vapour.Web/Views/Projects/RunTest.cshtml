@@ -1,0 +1,21 @@
+﻿@model Vapour.Domain.ProjectConfiguration
+
+@{
+    ViewBag.Title = Model.ProjectName;
+    Layout = "../Shared/_Layout.cshtml";
+}
+<script>
+    $(function() {
+        $.ajax({
+            url: '@ViewBag.RunTestApiUrl',
+            type: 'GET',
+            success: function(data) {
+                alert(data);
+            },
+            error: function (data) {
+                alert(data);
+            }
+        });
+    });
+</script>
+<h2></h2>

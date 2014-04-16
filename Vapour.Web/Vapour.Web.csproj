@@ -220,6 +220,7 @@
     <Content Include="Scripts\save.min.js.map">
       <DependentUpon>save.min.js</DependentUpon>
     </Content>
+    <Content Include="Views\Projects\RunTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
