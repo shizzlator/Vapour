@@ -33,6 +33,9 @@
 	opacity: 0;
 	filter: alpha(opacity=0);
 }
+.progress {
+    margin: 10px 0 10px;
+}
 </style>
 <form id="projectConfiguration">
     <fieldset>
@@ -77,6 +80,8 @@
         </form>
     </fieldset>
     <input id="upload" type="button" value="Upload Assembly" class="btn btn-success" />
-    <progress value="2" max="100"></progress>
+    <div id="assemblyProgress" class="progress progress-striped active">
+        <div class="progress-bar" role="progressbar"></div>
+    </div>
 </div>
 @Scripts.Render("~/Scripts/save.min.js")

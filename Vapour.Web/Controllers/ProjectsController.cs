@@ -22,9 +22,9 @@ namespace Vapour.Web.Controllers
         {
         }
 
-        public ActionResult Home()
+        public ActionResult Index()
         {
-            return View(_projectsViewModelFactory.Create());
+            return View("Home", _projectsViewModelFactory.Create());
         }
 
         [HttpGet]

@@ -49,7 +49,7 @@ function moveToAssemblyUploadScreen() {
 
 function progressHandlingFunction(e) {
     if (e.lengthComputable) {
-        $('progress').attr({ value: e.loaded, max: e.total });
+        $('#assemblyProgress').attr({ width: e.loaded, max: e.total });
     }
 }
 
