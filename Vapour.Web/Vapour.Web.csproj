@@ -254,7 +254,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49515</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/</IISUrl>
+          <IISUrl>http://localhost:8040/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -4,19 +4,77 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    #save {
+        margin: 10px 0 0 204px;
+    }
+    legend {
+        padding: 10px;
+    }
+
+    .upload-container {
+        margin: 10px;
+    }
+
+    .fileUpload {
+	position: relative;
+	overflow: hidden;
+	margin: 10px;
+}
+.fileUpload input.upload {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+</style>
 <form id="projectConfiguration">
     <fieldset>
-        <legend>Project Configuration</legend>
-        Project Name: <input name="projectName" type="text" /><br />
-        Environment: <input name="environment" type="text" /><br />
-        Test Description: <input name="testDescription" type="text" /><br />
-        Assembly Name: <input name="assemblyName" type="text" /><br />
-    </fieldset>    
+        <legend>New Project</legend>
+        <div class="form-group">
+            <label for="projectName" class="col-sm-2 control-label">Project Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="projectName" placeholder="Project Name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="environment" class="col-sm-2 control-label">Environment</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="environment" placeholder="Environment">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="testDescription" class="col-sm-2 control-label">Test Description</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="testDescription" placeholder="Test Description">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="assemblyName" class="col-sm-2 control-label">Project Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="assemblyName" placeholder="Assembly Name">
+            </div>
+        </div>
+    </fieldset>
+    <button id="save" class="btn btn-default">Save</button>
 </form>
-<form id="assemblyUpload" enctype="multipart/form-data" style="display: none;">
-    <input name="file" type="file" />
-    <input id="upload" type="button" value="Upload" />
-</form>
-<progress style="display: none;" value="2" max="100"></progress>
-<button id="save">Save</button>
+<div class="upload-container">
+    <fieldset>
+        <legend>Upload Assembly</legend>
+        <form enctype="multipart/form-data">
+            <input id="uploadFile" placeholder="Choose File" />
+            <div class="fileUpload btn btn-primary">
+                <span>Browse...</span>
+                <input id="chooseFile" type="file" class="upload" />
+            </div>
+        </form>
+    </fieldset>
+    <input id="upload" type="button" value="Upload Assembly" class="btn btn-success" />
+    <progress value="2" max="100"></progress>
+</div>
 @Scripts.Render("~/Scripts/save.min.js")

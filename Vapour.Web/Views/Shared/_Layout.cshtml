@@ -27,8 +27,10 @@
                 </div>
             </div>
         </div>
-        @RenderBody()
+        <div class="container">
+            @RenderBody()
+        </div>
         @Scripts.Render("~/bundles/bootstrap")
         @RenderSection("scripts", required: false)
-    </body>
+</body>
 </html>
