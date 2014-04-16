@@ -33,7 +33,7 @@ namespace Vapour.Web.WebDomain
         public ProjectConfiguration Save(ProjectConfiguration projectConfiguration)
         {
             var client = new RestClient(_config.VapourApiUrl);
-            var request = new RestRequest("projects/save", Method.POST);
+            var request = new RestRequest("/projects/save", Method.POST);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(projectConfiguration);
 
