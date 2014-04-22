@@ -36,13 +36,24 @@
                     @Html.DropDownListFor(x => x.Projects[project.Key].TestDescriptions, new SelectList(Model.Projects[project.Key].TestDescriptions), new { @class = "form-control" })
                 </div>
                 <div class="col-xs-12 col-sm-2">
-                    <span class="btn btn-success btn-run">Run</span>
+                    <span class="btn btn-success btn-run" data-projectName="@project.Key">Run</span>
                 </div>
             </div>
         </div>
     }
     <hr>
 </div>
+<script>
+    $(function() {
+        $('.btn-run').click(function() {
+            var projectDropDowns = $(this).parent().siblings().children('select');
+            var environment = $(projectDropDowns[0]).val();
+            var testDescription = $(projectDropDowns[1]).val();
+
+            window.location.assign('test/' + $(this).attr('data-projectName') + '/' + environment + '/' + testDescription);
+        });
+    });
+</script>
 <style>
     .btn-run {
         margin-top: 30px;
