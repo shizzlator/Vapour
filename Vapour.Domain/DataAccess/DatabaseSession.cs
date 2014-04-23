@@ -1,6 +1,6 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
-using ServiceStack.Text;
+using MongoDB.Driver.Builders;
 using Vapour.Domain.Interfaces;
 
 namespace Vapour.Domain.DataAccess
@@ -38,7 +38,6 @@ namespace Vapour.Domain.DataAccess
             var collection = GetCollection<T>(collectionName);
 
             var queryDoc = new QueryDocument(queryObject.ToBsonDocument());
-
             return collection.FindAs<T>(queryDoc);
         }
     }
