@@ -28,15 +28,16 @@ namespace Vapour.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Save()
+        public ActionResult New()
         {
             return View();
         }
 
         [HttpPost]
-        public JsonResult Save(ProjectConfiguration projectConfiguration)
+        public ActionResult New(ProjectConfiguration projectConfiguration)
         {
-            return Json(_projectConfigurationService.Save(projectConfiguration));
+            _projectConfigurationService.Save(projectConfiguration);
+            return RedirectToAction("Index");
         }
 
         [Route("Test/{projectName}/{environment}/{testDescription}")]

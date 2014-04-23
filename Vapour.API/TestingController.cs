@@ -15,18 +15,11 @@ namespace Vapour.API
 
         public TestingController() : this(new NunitTestRunner())
         {
-            //TODO: IoC?
         }
 
         [Route("Test/{projectName}/{environment}/{testDescription}")]
         public TestOutput Get(string projectName, string environment, string testDescription)
         {
-            //TODO: copy dll to run path
-            //TODO: save config in run path
-            //TODO: run tests
-            //TODO: Deal with result!
-            //TODO: Chill out
-
             var result = _testRunner.RunTests(projectName, environment, testDescription);
 
             return new TestOutput(){TestResult = result};

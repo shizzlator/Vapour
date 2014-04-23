@@ -11,7 +11,7 @@
             <h1>Projects</h1>
         </div>
         <div class="col-md-6">
-            <a href="~/Projects/Save" class="btn btn-default btn-lg" role="button">Create New &raquo;</a>
+            <a href="~/Projects/New" class="btn btn-default btn-lg" role="button">Create New &raquo;</a>
         </div>
     </div>
     <hr class="heading-line"/>
@@ -30,13 +30,8 @@
                     <label class="control-label">Tests:</label>
                     @Html.DropDownListFor(x => x.Projects[project.Key].TestDescriptions, new SelectList(Model.Projects[project.Key].TestDescriptions), new { @class = "form-control" })
                 </div>
-<<<<<<< HEAD
                 <div class="col-xs-12 col-sm-2 col-md-6">
-                    <span class="btn btn-success btn-run pull-right">Run</span>
-=======
-                <div class="col-xs-12 col-sm-2">
-                    <span class="btn btn-success btn-run" data-projectName="@project.Key">Run</span>
->>>>>>> e9bfa3cba697e72747c2441eb832e595eceaca45
+                    <span class="btn btn-success btn-run pull-right" data-projectname="@project.Key">Run</span>
                 </div>
             </div>
         </div>
