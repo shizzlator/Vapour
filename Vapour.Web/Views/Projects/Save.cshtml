@@ -5,38 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<style>
-    #save {
-        margin: 10px 0 0 204px;
-    }
-    legend {
-        padding: 10px;
-    }
-
-    .upload-container {
-        margin: 10px;
-    }
-
-    .fileUpload {
-	position: relative;
-	overflow: hidden;
-	margin: 10px;
-}
-.fileUpload input.upload {
-	position: absolute;
-	top: 0;
-	right: 0;
-	margin: 0;
-	padding: 0;
-	font-size: 20px;
-	cursor: pointer;
-	opacity: 0;
-	filter: alpha(opacity=0);
-}
-.progress {
-    margin: 10px 0 10px;
-}
-</style>
 <form id="projectConfiguration">
     <fieldset>
         <legend>New Project</legend>
@@ -84,4 +52,40 @@
         <div class="progress-bar" role="progressbar"></div>
     </div>
 </div>
+
 @Scripts.Render("~/Scripts/save.min.js")
+<style>
+    #save {
+        margin: 10px 0 0 204px;
+    }
+
+    legend {
+        padding: 10px;
+    }
+
+    .upload-container {
+        margin: 10px;
+    }
+
+    .fileUpload {
+        position: relative;
+        overflow: hidden;
+        margin: 10px;
+    }
+
+        .fileUpload input.upload {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 0;
+            padding: 0;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            filter: alpha(opacity=0);
+        }
+
+    .progress {
+        margin: 10px 0 10px;
+    }
+</style>
