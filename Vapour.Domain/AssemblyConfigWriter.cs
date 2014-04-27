@@ -22,9 +22,9 @@ namespace Vapour.Domain
         {
         }
 
-        public void WriteConfigFor(string projectName, string environment, string testDescription)
+        public void WriteConfigFor(ProjectConfiguration projectConfiguration)
         {
-            var projectConfiguration = _projectConfigurationRepository.GetConfig(projectName, environment, testDescription);
+            projectConfiguration = _projectConfigurationRepository.GetConfig(projectConfiguration);
             var path = GetPathFor(projectConfiguration);
             WriteConfig(path, projectConfiguration.ConfigurationCollection);
         }

@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Vapour.API.Client;
 using Vapour.Domain;
 using Vapour.Domain.Interfaces;
 using Vapour.Web.WebDomain;

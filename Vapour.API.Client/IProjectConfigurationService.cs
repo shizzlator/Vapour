@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Net;
-using RestSharp;
 using Vapour.Domain;
 
-namespace Vapour.Web.WebDomain
+namespace Vapour.API.Client
 {
     public interface IProjectConfigurationService
     {

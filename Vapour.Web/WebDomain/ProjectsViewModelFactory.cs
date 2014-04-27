@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Vapour.API.Client;
 using Vapour.Web.Models;
 
 namespace Vapour.Web.WebDomain

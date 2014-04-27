@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
+using Vapour.API.Client;
 using Vapour.Domain;
 using Vapour.Web.WebDomain;
 

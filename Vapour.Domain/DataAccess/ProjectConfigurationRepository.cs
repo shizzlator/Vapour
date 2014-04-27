@@ -17,11 +17,9 @@ namespace Vapour.Domain.DataAccess
         {
         }
 
-        public ProjectConfiguration GetConfig(string projectName, string environment, string testDescription)
+        public ProjectConfiguration GetConfig(ProjectConfiguration projectConfiguration)
         {
-            var queryObject = new {Environment = environment, ProjectName = projectName, TestDescription = testDescription};
-
-            var result = _databaseSession.RunQuery<ProjectConfiguration>(queryObject, VapourCollections.ProjectConfigurations);
+            var result = _databaseSession.RunQuery<ProjectConfiguration>(projectConfiguration, VapourCollections.ProjectConfigurations);
 
             return result.FirstOrDefault();
         }

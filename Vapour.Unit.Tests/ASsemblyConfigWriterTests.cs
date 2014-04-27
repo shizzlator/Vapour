@@ -33,13 +33,13 @@ namespace Vapour.Unit.Tests
             _assemblyConfigWriter = new AssemblyConfigWriter(_fakeStreamWriter.Object, _fakeProjectConfigRepository.Object, _fakeConfig.Object);
 
             _fakeConfig.Setup(x => x.AssemblyStorePath).Returns("D:\\Vapour\\Projects\\");
-            _fakeProjectConfigRepository.Setup(x => x.GetConfig(_projectConfig.ProjectName, _projectConfig.Environment, _projectConfig.TestDescription)).Returns(_projectConfig);
+            _fakeProjectConfigRepository.Setup(x => x.GetConfig(_projectConfig)).Returns(_projectConfig);
         }
 
         [Test]
         public void ShouldWriteFileToConfiguredPath()
         {
-            _assemblyConfigWriter.WriteConfigFor("AppYours", "TeamDave", "Smoke");
+            _assemblyConfigWriter.WriteConfigFor(_projectConfig);
 
             _fakeStreamWriter.Verify(x => x.CreateFile("D:\\Vapour\\Projects\\AppYours\\Smoke\\AppYours.Smoke.Tests.dll.config"), Times.Once);
         }
@@ -47,7 +47,7 @@ namespace Vapour.Unit.Tests
         [Test]
         public void ShouldWriteOutAppSettingsFromGivenProjectConfigurationObject()
         {
-            _assemblyConfigWriter.WriteConfigFor("AppYours", "TeamDave", "Smoke");
+            _assemblyConfigWriter.WriteConfigFor(_projectConfig);
 
             _fakeStreamWriter.Verify(x => x.WriteLine(@"<add key=""baseUrl"" value=""www.something.com"" />"), Times.Once);
             _fakeStreamWriter.Verify(x => x.WriteLine(@"<add key=""somekey"" value=""somevalue"" />"), Times.Once);
@@ -56,7 +56,7 @@ namespace Vapour.Unit.Tests
         [Test]
         public void ShouldWriteOutBeginningAndEndOfConfigFile()
         {
-            _assemblyConfigWriter.WriteConfigFor("AppYours", "TeamDave", "Smoke");
+            _assemblyConfigWriter.WriteConfigFor(_projectConfig);
 
             _fakeStreamWriter.Verify(x => x.WriteLine(@"<?xml version=""1.0"" encoding=""utf-8""?><configuration><appSettings>"), Times.Once);
             _fakeStreamWriter.Verify(x => x.WriteLine(@"</appSettings></configuration>"), Times.Once);

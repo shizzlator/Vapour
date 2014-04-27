@@ -5,7 +5,7 @@ using RestSharp;
 using Vapour.Domain;
 using Vapour.Domain.Interfaces;
 
-namespace Vapour.Web.WebDomain
+namespace Vapour.API.Client
 {
     public class ProjectConfigurationService : IProjectConfigurationService
     {
@@ -23,8 +23,7 @@ namespace Vapour.Web.WebDomain
         public List<ProjectConfiguration> GetAll()
         {
             var client = new RestClient(_config.VapourApiUrl);
-            var request = new RestRequest("/projects/all", Method.GET);
-            request.RequestFormat = DataFormat.Json;
+            var request = new RestRequest("/projects/all", Method.GET) {RequestFormat = DataFormat.Json};
             var response = client.Execute(request);
 
             return response.StatusCode == HttpStatusCode.OK ? Json.Decode<List<ProjectConfiguration>>(response.Content) : new List<ProjectConfiguration>();
@@ -33,8 +32,7 @@ namespace Vapour.Web.WebDomain
         public ProjectConfiguration Save(ProjectConfiguration projectConfiguration)
         {
             var client = new RestClient(_config.VapourApiUrl);
-            var request = new RestRequest("/projects/save", Method.POST);
-            request.RequestFormat = DataFormat.Json;
+            var request = new RestRequest("/projects/save", Method.POST) {RequestFormat = DataFormat.Json};
             request.AddBody(projectConfiguration);
 
             var response = client.Execute(request);

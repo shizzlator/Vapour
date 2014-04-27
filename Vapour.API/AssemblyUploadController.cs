@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Vapour.Domain;
-using Vapour.Domain.DataAccess;
 using Vapour.Domain.Interfaces;
 
 namespace Vapour.API
@@ -14,26 +13,22 @@ namespace Vapour.API
     public class AssemblyUploadController : ApiController
     {
         private readonly IConfig _config;
-        private readonly IProjectConfigurationRepository _projectConfigurationRepository;
 
-        public AssemblyUploadController(IConfig config, IProjectConfigurationRepository projectConfigurationRepository)
+        public AssemblyUploadController(IConfig config)
         {
             _config = config;
-            _projectConfigurationRepository = projectConfigurationRepository;
         }
 
-        public AssemblyUploadController() : this(new Config(), new ProjectConfigurationRepository())
+        public AssemblyUploadController() : this(new Config())
         {
         }
 
         [Route("new/project/{projectName}/{environment}/{testDescription}")]
-        public async Task<HttpResponseMessage> PostAssembly(string projectName, string environment, string testDescription)
+        public async Task<HttpResponseMessage> PostAssembly(ProjectConfiguration projectConfiguration)
         {
             CheckRequestIsMultipartFormData();
 
-            var projectConfiguration = _projectConfigurationRepository.GetConfig(projectName, environment, testDescription);
-
-            string assemblyPath = GetAssemblyPathFor(projectConfiguration);
+            var assemblyPath = GetAssemblyPathFor(projectConfiguration);
 
             var provider = new MultipartFormDataStreamProvider(assemblyPath);
 

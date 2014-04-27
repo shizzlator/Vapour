@@ -39,7 +39,7 @@ namespace Vapour.Integration.Tests
         public void SetUp()
         {
             _config = new Mock<IConfig>();
-            _nunitTestRunner = new NunitTestRunner(new AssemblyConfigWriter(new StreamWriterWrapper(), new ProjectConfigurationRepository(), _config.Object), new ProjectConfigurationRepository(), _config.Object);
+            _nunitTestRunner = new NunitTestRunner(new AssemblyConfigWriter(new StreamWriterWrapper(), new ProjectConfigurationRepository(), _config.Object), _config.Object);
 
             _config.Setup(x => x.AssemblyStorePath).Returns(AssemblyStorePath());
         }
@@ -53,7 +53,7 @@ namespace Vapour.Integration.Tests
         [Test]
         public void ShouldRunTestsForGivenProject()
         {
-            var testResult = _nunitTestRunner.RunTests(_projectConfiguration.ProjectName, _projectConfiguration.Environment, _projectConfiguration.TestDescription);
+            var testResult = _nunitTestRunner.RunTests(_projectConfiguration);
 
             Assert.That(testResult.IsSuccess, Is.True);
         }
@@ -61,7 +61,7 @@ namespace Vapour.Integration.Tests
         [Test]
         public void ShouldWriteConfigToAssemblyDirectory()
         {
-            _nunitTestRunner.RunTests(_projectConfiguration.ProjectName, _projectConfiguration.Environment, _projectConfiguration.TestDescription);
+            _nunitTestRunner.RunTests(_projectConfiguration);
 
             Assert.That(File.Exists(PathToConfig()), Is.True);
         }

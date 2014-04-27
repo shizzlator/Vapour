@@ -2,6 +2,6 @@
 {
     public interface IAssemblyConfigWriter
     {
-        void WriteConfigFor(string appNamestring, string environment, string testDescription);
+        void WriteConfigFor(ProjectConfiguration projectConfiguration);
     }
 }
