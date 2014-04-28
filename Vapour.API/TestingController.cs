@@ -18,11 +18,13 @@ namespace Vapour.API
         }
 
         [Route("Test/{projectName}/{environment}/{testDescription}")]
-        public TestOutput Get(ProjectConfiguration projectConfiguration)
+        public TestOutput Get(string projectName, string environment, string testDescription)
         {
+            var projectConfiguration = new ProjectConfiguration {ProjectName = projectName,Environment = environment,TestDescription = testDescription};
+
             var result = _testRunner.RunTests(projectConfiguration);
 
-            return new TestOutput(){TestResult = result};
+            return new TestOutput {TestResult = result};
         }
     }
 }

@@ -1,5 +1,9 @@
 using System;
+using System.Net.NetworkInformation;
+using MongoDB.Driver.Linq;
 using NUnit.Core;
+using NUnit.Core.Filters;
+using Vapour.Domain.DataAccess;
 using Vapour.Domain.Interfaces;
 
 namespace Vapour.Domain
@@ -8,14 +12,16 @@ namespace Vapour.Domain
     {
         private readonly IAssemblyConfigWriter _assemblyConfigWriter;
         private readonly IConfig _config;
+        private readonly IProjectConfigurationRepository _projectConfigurationRepository;
 
-        public NunitTestRunner(IAssemblyConfigWriter assemblyConfigWriter, IConfig config)
+        public NunitTestRunner(IAssemblyConfigWriter assemblyConfigWriter, IConfig config, IProjectConfigurationRepository projectConfigurationRepository)
         {
             _assemblyConfigWriter = assemblyConfigWriter;
             _config = config;
+            _projectConfigurationRepository = projectConfigurationRepository;
         }
 
-        public NunitTestRunner() : this(new AssemblyConfigWriter(), new Config())
+        public NunitTestRunner() : this(new AssemblyConfigWriter(), new Config(), new ProjectConfigurationRepository())
         {
         }
 
@@ -24,14 +30,21 @@ namespace Vapour.Domain
         {
             CoreExtensions.Host.InitializeService();
 
-            _assemblyConfigWriter.WriteConfigFor(projectConfiguration);
+            projectConfiguration = _projectConfigurationRepository.GetConfig(projectConfiguration);
+
+            WriteConfig(projectConfiguration);
             var pathToAssembly = GetAssemblyPathFor(projectConfiguration);
 
             var remoteTestRunner = new RemoteTestRunner();
             remoteTestRunner.Load(new TestPackage(pathToAssembly));
 
-
             return remoteTestRunner.Run(new NullListener(), TestFilter.Empty, false, LoggingThreshold.Error);
+        }
+
+        private void WriteConfig(ProjectConfiguration projectConfiguration)
+        {
+            if(projectConfiguration.ConfigurationCollection != null && projectConfiguration.ConfigurationCollection.Count > 0)
+                _assemblyConfigWriter.WriteConfigFor(projectConfiguration);
         }
 
         public TestResult RunTests(ProjectConfiguration projectConfiguration, string testFixtureName)
