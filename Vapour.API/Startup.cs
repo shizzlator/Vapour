@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Net.Http.Formatting;
+using System.Web.Http;
 using Owin;
 
 namespace Vapour.API
@@ -13,6 +14,7 @@ namespace Vapour.API
         private void ConfigureWebApi(IAppBuilder app)
         {
             var config = new HttpConfiguration();
+            config.Formatters.Add(new BsonMediaTypeFormatter());
             config.MapHttpAttributeRoutes();
             app.UseWebApi(config);
         }
