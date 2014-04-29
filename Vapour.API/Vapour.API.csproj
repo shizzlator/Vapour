@@ -135,11 +135,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyUploadController.cs" />
+    <Compile Include="ITestOutputFactory.cs" />
     <Compile Include="ProjectsController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="TestingController.cs" />
+    <Compile Include="TestOutputFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Vapour.Domain\Vapour.Domain.csproj">

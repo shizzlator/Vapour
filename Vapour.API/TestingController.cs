@@ -1,19 +1,22 @@
 ﻿using System.Web.Http;
 using Vapour.Domain;
 using Vapour.Domain.Interfaces;
+using TestOutput = Vapour.Domain.TestOutput;
 
 namespace Vapour.API
 {
     public class TestingController : ApiController
     {
         private readonly ITestRunner _testRunner;
+        private readonly ITestOutputFactory _testOutputFactory;
 
-        public TestingController(ITestRunner testRunner)
+        public TestingController(ITestRunner testRunner, ITestOutputFactory testOutputFactory)
         {
             _testRunner = testRunner;
+            _testOutputFactory = testOutputFactory;
         }
 
-        public TestingController() : this(new NunitTestRunner())
+        public TestingController() : this(new NunitTestRunner(), new TestOutputFactory())
         {
         }
 
@@ -22,9 +25,11 @@ namespace Vapour.API
         {
             var projectConfiguration = new ProjectConfiguration {ProjectName = projectName,Environment = environment,TestDescription = testDescription};
 
-            var result = _testRunner.RunTests(projectConfiguration);
+            var testResult = _testRunner.RunTests(projectConfiguration);
 
-            return new TestOutput {TestResult = result};
+            return _testOutputFactory.Create(testResult);
         }
+
+        
     }
 }

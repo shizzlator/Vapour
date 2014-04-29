@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using NUnit.Core;
 
@@ -9,6 +10,9 @@ namespace Vapour.Domain
     public class TestOutput
     {
         [DataMember]
-        public TestResult TestResult { get; set; }
+        public List<TestResult> TestResult { get; set; }
+
+        [DataMember] 
+        public string Message;
     }
 }

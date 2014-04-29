@@ -45,7 +45,7 @@
             var environment = $(projectDropDowns[0]).val();
             var testDescription = $(projectDropDowns[1]).val();
 
-            window.location.assign('test/' + $(this).attr('data-projectName') + '/' + environment + '/' + testDescription);
+            window.location.assign('api/test/' + $(this).attr('data-projectName') + '/' + environment + '/' + testDescription);
         });
     });
 </script>
