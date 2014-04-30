@@ -226,6 +226,7 @@
     <Content Include="Scripts\new.min.js.map">
       <DependentUpon>new.min.js</DependentUpon>
     </Content>
+    <Content Include="Views\Projects\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

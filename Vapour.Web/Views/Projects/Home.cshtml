@@ -1,20 +1,20 @@
 ﻿@model Vapour.Web.Models.ProjectsViewModel
 
 @{
-    ViewBag.Title = "title";
+    Page.Title = "Vapour Projects";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-10">
             <h1>Projects</h1>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-2 btn-create">
             <a href="~/Projects/New" class="btn btn-default btn-lg" role="button">Create New &raquo;</a>
         </div>
     </div>
-    <hr class="heading-line"/>
+    <hr/>
     @foreach (var project in Model.Projects)
     {
         <div class="panel panel-info row">
@@ -30,13 +30,15 @@
                     <label class="control-label">Tests:</label>
                     @Html.DropDownListFor(x => x.Projects[project.Key].TestDescriptions, new SelectList(Model.Projects[project.Key].TestDescriptions), new { @class = "form-control" })
                 </div>
-                <div class="col-xs-12 col-sm-2 col-md-6">
-                    <span class="btn btn-success btn-run pull-right" data-projectname="@project.Key">Run</span>
+                <div class="col-xs-6 col-sm-1 col-md-3">
+                    <span class="btn btn-success btn-edit pull-right" data-projectname="@project.Key">Edit</span>
+                </div>
+                <div class="col-xs-6 col-sm-1 col-md-3">
+                    <span class="btn btn-success btn-run" data-projectname="@project.Key">Run</span>
                 </div>
             </div>
         </div>
     }
-    <hr>
 </div>
 <script>
     $(function() {
@@ -47,14 +49,25 @@
 
             window.location.assign('api/test/' + $(this).attr('data-projectName') + '/' + environment + '/' + testDescription);
         });
+        $('.btn-edit').click(function () {
+            var projectDropDowns = $(this).parent().siblings().children('select');
+            var environment = $(projectDropDowns[0]).val();
+            var testDescription = $(projectDropDowns[1]).val();
+
+            window.location.assign('/Edit/' + $(this).attr('data-projectName') + '/' + environment + '/' + testDescription);
+        });
     });
 </script>
 <style>
     .panel-info h2 {
         color: #222222;
     }
-     .btn-run {
+     .btn-run, .btn-edit {
          margin-top: 30px;
+     }
+
+     .btn-create {
+         margin-top: 20px;
      }
 
     .control-label {

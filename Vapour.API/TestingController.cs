@@ -20,10 +20,8 @@ namespace Vapour.API
         }
 
         [Route("Test/{projectName}/{environment}/{testDescription}")]
-        public TestOutputModel Get(string projectName, string environment, string testDescription)
+        public TestOutputModel Get([FromUri]ProjectConfiguration projectConfiguration)
         {
-            var projectConfiguration = new ProjectConfiguration {ProjectName = projectName,Environment = environment,TestDescription = testDescription};
-
             var testResult = _testRunner.RunTests(projectConfiguration);
 
             return _testOutputModelFactory.Create(testResult);

@@ -27,9 +27,16 @@ namespace Vapour.API
         }
 
         [Route("projects/save")]
-        public ProjectConfiguration Post(ProjectConfiguration projectConfiguration)
+        public ProjectConfiguration Save(ProjectConfiguration projectConfiguration)
         {
             return _projectConfigurationRepository.Save(projectConfiguration);
+        }
+
+        //TODO: Put routes into object and share with service
+        [Route("project/{projectName}/{environment}/{testDescription}")]
+        public ProjectConfiguration Get([FromUri]ProjectConfiguration projectConfiguration)
+        {
+            return _projectConfigurationRepository.GetConfig(projectConfiguration);
         }
     }
 }

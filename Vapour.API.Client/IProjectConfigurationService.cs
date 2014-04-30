@@ -7,5 +7,6 @@ namespace Vapour.API.Client
     {
         List<ProjectConfiguration> GetAll();
         ProjectConfiguration Save(ProjectConfiguration projectConfiguration);
+        ProjectConfiguration Get(ProjectConfiguration projectConfiguration);
     }
 }

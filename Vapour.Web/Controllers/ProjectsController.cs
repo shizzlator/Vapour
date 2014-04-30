@@ -48,6 +48,12 @@ namespace Vapour.Web.Controllers
             return View(projectConfiguration);
         }
 
+        [Route("Edit/{projectName}/{environment}/{testDescription}")]
+        public ActionResult Edit(ProjectConfiguration projectConfiguration)
+        {
+            return View(_projectConfigurationService.Get(projectConfiguration));
+        }
+
         private string CreateApiUrlForTestRun(ProjectConfiguration projectConfiguration)
         {
             return string.Format("{0}/Test/{1}/{2}/{3}", _config.VapourApiUrl, projectConfiguration.ProjectName, projectConfiguration.Environment, projectConfiguration.TestDescription);

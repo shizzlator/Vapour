@@ -10,6 +10,7 @@ namespace Vapour.Domain
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
+        [DataMember]
         public string Id { get; set; }
         [DataMember]
         public string ProjectName { get; set; }
