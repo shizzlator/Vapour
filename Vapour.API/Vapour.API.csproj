@@ -113,6 +113,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Properties\PublishProfiles\106.pubxml" />
     <None Include="Scripts\jquery-1.9.0.intellisense.js" />
     <Content Include="Projects.html" />
     <Content Include="Scripts\bootstrap.js" />
@@ -135,13 +136,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyUploadController.cs" />
-    <Compile Include="ITestOutputFactory.cs" />
+    <Compile Include="ITestOutputModelFactory.cs" />
     <Compile Include="ProjectsController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="TestingController.cs" />
-    <Compile Include="TestOutputFactory.cs" />
+    <Compile Include="TestOutputModelFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Vapour.Domain\Vapour.Domain.csproj">
