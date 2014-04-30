@@ -18,6 +18,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vapour.Unit.Tests", "Vapour
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{73D0E5CB-D4AB-4EF8-A0E7-11913C508040}"
+	ProjectSection(SolutionItems) = preProject
+		TeamCityRunScript.ps1 = TeamCityRunScript.ps1
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vapour.Web", "Vapour.Web\Vapour.Web.csproj", "{DA628967-7630-4C76-BC50-CEE2C90C24CF}"
 	ProjectSection(ProjectDependencies) = postProject
