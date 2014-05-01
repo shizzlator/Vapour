@@ -10,7 +10,7 @@
         <div class="col-md-10">
             <h1>Projects</h1>
         </div>
-        <div class="col-md-2 btn-create">
+        <div class="col-md-2 create-container">
             <a href="~/Projects/New" class="btn btn-default btn-lg" role="button">Create New &raquo;</a>
         </div>
     </div>
@@ -43,20 +43,26 @@
 <script>
     $(function() {
         $('.btn-run').click(function() {
-            var projectDropDowns = $(this).parent().siblings().children('select');
-            var environment = $(projectDropDowns[0]).val();
-            var testDescription = $(projectDropDowns[1]).val();
-
-            window.location.assign('api/test/' + $(this).attr('data-projectName') + '/' + environment + '/' + testDescription);
+            window.location.assign('api/test/' + CreateProjectUrl(this));
         });
         $('.btn-edit').click(function () {
-            var projectDropDowns = $(this).parent().siblings().children('select');
-            var environment = $(projectDropDowns[0]).val();
-            var testDescription = $(projectDropDowns[1]).val();
-
-            window.location.assign('/Edit/' + $(this).attr('data-projectName') + '/' + environment + '/' + testDescription);
+            window.location.assign('/Edit/' + CreateProjectUrl(this));
         });
     });
+
+    function GetProjectDetailsFromDropDowns(button) {
+        var projectDropDowns = $(button).parent().siblings().children('select');
+        var environment = $(projectDropDowns[0]).val();
+        var testDescription = $(projectDropDowns[1]).val();
+        var projectName = $(button).attr('data-projectName');
+
+        return { "projectName" : projectName, "environment": environment, "testDescription": testDescription };
+    }
+
+    function CreateProjectUrl(button) {
+        var projectDetails = GetProjectDetailsFromDropDowns(button);
+        return projectDetails.projectName + '/' + projectDetails.environment + '/' + projectDetails.testDescription;
+    }
 </script>
 <style>
     .panel-info h2 {
@@ -66,7 +72,7 @@
          margin-top: 30px;
      }
 
-     .btn-create {
+     .create-container {
          margin-top: 20px;
      }
 
