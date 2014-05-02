@@ -37,8 +37,8 @@ namespace Vapour.Web.Controllers
         [HttpPost]
         public ActionResult New(ProjectConfiguration projectConfiguration)
         {
-            _projectConfigurationService.Save(projectConfiguration);
-            return RedirectToAction("Index");
+            projectConfiguration = _projectConfigurationService.Save(projectConfiguration);
+            return RedirectToAction("NewConfig", projectConfiguration);
         }
 
         [Route("Test/{projectName}/{environment}/{testDescription}")]
@@ -52,6 +52,17 @@ namespace Vapour.Web.Controllers
         public ActionResult Edit(ProjectConfiguration projectConfiguration)
         {
             return View(_projectConfigurationService.Get(projectConfiguration));
+        }
+
+        public ActionResult NewConfig(ProjectConfiguration projectConfiguration)
+        {
+            return View(projectConfiguration);
+        }
+
+        [HttpPost]
+        public ActionResult SaveConfig(ProjectConfiguration projectConfiguration)
+        {
+            return RedirectToAction("Index");
         }
 
         private string CreateApiUrlForTestRun(ProjectConfiguration projectConfiguration)

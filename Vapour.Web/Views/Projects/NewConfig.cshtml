@@ -1,0 +1,45 @@
+﻿@model Vapour.Domain.ProjectConfiguration
+
+@{
+    ViewBag.Title = "NewConfig";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<form id="Configuration" method="POST" action="~/Projects/SaveConfig">
+    <fieldset>
+        <legend>New Project</legend>
+        <div id="config_0" class="row">
+            <div class="form-group">
+                <label class="col-sm-1 control-label">1.</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="ProjectConfiguration.ConfigurationCollection[0].Key" placeholder="Project Name">
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="ProjectConfiguration.ConfigurationCollection[0].Value" placeholder="Project Name">
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <button type="submit">Brap!</button>
+</form>
+<button id="newRow">New Row</button>
+<script>
+    var count = 0;
+
+    $(function() {
+        $('#newRow').click(function() {
+            count++;
+            var lastRow = $('fieldset').children().last();
+            
+            var newRow = lastRow.clone();
+            newRow.attr('id', 'count_' + count);
+
+            $(newRow.find('input')[0]).attr('id', 'ProjectConfiguration.ConfigurationCollection[' + count + '].Key');
+            $(newRow.find('input')[1]).attr('id', 'ProjectConfiguration.ConfigurationCollection[' + count + '].Value');
+            newRow.find('label').text((count + 1) + '.');
+
+            $('fieldset').append(newRow);
+        });
+    });
+</script>

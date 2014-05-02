@@ -227,6 +227,7 @@
       <DependentUpon>new.min.js</DependentUpon>
     </Content>
     <Content Include="Views\Projects\Edit.cshtml" />
+    <Content Include="Views\Projects\NewConfig.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
