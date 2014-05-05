@@ -11,19 +11,28 @@
         <legend>New Project</legend>
         <div id="config_0" class="row">
             <div class="form-group">
-                <label class="col-sm-1 control-label">1.</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" name="ProjectConfiguration.ConfigurationCollection[0].Key" placeholder="Project Name">
+                    <input type="text" class="form-control" name="ProjectConfiguration.ConfigurationCollection[0].Key" placeholder=" Key">
                 </div>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" name="ProjectConfiguration.ConfigurationCollection[0].Value" placeholder="Project Name">
+                    <input type="text" class="form-control" name="ProjectConfiguration.ConfigurationCollection[0].Value" placeholder="Value">
+                </div>
+                <div class="col-sm-3 button-container">
+                    <button id="newRow" type="button" class="btn btn-default">New Row</button>
                 </div>
             </div>
         </div>
     </fieldset>
-    <button type="submit">Brap!</button>
+    <div class="row text-center">
+        <button type="submit" class="btn btn-success">Save</button>
+        <button id="cancel" type="button" class="btn btn-danger">Cancel</button>
+    </div>
 </form>
-<button id="newRow">New Row</button>
+<style>
+    fieldset {
+        margin-bottom: 25px;
+    }
+</style>
 <script>
     var count = 0;
 
@@ -31,15 +40,21 @@
         $('#newRow').click(function() {
             count++;
             var lastRow = $('fieldset').children().last();
-            
+            var newRowButton = $('#newRow').detach();
             var newRow = lastRow.clone();
+
             newRow.attr('id', 'count_' + count);
 
-            $(newRow.find('input')[0]).attr('id', 'ProjectConfiguration.ConfigurationCollection[' + count + '].Key');
-            $(newRow.find('input')[1]).attr('id', 'ProjectConfiguration.ConfigurationCollection[' + count + '].Value');
+            $(newRow.find('input')[0]).attr('name', 'ProjectConfiguration.ConfigurationCollection[' + count + '].Key');
+            $(newRow.find('input')[1]).attr('name', 'ProjectConfiguration.ConfigurationCollection[' + count + '].Value');
             newRow.find('label').text((count + 1) + '.');
 
             $('fieldset').append(newRow);
+            newRow.find('.button-container').append(newRowButton);
+        });
+
+        $('#cancel').click(function() {
+            window.location.assign('../projects');
         });
     });
 </script>
