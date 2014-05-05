@@ -27,6 +27,11 @@
         <button type="submit" class="btn btn-success">Save</button>
         <button id="cancel" type="button" class="btn btn-danger">Cancel</button>
     </div>
+    <input type="hidden" name="ProjectConfiguration.Id" value="@Model.Id" />
+    <input type="hidden" name="ProjectConfiguration.ProjectName" value="@Model.ProjectName" />
+    <input type="hidden" name="ProjectConfiguration.TestDescription" value="@Model.TestDescription" />
+    <input type="hidden" name="ProjectConfiguration.AssemblyName" value="@Model.AssemblyName" />
+    <input type="hidden" name="ProjectConfiguration.Environment" value="@Model.Environment" />
 </form>
 <style>
     fieldset {

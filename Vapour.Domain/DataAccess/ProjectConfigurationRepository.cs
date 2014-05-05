@@ -27,7 +27,7 @@ namespace Vapour.Domain.DataAccess
 
         public ProjectConfiguration Save(ProjectConfiguration projectConfiguration)
         {
-            _databaseSession.Insert<ProjectConfiguration>(projectConfiguration, VapourCollections.ProjectConfigurations);
+            _databaseSession.Save<ProjectConfiguration>(projectConfiguration, VapourCollections.ProjectConfigurations);
 
             return projectConfiguration;
         }

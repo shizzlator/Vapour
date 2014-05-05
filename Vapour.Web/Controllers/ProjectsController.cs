@@ -37,6 +37,7 @@ namespace Vapour.Web.Controllers
         [HttpPost]
         public ActionResult New(ProjectConfiguration projectConfiguration)
         {
+            //TODO: validate
             projectConfiguration = _projectConfigurationService.Save(projectConfiguration);
             return RedirectToAction("NewConfig", projectConfiguration);
         }
@@ -62,9 +63,10 @@ namespace Vapour.Web.Controllers
         [HttpPost]
         public ActionResult SaveConfig(ProjectConfiguration projectConfiguration)
         {
+            _projectConfigurationService.Save(projectConfiguration);
             return RedirectToAction("Index");
         }
-
+        
         private string CreateApiUrlForTestRun(ProjectConfiguration projectConfiguration)
         {
             return string.Format("{0}/Test/{1}/{2}/{3}", _config.VapourApiUrl, projectConfiguration.ProjectName, projectConfiguration.Environment, projectConfiguration.TestDescription);

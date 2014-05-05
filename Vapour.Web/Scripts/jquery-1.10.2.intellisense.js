@@ -765,13 +765,13 @@ intellisense.annotate(jQuery.fn, {
   },
   'after': function() {
     /// <signature>
-    ///   <summary>Insert content, specified by the parameter, after each element in the set of matched elements.</summary>
+    ///   <summary>Save content, specified by the parameter, after each element in the set of matched elements.</summary>
     ///   <param name="content" type="jQuery">HTML string, DOM element, or jQuery object to insert after each element in the set of matched elements.</param>
     ///   <param name="content" type="jQuery">One or more additional DOM elements, arrays of elements, HTML strings, or jQuery objects to insert after each element in the set of matched elements.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Insert content, specified by the parameter, after each element in the set of matched elements.</summary>
+    ///   <summary>Save content, specified by the parameter, after each element in the set of matched elements.</summary>
     ///   <param name="function(index)" type="Function">A function that returns an HTML string, DOM element(s), or jQuery object to insert after each element in the set of matched elements. Receives the index position of the element in the set as an argument. Within the function, this refers to the current element in the set.</param>
     ///   <returns type="jQuery" />
     /// </signature>
@@ -846,20 +846,20 @@ intellisense.annotate(jQuery.fn, {
   },
   'append': function() {
     /// <signature>
-    ///   <summary>Insert content, specified by the parameter, to the end of each element in the set of matched elements.</summary>
+    ///   <summary>Save content, specified by the parameter, to the end of each element in the set of matched elements.</summary>
     ///   <param name="content" type="jQuery">DOM element, HTML string, or jQuery object to insert at the end of each element in the set of matched elements.</param>
     ///   <param name="content" type="jQuery">One or more additional DOM elements, arrays of elements, HTML strings, or jQuery objects to insert at the end of each element in the set of matched elements.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Insert content, specified by the parameter, to the end of each element in the set of matched elements.</summary>
+    ///   <summary>Save content, specified by the parameter, to the end of each element in the set of matched elements.</summary>
     ///   <param name="function(index, html)" type="Function">A function that returns an HTML string, DOM element(s), or jQuery object to insert at the end of each element in the set of matched elements. Receives the index position of the element in the set and the old HTML value of the element as arguments. Within the function, this refers to the current element in the set.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
   'appendTo': function() {
     /// <signature>
-    ///   <summary>Insert every element in the set of matched elements to the end of the target.</summary>
+    ///   <summary>Save every element in the set of matched elements to the end of the target.</summary>
     ///   <param name="target" type="jQuery">A selector, element, HTML string, or jQuery object; the matched set of elements will be inserted at the end of the element(s) specified by this parameter.</param>
     ///   <returns type="jQuery" />
     /// </signature>
@@ -948,13 +948,13 @@ intellisense.annotate(jQuery.fn, {
   },
   'before': function() {
     /// <signature>
-    ///   <summary>Insert content, specified by the parameter, before each element in the set of matched elements.</summary>
+    ///   <summary>Save content, specified by the parameter, before each element in the set of matched elements.</summary>
     ///   <param name="content" type="jQuery">HTML string, DOM element, or jQuery object to insert before each element in the set of matched elements.</param>
     ///   <param name="content" type="jQuery">One or more additional DOM elements, arrays of elements, HTML strings, or jQuery objects to insert before each element in the set of matched elements.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Insert content, specified by the parameter, before each element in the set of matched elements.</summary>
+    ///   <summary>Save content, specified by the parameter, before each element in the set of matched elements.</summary>
     ///   <param name="function" type="Function">A function that returns an HTML string, DOM element(s), or jQuery object to insert before each element in the set of matched elements. Receives the index position of the element in the set as an argument. Within the function, this refers to the current element in the set.</param>
     ///   <returns type="jQuery" />
     /// </signature>
@@ -1587,14 +1587,14 @@ intellisense.annotate(jQuery.fn, {
   },
   'insertAfter': function() {
     /// <signature>
-    ///   <summary>Insert every element in the set of matched elements after the target.</summary>
+    ///   <summary>Save every element in the set of matched elements after the target.</summary>
     ///   <param name="target" type="jQuery">A selector, element, HTML string, or jQuery object; the matched set of elements will be inserted after the element(s) specified by this parameter.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
   'insertBefore': function() {
     /// <signature>
-    ///   <summary>Insert every element in the set of matched elements before the target.</summary>
+    ///   <summary>Save every element in the set of matched elements before the target.</summary>
     ///   <param name="target" type="jQuery">A selector, element, HTML string, or jQuery object; the matched set of elements will be inserted before the element(s) specified by this parameter.</param>
     ///   <returns type="jQuery" />
     /// </signature>
@@ -2048,20 +2048,20 @@ intellisense.annotate(jQuery.fn, {
   },
   'prepend': function() {
     /// <signature>
-    ///   <summary>Insert content, specified by the parameter, to the beginning of each element in the set of matched elements.</summary>
+    ///   <summary>Save content, specified by the parameter, to the beginning of each element in the set of matched elements.</summary>
     ///   <param name="content" type="jQuery">DOM element, array of elements, HTML string, or jQuery object to insert at the beginning of each element in the set of matched elements.</param>
     ///   <param name="content" type="jQuery">One or more additional DOM elements, arrays of elements, HTML strings, or jQuery objects to insert at the beginning of each element in the set of matched elements.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Insert content, specified by the parameter, to the beginning of each element in the set of matched elements.</summary>
+    ///   <summary>Save content, specified by the parameter, to the beginning of each element in the set of matched elements.</summary>
     ///   <param name="function(index, html)" type="Function">A function that returns an HTML string, DOM element(s), or jQuery object to insert at the beginning of each element in the set of matched elements. Receives the index position of the element in the set and the old HTML value of the element as arguments. Within the function, this refers to the current element in the set.</param>
     ///   <returns type="jQuery" />
     /// </signature>
   },
   'prependTo': function() {
     /// <signature>
-    ///   <summary>Insert every element in the set of matched elements to the beginning of the target.</summary>
+    ///   <summary>Save every element in the set of matched elements to the beginning of the target.</summary>
     ///   <param name="target" type="jQuery">A selector, element, HTML string, or jQuery object; the matched set of elements will be inserted at the beginning of the element(s) specified by this parameter.</param>
     ///   <returns type="jQuery" />
     /// </signature>

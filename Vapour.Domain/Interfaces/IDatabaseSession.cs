@@ -6,6 +6,6 @@ namespace Vapour.Domain.Interfaces
     {
         MongoCollection GetCollection<T>(string collectionName);
         MongoCursor<T> RunQuery<T>(object queryObject, string collectionName);
-        T Insert<T>(object objectToInsert, string collectionName);
+        T Save<T>(object objectToInsert, string collectionName);
     }
 }

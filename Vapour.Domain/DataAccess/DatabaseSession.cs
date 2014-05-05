@@ -18,9 +18,9 @@ namespace Vapour.Domain.DataAccess
             _mongoClient = new MongoClient(config.ConnectionString);
         }
 
-        public T Insert<T>(object objectToInsert, string collectionName)
+        public T Save<T>(object objectToInsert, string collectionName)
         {
-            GetCollection<T>(collectionName).Insert(objectToInsert);
+            GetCollection<T>(collectionName).Save(objectToInsert);
 
             return (T) objectToInsert;
         }
