@@ -1,8 +1,5 @@
 using System;
-using System.Net.NetworkInformation;
-using MongoDB.Driver.Linq;
 using NUnit.Core;
-using NUnit.Core.Filters;
 using Vapour.Domain.DataAccess;
 using Vapour.Domain.Interfaces;
 
@@ -30,7 +27,7 @@ namespace Vapour.Domain
         {
             CoreExtensions.Host.InitializeService();
 
-            projectConfiguration = _projectConfigurationRepository.GetConfig(projectConfiguration);
+            projectConfiguration = _projectConfigurationRepository.Get(projectConfiguration);
 
             WriteConfig(projectConfiguration);
             var pathToAssembly = GetAssemblyPathFor(projectConfiguration);

@@ -49,5 +49,15 @@ namespace Vapour.API.Client
 
             return response.StatusCode == HttpStatusCode.OK ? Json.Decode<ProjectConfiguration>(response.Content) : new ProjectConfiguration();
         }
+
+        public ProjectConfiguration Get(string id)
+        {
+            var client = new RestClient(_config.VapourApiUrl);
+            var uri = string.Format("/project/{0}", id);
+            var request = new RestRequest(uri, Method.GET) { RequestFormat = DataFormat.Json };
+            var response = client.Execute(request);
+
+            return response.StatusCode == HttpStatusCode.OK ? Json.Decode<ProjectConfiguration>(response.Content) : new ProjectConfiguration();
+        }
     }
 }

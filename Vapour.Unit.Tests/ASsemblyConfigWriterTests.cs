@@ -33,7 +33,7 @@ namespace Vapour.Unit.Tests
             _assemblyConfigWriter = new AssemblyConfigWriter(_fakeStreamWriter.Object, _fakeProjectConfigRepository.Object, _fakeConfig.Object);
 
             _fakeConfig.Setup(x => x.AssemblyStorePath).Returns("D:\\Vapour\\Projects\\");
-            _fakeProjectConfigRepository.Setup(x => x.GetConfig(_projectConfig)).Returns(_projectConfig);
+            _fakeProjectConfigRepository.Setup(x => x.Get(_projectConfig)).Returns(_projectConfig);
         }
 
         [Test]

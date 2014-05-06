@@ -35,7 +35,7 @@ namespace Vapour.Integration.Tests
         {
             _projectConfigurationRepository.Save(_projectConfiguration);
 
-            var retrievedConfig = _projectConfigurationRepository.GetConfig(_projectConfiguration);
+            var retrievedConfig = _projectConfigurationRepository.Get(_projectConfiguration);
 
             Assert.That(retrievedConfig.ConfigurationCollection["baseUrl"], Is.EqualTo(_configurationCollection["baseUrl"]));
             Assert.That(retrievedConfig.ConfigurationCollection["someothersetting"], Is.EqualTo(_configurationCollection["someothersetting"]));

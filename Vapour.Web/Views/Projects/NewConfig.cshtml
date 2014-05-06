@@ -5,10 +5,34 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <form id="Configuration" method="POST" action="~/Projects/SaveConfig">
+    <div id="projectDetails" class="panel panel-info">
+        <div class="panel-body">
+            <div class="col-md-11">
+                <div class="row">
+                    <label>Project Name:</label>
+                    <span>@Model.ProjectName</span>
+                </div>
+                <div class="row">
+                    <label>Environment:</label>
+                    <span>@Model.Environment</span>
+                </div>
+                <div class="row">
+                    <label>Test Description:</label>
+                    <span>@Model.TestDescription</span>
+                </div>
+                <div class="row">
+                    <label>Assembly Name:</label>
+                    <span>@Model.AssemblyName</span>
+                </div>    
+            </div>
+            <div class="col-md-1">
+                <button id="editDetails" type="button" class="btn btn-default btn-sm pull-right">Edit</button>
+            </div>
+        </div>
+    </div>
     <fieldset>
-        <legend>New Project</legend>
+        <legend>Configuration</legend>
         <div id="config_0" class="row">
             <div class="form-group">
                 <div class="col-sm-4">
@@ -24,7 +48,7 @@
         </div>
     </fieldset>
     <div class="row text-center">
-        <button type="submit" class="btn btn-success">Save</button>
+        <button id="save" type="button" class="btn btn-success">Save</button>
         <button id="cancel" type="button" class="btn btn-danger">Cancel</button>
     </div>
     <input type="hidden" name="ProjectConfiguration.Id" value="@Model.Id" />
@@ -36,6 +60,9 @@
 <style>
     fieldset {
         margin-bottom: 25px;
+    }
+    #projectDetails span {
+        margin: 0 10px;
     }
 </style>
 <script>
@@ -58,7 +85,18 @@
             newRow.find('.button-container').append(newRowButton);
         });
 
+        $('#save').click(function () {
+            //remove rows with empty inputs
+            $('fieldset').find('.row input').filter(function () { return $(this).val().trim() == ""; }).parents('.row').remove();
+            $('#Configuration').submit();
+        });
+
         $('#cancel').click(function() {
+            window.location.assign('../');
+        });
+
+        //TODO: edit by Id
+        $('#editDetails').click(function () {
             window.location.assign('../projects');
         });
     });

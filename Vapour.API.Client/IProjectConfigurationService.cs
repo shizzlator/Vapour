@@ -8,5 +8,6 @@ namespace Vapour.API.Client
         List<ProjectConfiguration> GetAll();
         ProjectConfiguration Save(ProjectConfiguration projectConfiguration);
         ProjectConfiguration Get(ProjectConfiguration projectConfiguration);
+        ProjectConfiguration Get(string id);
     }
 }

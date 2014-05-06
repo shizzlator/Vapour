@@ -36,7 +36,14 @@ namespace Vapour.API
         [Route("project/{projectName}/{environment}/{testDescription}")]
         public ProjectConfiguration Get([FromUri]ProjectConfiguration projectConfiguration)
         {
-            return _projectConfigurationRepository.GetConfig(projectConfiguration);
+            return _projectConfigurationRepository.Get(projectConfiguration);
+        }
+
+        //TODO: Put routes into object and share with service
+        [Route("project/{id}")]
+        public ProjectConfiguration Get([FromUri]string id)
+        {
+            return _projectConfigurationRepository.Get(id);
         }
     }
 }
