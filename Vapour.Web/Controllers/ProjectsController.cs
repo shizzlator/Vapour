@@ -61,7 +61,7 @@ namespace Vapour.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveConfig(ProjectConfiguration projectConfiguration)
+        public ActionResult Save(ProjectConfiguration projectConfiguration)
         {
             _projectConfigurationService.Save(projectConfiguration);
             return RedirectToAction("Index");
