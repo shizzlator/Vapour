@@ -22,7 +22,6 @@ namespace Vapour.Domain
         {
         }
 
-        //TODO: change to just take a ProjectConfiguration
         public TestResult RunTests(ProjectConfiguration projectConfiguration)
         {
             CoreExtensions.Host.InitializeService();
@@ -33,7 +32,8 @@ namespace Vapour.Domain
             var pathToAssembly = GetAssemblyPathFor(projectConfiguration);
 
             var remoteTestRunner = new RemoteTestRunner();
-            remoteTestRunner.Load(new TestPackage(pathToAssembly));
+            var testPackage = new TestPackage(pathToAssembly);
+            remoteTestRunner.Load(testPackage);
 
             return remoteTestRunner.Run(new NullListener(), TestFilter.Empty, false, LoggingThreshold.Error);
         }

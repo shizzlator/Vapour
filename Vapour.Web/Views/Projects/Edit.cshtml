@@ -1,6 +1,4 @@
-﻿@using System.Collections
-@using Microsoft.Ajax.Utilities
-@model Vapour.Domain.ProjectConfiguration
+﻿@model Vapour.Domain.ProjectConfiguration
 
 @{
     Page.Title = "Edit " + @Model.ProjectName;
@@ -37,29 +35,45 @@
             </div>
         </div>
     </fieldset>
-    
+
     <fieldset id="configuration">
         <div class="row">
-            <div class="col-sm-2"><h3 >Configuration</h3></div>
+            <div class="col-sm-2"><h3>Configuration</h3></div>
             <div class="col-sm-2"><button id="newRow" type="button" class="btn btn-sm">New Row</button></div>
         </div>
-        <hr/>
-        @for(var i=0; i < Model.ConfigurationCollection.Count; i++)
+        <hr />
+        @if (Model.ConfigurationCollection == null || Model.ConfigurationCollection.Count == 0)
         {
-            var currentKey = @Model.ConfigurationCollection.Keys.ToArray()[i];
             <div class="row">
                 <div class="form-group">
                     <div class="col-sm-4">
-                        <input type="text" value="@currentKey" class="form-control" name="ConfigurationCollection[@i].Key" placeholder=" Key">
+                        <input type="text" class="form-control" name="ProjectConfiguration.ConfigurationCollection[0].Key" placeholder=" Key">
                     </div>
                     <div class="col-sm-4">
-                        <input type="text" value="@Model.ConfigurationCollection[currentKey]" class="form-control" name="ConfigurationCollection[@i].Value" placeholder="Value">
+                        <input type="text" class="form-control" name="ProjectConfiguration.ConfigurationCollection[0].Value" placeholder="Value">
                     </div>
                 </div>
             </div>
         }
+        else
+        {
+            for (var i = 0; i < Model.ConfigurationCollection.Count; i++)
+            {
+                var currentKey = Model.ConfigurationCollection.Keys.ToArray()[i];
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <input type="text" value="@currentKey" class="form-control" name="ConfigurationCollection[@i].Key" placeholder=" Key">
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" value="@Model.ConfigurationCollection[currentKey]" class="form-control" name="ConfigurationCollection[@i].Value" placeholder="Value">
+                        </div>
+                    </div>
+                </div>
+            }
+        }
     </fieldset>
-    
+
     <div class="row text-center">
         <button id="save" type="button" class="btn btn-success">Save</button>
         <button id="cancel" type="button" class="btn btn-danger">Cancel</button>
@@ -69,25 +83,27 @@
     fieldset {
         margin-bottom: 70px;
     }
+
     #configuration hr {
         margin: 5px 0 20px;
     }
+
     h3 {
         font-size: 21px;
         margin: 5px 0 0;
     }
 </style>
 <script>
-    var count = @Model.ConfigurationCollection.Count;
+    var count = @(Model.ConfigurationCollection == null ? 0 : Model.ConfigurationCollection.Count);
 
     $(function() {
         $('#newRow').click(function() {
             var lastRow = $('#configuration').children().last();
             var newRow = lastRow.clone();
-            
+
             $(newRow.find('input')[0]).attr('name', 'ConfigurationCollection[' + count + '].Key');
             $(newRow.find('input')[1]).attr('name', 'ConfigurationCollection[' + count + '].Value');
-            
+
             $('#configuration').append(newRow);
             count++;
         });
@@ -100,7 +116,7 @@
 
         $('#cancel').click(function() {
             if (confirm('Cancel all changes?')) {
-                window.location.assign('@Url.Action("Index")');    
+                window.location.assign('@Url.Action("Index")');
             }
         });
     });
