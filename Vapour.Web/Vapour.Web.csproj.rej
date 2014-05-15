@@ -1,0 +1,34 @@
+diff a/Vapour.Web/Vapour.Web.csproj b/Vapour.Web/Vapour.Web.csproj	(rejected hunks)
+@@ -192,11 +192,14 @@
+     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+     <Content Include="Scripts\modernizr-2.6.2.js" />
++    <Content Include="Scripts\new.min.js">
++      <DependentUpon>new.js</DependentUpon>
++    </Content>
+     <Content Include="Scripts\respond.js" />
+     <Content Include="Scripts\respond.min.js" />
+-    <Content Include="Scripts\save.js" />
++    <Content Include="Scripts\new.js" />
+     <Content Include="Scripts\save.min.js">
+-      <DependentUpon>save.js</DependentUpon>
++      <DependentUpon>new.js</DependentUpon>
+     </Content>
+     <Content Include="Scripts\_references.js" />
+     <Content Include="UploadTest.html">
+@@ -216,11 +219,14 @@
+     <Content Include="Scripts\jquery-1.10.2.min.map" />
+     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+     <Content Include="Views\Projects\Home.cshtml" />
+-    <Content Include="Views\Projects\Save.cshtml" />
++    <Content Include="Views\Projects\New.cshtml" />
+     <Content Include="Scripts\save.min.js.map">
+       <DependentUpon>save.min.js</DependentUpon>
+     </Content>
+     <Content Include="Views\Projects\RunTest.cshtml" />
++    <Content Include="Scripts\new.min.js.map">
++      <DependentUpon>new.min.js</DependentUpon>
++    </Content>
+   </ItemGroup>
+   <ItemGroup>
+     <Folder Include="App_Data\" />
