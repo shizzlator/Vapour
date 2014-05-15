@@ -56,8 +56,12 @@ namespace Vapour.Domain
 
         private string GetAssemblyPathFor(ProjectConfiguration projectConfiguration)
         {
-            return string.Format("{0}\\{1}\\{2}\\{3}.dll", _config.AssemblyStorePath.TrimEnd("\\".ToCharArray()),
-                projectConfiguration.ProjectName, projectConfiguration.TestDescription, projectConfiguration.AssemblyName);
+            return string.Format(@"{0}\{1}\{2}\{3}\{4}.dll", 
+				_config.AssemblyStorePath.TrimEnd(@"\".ToCharArray()),
+                projectConfiguration.ProjectName, 
+				projectConfiguration.TestDescription, 
+				projectConfiguration.Environment,
+				projectConfiguration.AssemblyName);
         }
     }
 }

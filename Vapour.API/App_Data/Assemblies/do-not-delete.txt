@@ -1,0 +1,1 @@
+﻿This file is required for the Assemblies folder to be published
