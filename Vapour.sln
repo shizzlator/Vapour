@@ -1,13 +1,35 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30324.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vapour.Web", "Vapour.Web\Vapour.Web.csproj", "{1933BB33-C356-4A31-B952-9D7D4AE3B54A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vapour.Host", "Vapour.Host\Vapour.Host.csproj", "{E17152EB-B2FC-4DC0-A0C2-AB9AE1EB3529}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vapour.API", "Vapour.API\Vapour.API.csproj", "{1933BB33-C356-4A31-B952-9D7D4AE3B54A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vapour.Domain", "Vapour.Domain\Vapour.Domain.csproj", "{5D9C4651-7E27-422A-B574-C9FC2CE3F5AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vapour.Integration.Tests", "Vapour.Integration.Tests\Vapour.Integration.Tests.csproj", "{242B2792-F792-4F1A-9EE7-E34C45FBD2D9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1933BB33-C356-4A31-B952-9D7D4AE3B54A} = {1933BB33-C356-4A31-B952-9D7D4AE3B54A}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vapour.Unit.Tests", "Vapour.Unit.Tests\Vapour.Unit.Tests.csproj", "{BE90C0DF-C4A5-4BEC-BEB9-435AB4176D66}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1933BB33-C356-4A31-B952-9D7D4AE3B54A} = {1933BB33-C356-4A31-B952-9D7D4AE3B54A}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{73D0E5CB-D4AB-4EF8-A0E7-11913C508040}"
+	ProjectSection(SolutionItems) = preProject
+		TeamCityRunScript.ps1 = TeamCityRunScript.ps1
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vapour.Web", "Vapour.Web\Vapour.Web.csproj", "{DA628967-7630-4C76-BC50-CEE2C90C24CF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{90F2D168-195E-4A44-B7CB-7FD833BAA123} = {90F2D168-195E-4A44-B7CB-7FD833BAA123}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vapour.API.Client", "Vapour.API.Client\Vapour.API.Client.csproj", "{90F2D168-195E-4A44-B7CB-7FD833BAA123}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeProject.Tests", "FakeProject.Tests\FakeProject.Tests.csproj", "{6FB5783A-4631-42A5-B150-17B57699EB77}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,16 +41,37 @@ Global
 		{1933BB33-C356-4A31-B952-9D7D4AE3B54A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1933BB33-C356-4A31-B952-9D7D4AE3B54A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1933BB33-C356-4A31-B952-9D7D4AE3B54A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E17152EB-B2FC-4DC0-A0C2-AB9AE1EB3529}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E17152EB-B2FC-4DC0-A0C2-AB9AE1EB3529}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E17152EB-B2FC-4DC0-A0C2-AB9AE1EB3529}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E17152EB-B2FC-4DC0-A0C2-AB9AE1EB3529}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5D9C4651-7E27-422A-B574-C9FC2CE3F5AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5D9C4651-7E27-422A-B574-C9FC2CE3F5AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D9C4651-7E27-422A-B574-C9FC2CE3F5AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D9C4651-7E27-422A-B574-C9FC2CE3F5AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{242B2792-F792-4F1A-9EE7-E34C45FBD2D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{242B2792-F792-4F1A-9EE7-E34C45FBD2D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{242B2792-F792-4F1A-9EE7-E34C45FBD2D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{242B2792-F792-4F1A-9EE7-E34C45FBD2D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE90C0DF-C4A5-4BEC-BEB9-435AB4176D66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE90C0DF-C4A5-4BEC-BEB9-435AB4176D66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE90C0DF-C4A5-4BEC-BEB9-435AB4176D66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE90C0DF-C4A5-4BEC-BEB9-435AB4176D66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA628967-7630-4C76-BC50-CEE2C90C24CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA628967-7630-4C76-BC50-CEE2C90C24CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA628967-7630-4C76-BC50-CEE2C90C24CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA628967-7630-4C76-BC50-CEE2C90C24CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90F2D168-195E-4A44-B7CB-7FD833BAA123}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90F2D168-195E-4A44-B7CB-7FD833BAA123}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90F2D168-195E-4A44-B7CB-7FD833BAA123}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90F2D168-195E-4A44-B7CB-7FD833BAA123}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FB5783A-4631-42A5-B150-17B57699EB77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FB5783A-4631-42A5-B150-17B57699EB77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FB5783A-4631-42A5-B150-17B57699EB77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FB5783A-4631-42A5-B150-17B57699EB77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{242B2792-F792-4F1A-9EE7-E34C45FBD2D9} = {73D0E5CB-D4AB-4EF8-A0E7-11913C508040}
+		{BE90C0DF-C4A5-4BEC-BEB9-435AB4176D66} = {73D0E5CB-D4AB-4EF8-A0E7-11913C508040}
+		{6FB5783A-4631-42A5-B150-17B57699EB77} = {73D0E5CB-D4AB-4EF8-A0E7-11913C508040}
 	EndGlobalSection
 EndGlobal

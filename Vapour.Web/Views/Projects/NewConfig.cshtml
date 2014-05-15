@@ -1,0 +1,103 @@
+﻿@model Vapour.Domain.ProjectConfiguration
+
+@{
+    ViewBag.Title = "NewConfig";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form id="Configuration" method="POST" action="~/Projects/Save">
+    <div id="projectDetails" class="panel panel-info">
+        <div class="panel-body">
+            <div class="col-md-11">
+                <div class="row">
+                    <label>Project Name:</label>
+                    <span>@Model.ProjectName</span>
+                </div>
+                <div class="row">
+                    <label>Environment:</label>
+                    <span>@Model.Environment</span>
+                </div>
+                <div class="row">
+                    <label>Test Description:</label>
+                    <span>@Model.TestDescription</span>
+                </div>
+                <div class="row">
+                    <label>Assembly Name:</label>
+                    <span>@Model.AssemblyName</span>
+                </div>    
+            </div>
+            <div class="col-md-1">
+                <button id="editDetails" type="button" class="btn btn-default btn-sm pull-right">Edit</button>
+            </div>
+        </div>
+    </div>
+    <fieldset>
+        <legend>Configuration</legend>
+        <div id="config_0" class="row">
+            <div class="form-group">
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="ProjectConfiguration.ConfigurationCollection[0].Key" placeholder=" Key">
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="ProjectConfiguration.ConfigurationCollection[0].Value" placeholder="Value">
+                </div>
+                <div class="col-sm-3 button-container">
+                    <button id="newRow" type="button" class="btn btn-default">New Row</button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <div class="row text-center">
+        <button id="save" type="button" class="btn btn-success">Save</button>
+        <button id="cancel" type="button" class="btn btn-danger">Cancel</button>
+    </div>
+    <input type="hidden" name="ProjectConfiguration.Id" value="@Model.Id" />
+    <input type="hidden" name="ProjectConfiguration.ProjectName" value="@Model.ProjectName" />
+    <input type="hidden" name="ProjectConfiguration.TestDescription" value="@Model.TestDescription" />
+    <input type="hidden" name="ProjectConfiguration.AssemblyName" value="@Model.AssemblyName" />
+    <input type="hidden" name="ProjectConfiguration.Environment" value="@Model.Environment" />
+</form>
+<style>
+    fieldset {
+        margin-bottom: 25px;
+    }
+    #projectDetails span {
+        margin: 0 10px;
+    }
+</style>
+<script>
+    var count = 0;
+
+    $(function() {
+        $('#newRow').click(function() {
+            count++;
+            var lastRow = $('fieldset').children().last();
+            var newRowButton = $('#newRow').detach();
+            var newRow = lastRow.clone();
+
+            newRow.attr('id', 'count_' + count);
+
+            $(newRow.find('input')[0]).attr('name', 'ProjectConfiguration.ConfigurationCollection[' + count + '].Key');
+            $(newRow.find('input')[1]).attr('name', 'ProjectConfiguration.ConfigurationCollection[' + count + '].Value');
+            newRow.find('label').text((count + 1) + '.');
+
+            $('fieldset').append(newRow);
+            newRow.find('.button-container').append(newRowButton);
+        });
+
+        $('#save').click(function () {
+            //remove rows with empty inputs
+            $('fieldset').find('.row input').filter(function () { return $(this).val().trim() == ""; }).parents('.row').remove();
+            $('#Configuration').submit();
+        });
+
+        $('#cancel').click(function() {
+            window.location.assign('../');
+        });
+
+        //TODO: edit by Id
+        $('#editDetails').click(function () {
+            window.location.assign('../projects');
+        });
+    });
+</script>

@@ -1,0 +1,123 @@
+﻿@model Vapour.Domain.ProjectConfiguration
+
+@{
+    Page.Title = "Edit " + @Model.ProjectName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Save", "Projects", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.Id)
+    <fieldset>
+        <legend>Project Details</legend>
+        <div class="form-group">
+            <label for="projectName" class="col-md-2 control-label">Project Name</label>
+            <div class="col-md-10">
+                <input type="text" value="@Model.ProjectName" class="form-control" id="projectName" name="ProjectName" placeholder="Project Name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="environment" class="col-md-2 control-label">Environment</label>
+            <div class="col-md-10">
+                <input type="text" value="@Model.Environment" class="form-control" id="environment" name="Environment" placeholder="Environment">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="testDescription" class="col-md-2 control-label">Test Description</label>
+            <div class="col-md-10">
+                <input type="text" value="@Model.TestDescription" class="form-control" id="testDescription" name="TestDescription" placeholder="Test Description">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="assemblyName" class="col-md-2 control-label">Assembly Name</label>
+            <div class="col-md-10">
+                <input type="text" value="@Model.AssemblyName" class="form-control" id="assemblyName" name="AssemblyName" placeholder="Assembly Name">
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset id="configuration">
+        <div class="row">
+            <div class="col-sm-2"><h3>Configuration</h3></div>
+            <div class="col-sm-2"><button id="newRow" type="button" class="btn btn-sm">New Row</button></div>
+        </div>
+        <hr />
+        @if (Model.ConfigurationCollection == null || Model.ConfigurationCollection.Count == 0)
+        {
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="ProjectConfiguration.ConfigurationCollection[0].Key" placeholder=" Key">
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="ProjectConfiguration.ConfigurationCollection[0].Value" placeholder="Value">
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            for (var i = 0; i < Model.ConfigurationCollection.Count; i++)
+            {
+                var currentKey = Model.ConfigurationCollection.Keys.ToArray()[i];
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <input type="text" value="@currentKey" class="form-control" name="ConfigurationCollection[@i].Key" placeholder=" Key">
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" value="@Model.ConfigurationCollection[currentKey]" class="form-control" name="ConfigurationCollection[@i].Value" placeholder="Value">
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </fieldset>
+
+    <div class="row text-center">
+        <button id="save" type="button" class="btn btn-success">Save</button>
+        <button id="cancel" type="button" class="btn btn-danger">Cancel</button>
+    </div>
+}
+<style>
+    fieldset {
+        margin-bottom: 70px;
+    }
+
+    #configuration hr {
+        margin: 5px 0 20px;
+    }
+
+    h3 {
+        font-size: 21px;
+        margin: 5px 0 0;
+    }
+</style>
+<script>
+    var count = @(Model.ConfigurationCollection == null ? 0 : Model.ConfigurationCollection.Count);
+
+    $(function() {
+        $('#newRow').click(function() {
+            var lastRow = $('#configuration').children().last();
+            var newRow = lastRow.clone();
+
+            $(newRow.find('input')[0]).attr('name', 'ConfigurationCollection[' + count + '].Key');
+            $(newRow.find('input')[1]).attr('name', 'ConfigurationCollection[' + count + '].Value');
+
+            $('#configuration').append(newRow);
+            count++;
+        });
+
+        $('#save').click(function() {
+            //remove rows with empty inputs
+            $('#configuration').find('.row input').filter(function () { return $(this).val().trim() == ""; }).parents('.row').remove();
+            $('form').submit();
+        });
+
+        $('#cancel').click(function() {
+            if (confirm('Cancel all changes?')) {
+                window.location.assign('@Url.Action("Index")');
+            }
+        });
+    });
+</script>

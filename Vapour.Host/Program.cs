@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.Owin.Hosting;
-using Owin;
+using Vapour.Web;
 
 namespace Vapour.Host
 {
@@ -16,14 +16,6 @@ namespace Vapour.Host
                 Console.ReadKey();
                 Console.WriteLine("Stopping...");
             }
-        }
-    }
-
-    public class Startup
-    {
-        public void Configuration(IAppBuilder app)
-        {
-            app.UseWelcomePage();
         }
     }
 }

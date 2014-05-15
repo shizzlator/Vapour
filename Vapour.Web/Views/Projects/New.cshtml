@@ -1,0 +1,74 @@
+﻿@model dynamic
+
+@{
+    Page.Title = "New Project";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<form id="projectConfiguration" method="POST">
+    <fieldset>
+        <legend>New Project</legend>
+        <div class="form-group">
+            <label for="projectName" class="col-sm-2 control-label">Project Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="projectName" name="projectName" placeholder="Project Name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="environment" class="col-sm-2 control-label">Environment</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="environment" name="environment" placeholder="Environment">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="testDescription" class="col-sm-2 control-label">Test Description</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="testDescription" name="testDescription" placeholder="Test Description">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="assemblyName" class="col-sm-2 control-label">Assembly Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="assemblyName" name="assemblyName" placeholder="Assembly Name">
+            </div>
+        </div>
+    </fieldset>
+    <button id="save" type="submit" class="btn btn-default">Save</button>
+</form>
+
+<style>
+    #save {
+        margin: 10px 0 0 204px;
+    }
+
+    legend {
+        padding: 10px;
+    }
+
+    .upload-container {
+        margin: 10px;
+    }
+
+    .fileUpload {
+        position: relative;
+        overflow: hidden;
+        margin: 10px;
+    }
+
+        .fileUpload input.upload {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 0;
+            padding: 0;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            filter: alpha(opacity=0);
+        }
+
+    .progress {
+        margin: 10px 0 10px;
+    }
+</style>
