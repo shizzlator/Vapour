@@ -66,8 +66,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IProjectConfigurationService.cs" />
-    <Compile Include="ProjectConfigurationService.cs" />
+    <Compile Include="Service\ApiClientException.cs" />
+    <Compile Include="Service\IProjectConfigurationService.cs" />
+    <Compile Include="Service\ProjectConfigurationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

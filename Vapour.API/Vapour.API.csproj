@@ -105,23 +105,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Assemblies\do-not-delete.txt" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="packages.config" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Properties\PublishProfiles\106.pubxml" />
-    <None Include="Scripts\jquery-1.9.0.intellisense.js" />
-    <Content Include="Projects.html" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-1.9.0.js" />
-    <Content Include="Scripts\jquery-1.9.0.min.js" />
-    <Content Include="Scripts\jquery-1.9.0.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -130,20 +115,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UploadTest.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyUploadController.cs" />
-    <Compile Include="ITestOutputModelFactory.cs" />
-    <Compile Include="ProjectsController.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Controllers\AssemblyUploadController.cs" />
+    <Compile Include="Models\ITestOutputModelFactory.cs" />
+    <Compile Include="Controllers\ProjectsController.cs" />
+    <Compile Include="Owin\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Startup.cs" />
-    <Compile Include="TestingController.cs" />
-    <Compile Include="TestOutputModelFactory.cs" />
+    <Compile Include="Owin\Startup.cs" />
+    <Compile Include="Controllers\TestingController.cs" />
+    <Compile Include="Models\TestOutputModelFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Vapour.Domain\Vapour.Domain.csproj">
