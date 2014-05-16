@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using Moq;
 using NUnit.Framework;
 using Vapour.Domain;
@@ -24,7 +25,11 @@ namespace Vapour.Unit.Tests
                 AssemblyName = "AppYours.Smoke.Tests",
                 Environment = "TeamDave",
                 TestDescription = "Smoke",
-                ConfigurationCollection = new Dictionary<string, string> { { "baseUrl", "www.something.com" }, { "somekey", "somevalue" } }
+                ConfigurationCollection = new Dictionary<string, string>
+                {
+	                { "baseUrl", "www.something.com" }, 
+					{ "somekey", "somevalue" }
+                }
             };
 
             _fakeStreamWriter = new Mock<IStreamWriterWrapper>();
@@ -37,27 +42,33 @@ namespace Vapour.Unit.Tests
         }
 
         [Test]
-        public void ShouldWriteFileToConfiguredPath()
+		public void WriteConfigFor_should_write_file_to_configured_path()
         {
-            _assemblyConfigWriter.WriteConfigFor(_projectConfig);
+			// given + when
+			_assemblyConfigWriter.WriteConfigFor(_projectConfig);
 
-            _fakeStreamWriter.Verify(x => x.CreateFile("D:\\Vapour\\Projects\\AppYours\\Smoke\\AppYours.Smoke.Tests.dll.config"), Times.Once);
+			// then
+			_fakeStreamWriter.Verify(x => x.CreateFile("D:\\Vapour\\Projects\\AppYours\\Smoke\\TeamDave\\AppYours.Smoke.Tests.dll.config"), Times.Once);
         }
 
         [Test]
-        public void ShouldWriteOutAppSettingsFromGivenProjectConfigurationObject()
+		public void WriteConfigFor_should_writeout_appsettings_from_given_project_configuration_object()
         {
+			// given + when
             _assemblyConfigWriter.WriteConfigFor(_projectConfig);
 
+			// then
             _fakeStreamWriter.Verify(x => x.WriteLine(@"<add key=""baseUrl"" value=""www.something.com"" />"), Times.Once);
             _fakeStreamWriter.Verify(x => x.WriteLine(@"<add key=""somekey"" value=""somevalue"" />"), Times.Once);
         }
 
         [Test]
-        public void ShouldWriteOutBeginningAndEndOfConfigFile()
+		public void WriteConfigFor_should_write_out_beginning_and_end_of_configfile()
         {
+			// given + when
             _assemblyConfigWriter.WriteConfigFor(_projectConfig);
 
+			// then
             _fakeStreamWriter.Verify(x => x.WriteLine(@"<?xml version=""1.0"" encoding=""utf-8""?><configuration><appSettings>"), Times.Once);
             _fakeStreamWriter.Verify(x => x.WriteLine(@"</appSettings></configuration>"), Times.Once);
         }

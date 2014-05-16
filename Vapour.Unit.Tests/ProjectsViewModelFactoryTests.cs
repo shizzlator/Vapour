@@ -8,18 +8,21 @@ using Vapour.Web.WebDomain;
 namespace Vapour.Unit.Tests
 {
     [TestFixture]
-    public class ProjectsViewModelFactoryTest
+    public class ProjectsViewModelFactoryTests
     {
         [Test]
-        public void ShouldPopulateProjectViewModel()
+        public void Create_should_populate_project_viewmodel()
         {
-            var fakeProjConfigRepo = new Mock<IProjectConfigurationService>();
-            var projectsViewModelFactory = new ProjectsViewModelFactory(fakeProjConfigRepo.Object);
+			// given
+			var fakeProjConfigRepo = new Mock<IProjectConfigurationService>();
+			var projectsViewModelFactory = new ProjectsViewModelFactory(fakeProjConfigRepo.Object);
 
-            fakeProjConfigRepo.Setup(x => x.GetAll()).Returns(BuildProjectCollection());
+			fakeProjConfigRepo.Setup(x => x.GetAll()).Returns(BuildProjectCollection());
 
-            var projectsViewModel = projectsViewModelFactory.Create();
+			// when
+			var projectsViewModel = projectsViewModelFactory.Create();
 
+			// then
             Assert.That(projectsViewModel.Projects["fakeproject1"].Environments[0], Is.EqualTo("fire"));
             Assert.That(projectsViewModel.Projects["fakeproject2"].Environments[1], Is.EqualTo("enzo"));
         }

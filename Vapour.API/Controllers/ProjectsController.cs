@@ -21,7 +21,7 @@ namespace Vapour.API
         }
 
         [Route("projects/all")]
-        public List<ProjectConfiguration> GetAll()
+        public IEnumerable<ProjectConfiguration> GetAll()
         {
             return _projectConfigurationRepository.GetAll();
         }

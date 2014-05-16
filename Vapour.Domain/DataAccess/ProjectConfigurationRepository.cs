@@ -7,44 +7,36 @@ namespace Vapour.Domain.DataAccess
 {
     public class ProjectConfigurationRepository : IProjectConfigurationRepository
     {
-        private readonly IDatabaseSession _databaseSession;
+        private readonly MongoDBSession _databaseSession;
 
-        public ProjectConfigurationRepository(IDatabaseSession databaseSession)
+		public ProjectConfigurationRepository(MongoDBSession databaseSession)
         {
             _databaseSession = databaseSession;
         }
 
-        public ProjectConfigurationRepository() : this(new DatabaseSession())
+        public ProjectConfigurationRepository() : this(new MongoDBSession())
         {
         }
 
         public ProjectConfiguration Get(ProjectConfiguration projectConfiguration)
         {
-            var queryObject = new {projectConfiguration.ProjectName, projectConfiguration.Environment, projectConfiguration.TestDescription};
-            var result = _databaseSession.RunQuery<ProjectConfiguration>(queryObject, VapourCollections.ProjectConfigurations);
-
-            return result.FirstOrDefault();
+	        return _databaseSession.Find<ProjectConfiguration>().FirstOrDefault(x => x.Id == projectConfiguration.Id);
         }
 
         public ProjectConfiguration Get(string id)
         {
-            var queryObject = new {_id = ObjectId.Parse(id)};
-            var result = _databaseSession.RunQuery<ProjectConfiguration>(queryObject, VapourCollections.ProjectConfigurations);
-
-            return result.FirstOrDefault();
+			return _databaseSession.Find<ProjectConfiguration>().FirstOrDefault(x => x.Id == id);
         }
 
         public ProjectConfiguration Save(ProjectConfiguration projectConfiguration)
         {
-            _databaseSession.Save<ProjectConfiguration>(projectConfiguration, VapourCollections.ProjectConfigurations);
-
+            _databaseSession.Save<ProjectConfiguration>(projectConfiguration);
             return projectConfiguration;
         }
 
-        public List<ProjectConfiguration> GetAll()
+        public IEnumerable<ProjectConfiguration> GetAll()
         {
-            return _databaseSession.GetCollection<ProjectConfiguration>(VapourCollections.ProjectConfigurations)
-                .FindAllAs<ProjectConfiguration>().ToList();
+	        return _databaseSession.Find<ProjectConfiguration>().ToList();
         }
     }
 }

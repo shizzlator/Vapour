@@ -69,6 +69,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FakeProject.Tests\FakeProject.Tests.csproj">
+      <Project>{6fb5783a-4631-42a5-b150-17b57699eb77}</Project>
+      <Name>FakeProject.Tests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Vapour.Domain\Vapour.Domain.csproj">
       <Project>{5D9C4651-7E27-422A-B574-C9FC2CE3F5AB}</Project>
       <Name>Vapour.Domain</Name>
@@ -76,7 +80,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="TestAssemblies\FakeProject\Smoke\FakeProject.Tests.dll" />
+    <Content Include="TestAssemblies\FakeProject\Smoke\Development\FakeProject.Tests.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -7,6 +7,6 @@ namespace Vapour.Domain.Interfaces
         ProjectConfiguration Get(ProjectConfiguration projectConfiguration);
         ProjectConfiguration Get(string id);
         ProjectConfiguration Save(ProjectConfiguration projectConfiguration);
-        List<ProjectConfiguration> GetAll();
+        IEnumerable<ProjectConfiguration> GetAll();
     }
 }

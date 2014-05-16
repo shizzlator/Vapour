@@ -71,12 +71,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\Config.cs" />
-    <Compile Include="DataAccess\DatabaseSession.cs" />
+    <Compile Include="DataAccess\MongoDBSession.cs" />
     <Compile Include="DataAccess\ProjectConfigurationRepository.cs" />
-    <Compile Include="DataAccess\VapourCollections.cs" />
     <Compile Include="TestRunner\IAssemblyConfigWriter.cs" />
     <Compile Include="Config\IConfig.cs" />
-    <Compile Include="DataAccess\IDatabaseSession.cs" />
     <Compile Include="DataAccess\IProjectConfigurationRepository.cs" />
     <Compile Include="TestRunner\IStreamWriterWrapper.cs" />
     <Compile Include="TestRunner\ITestConfigWriter.cs" />

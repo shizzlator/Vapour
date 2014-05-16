@@ -9,13 +9,13 @@ namespace Vapour.Domain
     {
         private readonly IStreamWriterWrapper _streamWriter;
         private readonly IProjectConfigurationRepository _projectConfigurationRepository;
-        private readonly IConfig _vapourConfig;
+        private readonly IConfig _config;
 
-        public AssemblyConfigWriter(IStreamWriterWrapper streamWriter, IProjectConfigurationRepository projectConfigurationRepository, IConfig vapourConfig)
+        public AssemblyConfigWriter(IStreamWriterWrapper streamWriter, IProjectConfigurationRepository projectConfigurationRepository, IConfig config)
         {
             _streamWriter = streamWriter;
             _projectConfigurationRepository = projectConfigurationRepository;
-            _vapourConfig = vapourConfig;
+            _config = config;
         }
 
         public AssemblyConfigWriter() : this(new StreamWriterWrapper(), new ProjectConfigurationRepository(), new Config())
@@ -25,7 +25,8 @@ namespace Vapour.Domain
         public void WriteConfigFor(ProjectConfiguration projectConfiguration)
         {
             projectConfiguration = _projectConfigurationRepository.Get(projectConfiguration);
-            var path = GetPathFor(projectConfiguration);
+            string path = projectConfiguration.GetAssemblyConfigPathFor(_config.AssemblyStorePath);
+
             WriteConfig(path, projectConfiguration.ConfigurationCollection);
         }
 
@@ -40,16 +41,6 @@ namespace Vapour.Domain
                 }
                 _streamWriter.WriteLine(@"</appSettings></configuration>");
             }
-        }
-
-        private string GetPathFor(ProjectConfiguration projectConfiguration)
-        {
-			return string.Format(@"{0}\{1}\{2}\{3}\{4}.dll.config",
-									_vapourConfig.AssemblyStorePath.TrimEnd(@"\".ToCharArray()),
-									projectConfiguration.ProjectName,
-									projectConfiguration.TestDescription,
-									projectConfiguration.Environment,
-									projectConfiguration.AssemblyName);
         }
     }
 }

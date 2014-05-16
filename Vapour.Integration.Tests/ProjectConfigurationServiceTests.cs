@@ -5,9 +5,5 @@ namespace Vapour.Integration.Tests
     [TestFixture]
     public class ProjectConfigurationServiceTests
     {
-        public void ShouldGetAllConfig()
-        {
-
-        }
     }
 }

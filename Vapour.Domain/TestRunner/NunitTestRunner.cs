@@ -29,7 +29,7 @@ namespace Vapour.Domain
             projectConfiguration = _projectConfigurationRepository.Get(projectConfiguration);
 
             WriteConfig(projectConfiguration);
-            var pathToAssembly = GetAssemblyPathFor(projectConfiguration);
+            string pathToAssembly = projectConfiguration.GetAssemblyPathFor(_config.AssemblyStorePath);
 
             var remoteTestRunner = new RemoteTestRunner();
             var testPackage = new TestPackage(pathToAssembly);
@@ -52,16 +52,6 @@ namespace Vapour.Domain
         public TestResult RunTest(ProjectConfiguration projectConfiguration, string testFixtureName, string testMethod)
         {
             throw new NotImplementedException();
-        }
-
-        private string GetAssemblyPathFor(ProjectConfiguration projectConfiguration)
-        {
-            return string.Format(@"{0}\{1}\{2}\{3}\{4}.dll", 
-				_config.AssemblyStorePath.TrimEnd(@"\".ToCharArray()),
-                projectConfiguration.ProjectName, 
-				projectConfiguration.TestDescription, 
-				projectConfiguration.Environment,
-				projectConfiguration.AssemblyName);
         }
     }
 }
