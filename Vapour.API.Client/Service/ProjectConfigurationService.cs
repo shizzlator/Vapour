@@ -77,6 +77,10 @@ namespace Vapour.API.Client
 			    StringBuilder errorBuilder = new StringBuilder();
 			    errorBuilder.AppendFormat(errorMessage, args);
 			    errorBuilder.AppendLine("");
+				errorBuilder.AppendLine("Errors:");
+				errorBuilder.AppendLine(response.ErrorMessage);
+				if (response.ErrorException != null) 
+					errorBuilder.AppendLine(response.ErrorException.ToString());
 				errorBuilder.AppendLine("HTTP body:");
 			    errorBuilder.AppendLine(response.Content);
 
