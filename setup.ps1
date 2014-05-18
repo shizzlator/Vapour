@@ -83,11 +83,17 @@ New-Item IIS:\AppPools\Vapour -force
 New-Item IIS:\AppPools\Vapour.Api -force
 Write-Host "Vapour App pools created" -ForegroundColor Green
 
-# Assign the app pools to the sites
+# Set the app pools to use LocalService
+Set-ItemProperty iis:\apppools\Vapour -name processModel -value @{userName="LocalService";identitytype=1}
+Set-ItemProperty iis:\apppools\Vapour.Api -name processModel -value @{userName="LocalService";identitytype=1}
+Write-Host "Assigned app pools to LocalService" -ForegroundColor Green
 
+# Assign the app pools to the sites
 Set-ItemProperty IIS:\sites\Vapour -name applicationPool -value Vapour -force
 Set-ItemProperty IIS:\sites\Vapour.Api -name applicationPool -value Vapour.Api -force
 Write-Host "Assigned app pools to sites" -ForegroundColor Green
+
+
 
 Write-Host "...Done!" -ForegroundColor Green
 
