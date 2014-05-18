@@ -49,11 +49,11 @@ namespace Vapour.Web.Controllers
             return View(projectConfiguration);
         }
 
-        [Route("Edit/{projectName}/{environment}/{testDescription}")]
-        public ActionResult Edit(ProjectConfiguration projectConfiguration)
-        {
-            return View(_projectConfigurationService.Get(projectConfiguration));
-        }
+		//[Route("Edit/{id}}")]
+		//public ActionResult Edit(string id)
+		//{
+		//	return View(_projectConfigurationService.Get(id));
+		//}
 
         public ActionResult NewConfig(ProjectConfiguration projectConfiguration)
         {

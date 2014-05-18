@@ -31,7 +31,7 @@
                     @Html.DropDownListFor(x => x.Projects[project.Key].TestDescriptions, new SelectList(Model.Projects[project.Key].TestDescriptions), new { @class = "form-control" })
                 </div>
                 <div class="col-xs-6 col-sm-1 col-md-3">
-                    <span class="btn btn-success btn-edit pull-right" data-projectname="@project.Key">Edit</span>
+                    <span class="btn btn-success btn-edit pull-right" data-projectId="@Model.Projects[project.Key].">Edit</span>
                 </div>
                 <div class="col-xs-6 col-sm-1 col-md-3">
                     <span class="btn btn-success btn-run" data-projectname="@project.Key">Run</span>
@@ -54,13 +54,15 @@
         var projectDropDowns = $(button).parent().siblings().children('select');
         var environment = $(projectDropDowns[0]).val();
         var testDescription = $(projectDropDowns[1]).val();
-        var projectName = $(button).attr('data-projectName');
+        var projectId = $(button).attr('data-projectName');
 
         return { "projectName" : projectName, "environment": environment, "testDescription": testDescription };
     }
 
     function CreateProjectUrl(button) {
-        var projectDetails = GetProjectDetailsFromDropDowns(button);
+    	//var projectDetails = GetProjectDetailsFromDropDowns(button);
+    	var projectId = $(button).attr('data-projectId');
+    	return projectId;
         return projectDetails.projectName + '/' + projectDetails.environment + '/' + projectDetails.testDescription;
     }
 </script>

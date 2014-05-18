@@ -1,9 +1,10 @@
-﻿using Vapour.Web.Models;
+﻿using System.Collections.Generic;
+using Vapour.Web.Models;
 
 namespace Vapour.Web.WebDomain
 {
     public interface IProjectsViewModelFactory
     {
-        ProjectsViewModel Create();
+		IEnumerable<ProjectViewModel> Create();
     }
 }

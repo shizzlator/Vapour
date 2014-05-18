@@ -1,45 +1,55 @@
 ﻿using System.Collections.Generic;
 using Vapour.API.Client;
+using Vapour.Domain;
 using Vapour.Web.Models;
+using System.Linq;
 
 namespace Vapour.Web.WebDomain
 {
-    public class ProjectsViewModelFactory : IProjectsViewModelFactory
-    {
-        private readonly IProjectConfigurationService _projectConfigurationService;
+	public class ProjectsViewModelFactory : IProjectsViewModelFactory
+	{
+		private readonly IProjectConfigurationService _projectConfigurationService;
 
-        public ProjectsViewModelFactory(IProjectConfigurationService projectConfigurationService)
-        {
-            _projectConfigurationService = projectConfigurationService;
-        }
+		public ProjectsViewModelFactory(IProjectConfigurationService projectConfigurationService)
+		{
+			_projectConfigurationService = projectConfigurationService;
+		}
 
-        public ProjectsViewModelFactory() : this(new ProjectConfigurationService())
-        {
-        }
+		public ProjectsViewModelFactory()
+			: this(new ProjectConfigurationService())
+		{
+		}
 
-        public ProjectsViewModel Create()
-        {
-            var projectsViewModel = new ProjectsViewModel(){Projects = new Dictionary<string, ProjectDetail>()};
-            var configurations = _projectConfigurationService.GetAll();
+		public IEnumerable<ProjectViewModel> Create()
+		{
+			List<ProjectViewModel> viewModelList = new List<ProjectViewModel>();
 
-            foreach (var projectConfiguration in configurations)
-            {
-                if (projectsViewModel.Projects.ContainsKey(projectConfiguration.ProjectName))
-                {
-                    projectsViewModel.Projects[projectConfiguration.ProjectName].Environments.Add(projectConfiguration.Environment);
-                    projectsViewModel.Projects[projectConfiguration.ProjectName].TestDescriptions.Add(projectConfiguration.TestDescription);
-                }
-                else
-                {
-                    projectsViewModel.Projects.Add(projectConfiguration.ProjectName, new ProjectDetail()
-                    {
-                        Environments = new List<string> { projectConfiguration.Environment},
-                        TestDescriptions = new HashSet<string> { projectConfiguration.TestDescription },
-                    });
-                }
+			List<ProjectConfiguration> configurations = _projectConfigurationService.GetAll();
+			string projectName = "";
+			ProjectViewModel container = null;
 
-            }
-            return projectsViewModel;
-        }
-    }
+			foreach (ProjectConfiguration config in configurations.OrderBy(x => x.ProjectName))
+			{
+				// Add a new container for all project settings
+				if (!string.IsNullOrEmpty(config.ProjectName) && projectName != config.ProjectName)
+				{
+					projectName = config.ProjectName;
+					container = new ProjectViewModel();
+					container.Name = config.ProjectName;
+
+					viewModelList.Add(container);
+				}
+
+				// OK
+				ConfigurationViewModel details = new ConfigurationViewModel();
+				details.Environment = config.Environment;
+				details.Id = config.Id;
+				details.TestDescription = config.TestDescription;
+				
+				container.AddProjectDetails(details);
+			}
+
+			return viewModelList;
+		}
+	}
 }
