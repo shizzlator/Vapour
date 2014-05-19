@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using MongoDB.Bson;
 using Vapour.Domain.Models;
 
 namespace Vapour.Domain.DataAccess
@@ -20,7 +19,8 @@ namespace Vapour.Domain.DataAccess
 
         public ProjectConfiguration Get(ProjectConfiguration projectConfiguration)
         {
-	        return _databaseSession.Find<ProjectConfiguration>().FirstOrDefault(x => x.Id == projectConfiguration.Id);
+            var queryObject = new { ProjectName = projectConfiguration.ProjectName, TestDescription = projectConfiguration.TestDescription, Environment = projectConfiguration.Environment};
+            return _databaseSession.Find<ProjectConfiguration>(queryObject).FirstOrDefault();
         }
 
         public ProjectConfiguration Get(string id)

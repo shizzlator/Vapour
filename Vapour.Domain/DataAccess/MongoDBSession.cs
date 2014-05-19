@@ -1,4 +1,5 @@
 using System.Linq;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using Vapour.Domain.Config;
@@ -37,6 +38,11 @@ namespace Vapour.Domain.DataAccess
 		public IQueryable<T> Find<T>()
         {
 			return GetCollection<T>().AsQueryable<T>();
+        }
+
+        public MongoCursor<T> Find<T>(object queryObject)
+        {
+            return GetCollection<T>().FindAs<T>(new QueryDocument(queryObject.ToBsonDocument()));
         }
     }
 }
