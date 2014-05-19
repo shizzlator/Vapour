@@ -1,4 +1,4 @@
-﻿namespace Vapour.Domain.Interfaces
+﻿namespace Vapour.Domain.Config
 {
     public interface IConfig
     {

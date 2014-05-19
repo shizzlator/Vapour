@@ -1,8 +1,9 @@
 ﻿using System.Web.Http;
-using Vapour.Domain;
-using Vapour.Domain.Interfaces;
+using Vapour.API.Models;
+using Vapour.Domain.DataAccess;
+using Vapour.Domain.TestRunner;
 
-namespace Vapour.API
+namespace Vapour.API.Controllers
 {
     public class TestingController : ApiController
     {

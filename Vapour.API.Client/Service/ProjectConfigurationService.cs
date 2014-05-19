@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Net;
+using System.Text;
 using System.Web.Helpers;
 using RestSharp;
 using Vapour.Domain;
-using Vapour.Domain.Interfaces;
-using Vapour.API.Client.Service;
-using System;
-using System.Text;
+using Vapour.Domain.Config;
+using Vapour.Domain.DataAccess;
 
-namespace Vapour.API.Client
+namespace Vapour.API.Client.Service
 {
     public class ProjectConfigurationService : IProjectConfigurationService
     {
@@ -16,6 +15,7 @@ namespace Vapour.API.Client
 
         public ProjectConfigurationService(IConfig config)
         {
+            //TODO: wrap up repetive code in Generic Service Wrapper thing, pass into here?
             _config = config;
         }
 
@@ -70,11 +70,11 @@ namespace Vapour.API.Client
             return response.StatusCode == HttpStatusCode.OK ? Json.Decode<ProjectConfiguration>(response.Content) : new ProjectConfiguration();
         }
 
-	    private void EnsureStatusOk(IRestResponse response, string errorMessage, params string[] args)
+	    private static void EnsureStatusOk(IRestResponse response, string errorMessage, params string[] args)
 	    {
 		    if (response.StatusCode != HttpStatusCode.OK)
 		    {
-			    StringBuilder errorBuilder = new StringBuilder();
+			    var errorBuilder = new StringBuilder();
 			    errorBuilder.AppendFormat(errorMessage, args);
 			    errorBuilder.AppendLine("");
 				errorBuilder.AppendLine("Errors:");

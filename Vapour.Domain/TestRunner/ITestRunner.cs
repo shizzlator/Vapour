@@ -1,6 +1,7 @@
 using NUnit.Core;
+using Vapour.Domain.DataAccess;
 
-namespace Vapour.Domain.Interfaces
+namespace Vapour.Domain.TestRunner
 {
     public interface ITestRunner
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Vapour.Domain.Interfaces
+namespace Vapour.Domain.DataAccess
 {
     public interface IProjectConfigurationRepository
     {

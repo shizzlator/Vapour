@@ -5,10 +5,10 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using Vapour.Domain;
-using Vapour.Domain.Interfaces;
+using Vapour.Domain.Config;
+using Vapour.Domain.DataAccess;
 
-namespace Vapour.API
+namespace Vapour.API.Controllers
 {
     public class AssemblyUploadController : ApiController
     {

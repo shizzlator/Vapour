@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Vapour.Domain
+namespace Vapour.Domain.DataAccess
 {
     [DataContract]
     public class ProjectConfiguration
@@ -35,17 +35,7 @@ namespace Vapour.Domain
 
 		public string GetAssemblyConfigPathFor(string assemblyStorePath)
 		{
-			return GetAssemblyPathFor(assemblyStorePath) + ".config";
-		}
-
-		public static string GetAssemblyPathFor(ProjectConfiguration configuration, string assemblyStorePath)
-		{
-			return configuration.GetAssemblyPathFor(assemblyStorePath);
-		}
-
-		public static string GetAssemblyConfigPathFor(ProjectConfiguration configuration, string assemblyStorePath)
-		{
-			return configuration.GetAssemblyConfigPathFor(assemblyStorePath);
+            return string.Format("{0}.config", GetAssemblyPathFor(assemblyStorePath));
 		}
     }
 }

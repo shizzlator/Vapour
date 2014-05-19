@@ -1,7 +1,6 @@
 ﻿using System.Configuration;
-using Vapour.Domain.Interfaces;
 
-namespace Vapour.Domain
+namespace Vapour.Domain.Config
 {
     public class Config : IConfig
     {

@@ -1,7 +1,7 @@
 using NUnit.Core;
-using Vapour.Domain;
+using Vapour.Domain.TestRunner;
 
-namespace Vapour.API
+namespace Vapour.API.Models
 {
     public interface ITestOutputModelFactory
     {

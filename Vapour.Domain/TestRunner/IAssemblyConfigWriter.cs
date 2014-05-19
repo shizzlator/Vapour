@@ -1,4 +1,6 @@
-﻿namespace Vapour.Domain.Interfaces
+﻿using Vapour.Domain.DataAccess;
+
+namespace Vapour.Domain.TestRunner
 {
     public interface IAssemblyConfigWriter
     {

@@ -5,8 +5,9 @@ using Moq;
 using NUnit.Core;
 using NUnit.Framework;
 using Vapour.Domain;
+using Vapour.Domain.Config;
 using Vapour.Domain.DataAccess;
-using Vapour.Domain.Interfaces;
+using Vapour.Domain.TestRunner;
 
 namespace Vapour.Integration.Tests
 {

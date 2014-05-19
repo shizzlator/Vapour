@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
-using Vapour.Domain;
 using Vapour.Domain.DataAccess;
-using Vapour.Domain.Interfaces;
 
-namespace Vapour.API
+namespace Vapour.API.Controllers
 {
     public class ProjectsController : ApiController
     {

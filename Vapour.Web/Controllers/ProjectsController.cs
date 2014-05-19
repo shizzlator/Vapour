@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
-using Vapour.API.Client;
-using Vapour.Domain;
-using Vapour.Domain.Interfaces;
+using Vapour.API.Client.Service;
+using Vapour.Domain.Config;
+using Vapour.Domain.DataAccess;
 using Vapour.Web.WebDomain;
 
 namespace Vapour.Web.Controllers

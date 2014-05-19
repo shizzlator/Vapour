@@ -3,7 +3,9 @@ using System.IO;
 using Moq;
 using NUnit.Framework;
 using Vapour.Domain;
-using Vapour.Domain.Interfaces;
+using Vapour.Domain.Config;
+using Vapour.Domain.DataAccess;
+using Vapour.Domain.TestRunner;
 
 namespace Vapour.Unit.Tests
 {

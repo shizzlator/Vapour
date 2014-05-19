@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using NUnit.Core;
 
-namespace Vapour.Domain
+namespace Vapour.Domain.TestRunner
 {
     [KnownType(typeof(TestResult))]
     [KnownType(typeof(ArrayList))]

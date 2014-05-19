@@ -1,9 +1,9 @@
 using System;
 using NUnit.Core;
+using Vapour.Domain.Config;
 using Vapour.Domain.DataAccess;
-using Vapour.Domain.Interfaces;
 
-namespace Vapour.Domain
+namespace Vapour.Domain.TestRunner
 {
     public class NunitTestRunner : ITestRunner
     {
@@ -18,7 +18,7 @@ namespace Vapour.Domain
             _projectConfigurationRepository = projectConfigurationRepository;
         }
 
-        public NunitTestRunner() : this(new AssemblyConfigWriter(), new Config(), new ProjectConfigurationRepository())
+        public NunitTestRunner() : this(new AssemblyConfigWriter(), new Config.Config(), new ProjectConfigurationRepository())
         {
         }
 

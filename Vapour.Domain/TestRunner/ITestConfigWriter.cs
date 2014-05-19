@@ -1,4 +1,4 @@
-namespace Vapour.Domain.Interfaces
+namespace Vapour.Domain.TestRunner
 {
     public interface ITestConfigWriter
     {

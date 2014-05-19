@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Configuration;
+using Vapour.Domain.Config;
 using Vapour.Domain.DataAccess;
-using Vapour.Domain.Interfaces;
 
-namespace Vapour.Domain
+namespace Vapour.Domain.TestRunner
 {
     public class AssemblyConfigWriter : IAssemblyConfigWriter
     {
@@ -18,7 +17,7 @@ namespace Vapour.Domain
             _config = config;
         }
 
-        public AssemblyConfigWriter() : this(new StreamWriterWrapper(), new ProjectConfigurationRepository(), new Config())
+        public AssemblyConfigWriter() : this(new StreamWriterWrapper(), new ProjectConfigurationRepository(), new Config.Config())
         {
         }
 
@@ -42,5 +41,7 @@ namespace Vapour.Domain
                 _streamWriter.WriteLine(@"</appSettings></configuration>");
             }
         }
+
+
     }
 }

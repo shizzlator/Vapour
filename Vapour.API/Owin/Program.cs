@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Owin.Hosting;
 
-namespace Vapour.API
+namespace Vapour.API.Owin
 {
     public class Program
     {

@@ -3,7 +3,7 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using MongoDB.Driver.Linq;
-using Vapour.Domain.Interfaces;
+using Vapour.Domain.Config;
 
 namespace Vapour.Domain.DataAccess
 {
@@ -12,7 +12,7 @@ namespace Vapour.Domain.DataAccess
         private readonly IConfig _config;
         private readonly MongoClient _mongoClient;
 
-        public MongoDBSession() : this(new Config()) { }
+        public MongoDBSession() : this(new Config.Config()) { }
 
         public MongoDBSession(IConfig config)
         {

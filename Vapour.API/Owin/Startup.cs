@@ -2,7 +2,7 @@
 using System.Web.Http;
 using Owin;
 
-namespace Vapour.API
+namespace Vapour.API.Owin
 {
     public class Startup
     {
