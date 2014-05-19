@@ -2,6 +2,7 @@ using System;
 using NUnit.Core;
 using Vapour.Domain.Config;
 using Vapour.Domain.DataAccess;
+using Vapour.Domain.Models;
 
 namespace Vapour.Domain.TestRunner
 {

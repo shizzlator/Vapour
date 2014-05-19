@@ -5,6 +5,7 @@ using NUnit.Framework;
 using Vapour.Domain;
 using Vapour.Domain.Config;
 using Vapour.Domain.DataAccess;
+using Vapour.Domain.Models;
 using Vapour.Domain.TestRunner;
 
 namespace Vapour.Unit.Tests

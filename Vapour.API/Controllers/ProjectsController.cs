@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
 using Vapour.Domain.DataAccess;
+using Vapour.Domain.Models;
 
 namespace Vapour.API.Controllers
 {

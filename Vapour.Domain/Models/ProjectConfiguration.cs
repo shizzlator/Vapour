@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Vapour.Domain.DataAccess
+namespace Vapour.Domain.Models
 {
     [DataContract]
     public class ProjectConfiguration

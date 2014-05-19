@@ -1,6 +1,7 @@
 ﻿using System.Web.Http;
 using Vapour.API.Models;
 using Vapour.Domain.DataAccess;
+using Vapour.Domain.Models;
 using Vapour.Domain.TestRunner;
 
 namespace Vapour.API.Controllers

@@ -1,4 +1,5 @@
 ﻿using Vapour.Domain.DataAccess;
+using Vapour.Domain.Models;
 
 namespace Vapour.Domain.TestRunner
 {

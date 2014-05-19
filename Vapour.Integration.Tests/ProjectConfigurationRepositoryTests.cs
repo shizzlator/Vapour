@@ -4,13 +4,14 @@ using MongoDB.Bson;
 using NUnit.Framework;
 using Vapour.Domain;
 using Vapour.Domain.DataAccess;
+using Vapour.Domain.Models;
 
 namespace Vapour.Integration.Tests
 {
     [TestFixture]
     public class ProjectConfigurationRepositoryTests
     {
-        private MongoDBSession _databaseSession;
+        private MongoDbSession _databaseSession;
         private ProjectConfigurationRepository _projectConfigurationRepository;
         private ProjectConfiguration _projectConfiguration;
         private Dictionary<string, string> _configurationCollection;
@@ -21,7 +22,7 @@ namespace Vapour.Integration.Tests
             _configurationCollection = new Dictionary<string, string>() { { "baseUrl", "blah.com" }, { "someothersetting", "someothervalue" } };
             _projectConfiguration = new ProjectConfiguration() { ProjectName = "TestProject", Environment = "Enzo", TestDescription = "Smoke", ConfigurationCollection = _configurationCollection };
 
-            _databaseSession = new MongoDBSession();
+            _databaseSession = new MongoDbSession();
             _projectConfigurationRepository = new ProjectConfigurationRepository(_databaseSession);
         }
 

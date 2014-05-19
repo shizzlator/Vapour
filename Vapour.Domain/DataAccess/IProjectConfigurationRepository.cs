@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Vapour.Domain.Models;
 
 namespace Vapour.Domain.DataAccess
 {

@@ -6,6 +6,7 @@ using RestSharp;
 using Vapour.Domain;
 using Vapour.Domain.Config;
 using Vapour.Domain.DataAccess;
+using Vapour.Domain.Models;
 
 namespace Vapour.API.Client.Service
 {

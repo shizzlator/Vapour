@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Vapour.Domain.Config;
 using Vapour.Domain.DataAccess;
+using Vapour.Domain.Models;
 
 namespace Vapour.Domain.TestRunner
 {

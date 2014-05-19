@@ -2,6 +2,7 @@
 using Vapour.API.Client.Service;
 using Vapour.Domain.Config;
 using Vapour.Domain.DataAccess;
+using Vapour.Domain.Models;
 using Vapour.Web.WebDomain;
 
 namespace Vapour.Web.Controllers

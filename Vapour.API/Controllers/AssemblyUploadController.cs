@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Vapour.Domain.Config;
 using Vapour.Domain.DataAccess;
+using Vapour.Domain.Models;
 
 namespace Vapour.API.Controllers
 {

@@ -5,6 +5,7 @@ using Vapour.API.Client;
 using Vapour.API.Client.Service;
 using Vapour.Domain;
 using Vapour.Domain.DataAccess;
+using Vapour.Domain.Models;
 using Vapour.Web.WebDomain;
 
 namespace Vapour.Unit.Tests

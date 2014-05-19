@@ -1,19 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using MongoDB.Bson;
+using Vapour.Domain.Models;
 
 namespace Vapour.Domain.DataAccess
 {
     public class ProjectConfigurationRepository : IProjectConfigurationRepository
     {
-        private readonly MongoDBSession _databaseSession;
+        private readonly MongoDbSession _databaseSession;
 
-		public ProjectConfigurationRepository(MongoDBSession databaseSession)
+		public ProjectConfigurationRepository(MongoDbSession databaseSession)
         {
             _databaseSession = databaseSession;
         }
 
-        public ProjectConfigurationRepository() : this(new MongoDBSession())
+        public ProjectConfigurationRepository() : this(new MongoDbSession())
         {
         }
 

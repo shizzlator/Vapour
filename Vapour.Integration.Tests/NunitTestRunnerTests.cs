@@ -7,6 +7,7 @@ using NUnit.Framework;
 using Vapour.Domain;
 using Vapour.Domain.Config;
 using Vapour.Domain.DataAccess;
+using Vapour.Domain.Models;
 using Vapour.Domain.TestRunner;
 
 namespace Vapour.Integration.Tests
@@ -14,7 +15,7 @@ namespace Vapour.Integration.Tests
     [TestFixture]
     public class NunitTestRunnerTests
     {
-        private MongoDBSession _databaseSession;
+        private MongoDbSession _databaseSession;
         private ProjectConfigurationRepository _projectConfigurationRepository;
         private ProjectConfiguration _projectConfiguration;
         private Dictionary<string, string> _configurationCollection;
@@ -45,7 +46,7 @@ namespace Vapour.Integration.Tests
 				ConfigurationCollection = _configurationCollection
             };
 
-            _databaseSession = new MongoDBSession();
+            _databaseSession = new MongoDbSession();
             _projectConfigurationRepository = new ProjectConfigurationRepository(_databaseSession);
             _projectConfigurationRepository.Save(_projectConfiguration);
 

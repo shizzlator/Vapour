@@ -1,20 +1,18 @@
 using System.Linq;
-using MongoDB.Bson;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
 using MongoDB.Driver.Linq;
 using Vapour.Domain.Config;
 
 namespace Vapour.Domain.DataAccess
 {
-    public class MongoDBSession
+    public class MongoDbSession
     {
         private readonly IConfig _config;
         private readonly MongoClient _mongoClient;
 
-        public MongoDBSession() : this(new Config.Config()) { }
+        public MongoDbSession() : this(new Config.Config()) { }
 
-        public MongoDBSession(IConfig config)
+        public MongoDbSession(IConfig config)
         {
             _config = config;
             _mongoClient = new MongoClient(config.ConnectionString);

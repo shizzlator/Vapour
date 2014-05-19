@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Vapour.Domain;
 using Vapour.Domain.DataAccess;
+using Vapour.Domain.Models;
 
 namespace Vapour.API.Client.Service
 {
