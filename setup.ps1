@@ -23,6 +23,24 @@ if (!(IsAdministrator))
     	exit 1
     }
 }
+
+#
+# Build the solution
+#
+$SolutionFile      = "Vapour.sln"
+$Configuration     = "Debug"
+$Platform          = "Any CPU"
+
+$env:Path = $env:Path + ";C:\Program Files (x86)\MSBuild\Microsoft\VisualStudio\v12.0\WebApplications"
+
+# n.b. use C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\msbuild.exe if you don't have VS2013 installed
+# Build the sln file (VS2013 msbuild)
+& "C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe" $SolutionFile /p:Configuration=$Configuration /p:Platform=$Platform /target:Build
+
+#
+# Setup the IIS sites
+#
+
 # The current location should be the master/trunk root of Vapour
 $pwd = pwd
 
