@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Core;
-using Vapour.Domain.TestRunner;
 
 namespace Vapour.API.Models
 {
@@ -12,10 +11,10 @@ namespace Vapour.API.Models
             if (testResult.IsSuccess)
                 return new TestOutputModel { Message = "All Tests Passed!",  Success = testResult.IsSuccess };
 
-            return new TestOutputModel { Message = "Some Tests Failed!", Success = testResult.IsSuccess, TestResult = CreateTestResultModel(GetFailedTestResults(GetTestResults(testResult))) };
+            return new TestOutputModel { Message = "Some Tests Failed!", Success = testResult.IsSuccess, FailedTests = PoulateFailedTestsCollection(GetFailedTests(GetTestResults(testResult))) };
         }
 
-        private List<TestResult> GetFailedTestResults(List<TestResult> testResults)
+        private List<TestResult> GetFailedTests(List<TestResult> testResults)
         {
             return testResults.Where(testResult => testResult.IsFailure).ToList();
         }
@@ -32,7 +31,7 @@ namespace Vapour.API.Models
             }
         }
 
-        private static List<TestResultModel> CreateTestResultModel(List<TestResult> testResults)
+        private static List<TestResultModel> PoulateFailedTestsCollection(List<TestResult> testResults)
         {
             return testResults.Select(testResult => new TestResultModel
             {

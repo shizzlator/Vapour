@@ -84,7 +84,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestRunner\AssemblyConfigWriter.cs" />
     <Compile Include="TestRunner\StreamWriterWrapper.cs" />
-    <Compile Include="TestRunner\TestOutputModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -98,7 +98,7 @@ namespace Vapour.Integration.Tests
 			string configPath = _projectConfiguration.GetAssemblyConfigPathFor(_testAssembliesDirectory);
 
 			// when
-			TestResult testResult = _nunitTestRunner.RunTests(_projectConfiguration);
+			_nunitTestRunner.RunTests(_projectConfiguration);
 
 			// then
 			Assert.That(File.Exists(configPath), Is.False);

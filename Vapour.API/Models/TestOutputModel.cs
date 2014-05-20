@@ -1,16 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using NUnit.Core;
 
-namespace Vapour.Domain.TestRunner
+namespace Vapour.API.Models
 {
-    [KnownType(typeof(TestResult))]
-    [KnownType(typeof(ArrayList))]
     public class TestOutputModel
     {
         [DataMember]
-        public List<TestResultModel> TestResult { get; set; }
+        public List<TestResultModel> FailedTests { get; set; }
 
         [DataMember] 
         public string Message;
