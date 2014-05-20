@@ -27,7 +27,7 @@ namespace Vapour.Integration.Tests
         [SetUp]
         public void SetUp()
         {
-			// .\ProjectName\Description\Environment\FakeProject.Tests.dll is copied as content on the build
+			// .\ProjectName\Description\FakeProject.Tests.dll is copied as content on the build
 	        _testAssembliesDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestAssemblies");
 
             _configurationCollection = new Dictionary<string, string>()
