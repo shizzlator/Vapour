@@ -1,4 +1,5 @@
-﻿@model Vapour.Web.Models.ProjectsViewModel
+﻿@using Vapour.Domain.Config
+@model Vapour.Web.Models.ProjectsViewModel
 
 @{
     Page.Title = "Vapour Projects";
@@ -43,7 +44,7 @@
 <script>
     $(function() {
         $('.btn-run').click(function() {
-            window.location.assign('api/test/' + CreateProjectUrl(this));
+            window.location.assign('@Config.Current.VapourApiUrl/Test/' + CreateProjectUrl(this));
         });
         $('.btn-edit').click(function () {
             window.location.assign('/Edit/' + CreateProjectUrl(this));
