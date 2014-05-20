@@ -24,7 +24,7 @@ namespace Vapour.API.Models
         {
             while (true)
             {
-                if (result.HasResults && ((TestResult)result.Results[0]).FailureSite == FailureSite.Test)
+                if ((result.HasResults && result.Results[0] != null) && ((TestResult)result.Results[0]).FailureSite == FailureSite.Test)
                 {
                     return result.Results.Cast<TestResult>().ToList();
                 }
