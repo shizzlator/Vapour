@@ -4,8 +4,7 @@ using System.IO;
 using Moq;
 using NUnit.Core;
 using NUnit.Framework;
-using Vapour.Domain;
-using Vapour.Domain.Config;
+using Vapour.Domain.Configuration;
 using Vapour.Domain.DataAccess;
 using Vapour.Domain.Models;
 using Vapour.Domain.TestRunner;
@@ -73,7 +72,7 @@ namespace Vapour.Integration.Tests
 
 			// then
 	        Assert.That(testResult, Is.Not.Null);
-            Assert.That(testResult.IsSuccess, Is.False);
+            Assert.That(testResult.IsSuccess, Is.True);
         }
 
         [Test]

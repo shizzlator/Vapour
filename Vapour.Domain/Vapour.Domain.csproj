@@ -70,11 +70,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config\Config.cs" />
+    <Compile Include="Configuration\Config.cs" />
     <Compile Include="DataAccess\MongoDbSession.cs" />
     <Compile Include="DataAccess\ProjectConfigurationRepository.cs" />
     <Compile Include="TestRunner\IAssemblyConfigWriter.cs" />
-    <Compile Include="Config\IConfig.cs" />
+    <Compile Include="Configuration\IConfig.cs" />
     <Compile Include="DataAccess\IProjectConfigurationRepository.cs" />
     <Compile Include="TestRunner\IStreamWriterWrapper.cs" />
     <Compile Include="TestRunner\ITestConfigWriter.cs" />

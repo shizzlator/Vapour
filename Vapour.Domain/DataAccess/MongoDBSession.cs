@@ -2,7 +2,7 @@ using System.Linq;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
-using Vapour.Domain.Config;
+using Vapour.Domain.Configuration;
 
 namespace Vapour.Domain.DataAccess
 {
@@ -11,7 +11,7 @@ namespace Vapour.Domain.DataAccess
         private readonly IConfig _config;
         private readonly MongoClient _mongoClient;
 
-        public MongoDbSession() : this(new Config.Config()) { }
+        public MongoDbSession() : this(new Config()) { }
 
         public MongoDbSession(IConfig config)
         {

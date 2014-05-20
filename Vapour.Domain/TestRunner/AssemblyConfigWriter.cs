@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Vapour.Domain.Config;
+using Vapour.Domain.Configuration;
 using Vapour.Domain.DataAccess;
 using Vapour.Domain.Models;
 
@@ -18,7 +18,7 @@ namespace Vapour.Domain.TestRunner
             _config = config;
         }
 
-        public AssemblyConfigWriter() : this(new StreamWriterWrapper(), new ProjectConfigurationRepository(), new Config.Config())
+        public AssemblyConfigWriter() : this(new StreamWriterWrapper(), new ProjectConfigurationRepository(), new Config())
         {
         }
 

@@ -3,9 +3,7 @@ using System.Net;
 using System.Text;
 using System.Web.Helpers;
 using RestSharp;
-using Vapour.Domain;
-using Vapour.Domain.Config;
-using Vapour.Domain.DataAccess;
+using Vapour.Domain.Configuration;
 using Vapour.Domain.Models;
 
 namespace Vapour.API.Client.Service

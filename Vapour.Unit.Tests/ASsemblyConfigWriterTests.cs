@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using Moq;
 using NUnit.Framework;
-using Vapour.Domain;
-using Vapour.Domain.Config;
+using Vapour.Domain.Configuration;
 using Vapour.Domain.DataAccess;
 using Vapour.Domain.Models;
 using Vapour.Domain.TestRunner;
@@ -51,7 +49,7 @@ namespace Vapour.Unit.Tests
 			_assemblyConfigWriter.WriteConfigFor(_projectConfig);
 
 			// then
-			_fakeStreamWriter.Verify(x => x.CreateFile("D:\\Vapour\\Projects\\AppYours\\Smoke\\TeamDave\\AppYours.Smoke.Tests.dll.config"), Times.Once);
+			_fakeStreamWriter.Verify(x => x.CreateFile("D:\\Vapour\\Projects\\AppYours\\Smoke\\AppYours.Smoke.Tests.dll.config"), Times.Once);
         }
 
         [Test]
