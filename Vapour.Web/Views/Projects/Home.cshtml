@@ -1,5 +1,4 @@
-﻿@using Vapour.Domain.Configuration
-@model Vapour.Web.Models.ProjectsViewModel
+﻿@model Vapour.Web.Models.ProjectsViewModel
 
 @{
     Page.Title = "Vapour Projects";
@@ -20,6 +19,9 @@
     {
         <div class="panel panel-info row">
             <div class="panel-heading">
+                <span class="btn btn-default btn-sm btn-edit btn-icon pull-right" data-projectname="@project.Key" title="Edit project">
+                    <i class="fa fa-lg fa-cog"></i>
+                </span>
                 <h2 class="panel-title">@project.Key</h2>
             </div>
             <div class="panel-body col-md-12">
@@ -32,7 +34,7 @@
                     @Html.DropDownListFor(x => x.Projects[project.Key].TestDescriptions, new SelectList(Model.Projects[project.Key].TestDescriptions), new { @class = "form-control" })
                 </div>
                 <div class="col-xs-6 col-sm-1 col-md-3">
-                    <span class="btn btn-success btn-edit pull-right" data-projectname="@project.Key">Edit</span>
+
                 </div>
                 <div class="col-xs-6 col-sm-1 col-md-3">
                     <span class="btn btn-success btn-run" data-projectname="@project.Key">Run</span>
@@ -52,7 +54,7 @@
     });
 
     function GetProjectDetailsFromDropDowns(button) {
-        var projectDropDowns = $(button).parent().siblings().children('select');
+        var projectDropDowns = $(button).closest('.panel').find('select');
         var environment = $(projectDropDowns[0]).val();
         var testDescription = $(projectDropDowns[1]).val();
         var projectName = $(button).attr('data-projectName');
@@ -65,40 +67,3 @@
         return projectDetails.projectName + '/' + projectDetails.environment + '/' + projectDetails.testDescription;
     }
 </script>
-<style>
-    .panel-info h2 {
-        color: #222222;
-    }
-     .btn-run, .btn-edit {
-         margin-top: 30px;
-     }
-
-     .create-container {
-         margin-top: 20px;
-     }
-
-    .control-label {
-        margin-top: 5px;
-    }
-
-    .vcenter {
-        vertical-align: middle;
-    }
-
-    .jumbotron {
-        padding: 20px;
-    }
-
-    .heading a {
-        margin-top: 20px;
-    }
-
-    .panel-heading h2 {
-        font-size: 1.3em;
-    }
-
-    .heading-line {
-        margin: 0;
-        border: 100% solid;
-    }
-</style>

@@ -24,7 +24,7 @@
                 <div class="row">
                     <label>Assembly Name:</label>
                     <span>@Model.AssemblyName</span>
-                </div>    
+                </div>
             </div>
             <div class="col-md-1">
                 <button id="editDetails" type="button" class="btn btn-default btn-sm pull-right">Edit</button>
@@ -47,10 +47,12 @@
             </div>
         </div>
     </fieldset>
-    <div class="row text-center">
+
+    <div class="control-panel">
         <button id="save" type="button" class="btn btn-success">Save</button>
-        <button id="cancel" type="button" class="btn btn-danger">Cancel</button>
+        <button id="cancel" type="button" class="btn btn-default">Cancel</button>
     </div>
+
     <input type="hidden" name="ProjectConfiguration.Id" value="@Model.Id" />
     <input type="hidden" name="ProjectConfiguration.ProjectName" value="@Model.ProjectName" />
     <input type="hidden" name="ProjectConfiguration.TestDescription" value="@Model.TestDescription" />
