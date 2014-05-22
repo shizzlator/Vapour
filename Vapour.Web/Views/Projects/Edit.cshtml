@@ -37,21 +37,23 @@
     </div>
 
     <div id="configuration">
-        <div class="row">
-            <div class="col-sm-2"><h3>Configuration</h3></div>
-            <div class="col-sm-2"><button id="newRow" type="button" class="btn btn-sm">New Row</button></div>
-        </div>
-        <hr />
+
+        <h3 class="form-title">
+            <button id="newRow" type="button" class="btn btn-default btn-sm pull-right">
+                <i class="fa fa-lupe"></i>
+                Add new row
+            </button>
+            Configuration entries
+        </h3>
+
         @if (Model.ConfigurationCollection == null || Model.ConfigurationCollection.Count == 0)
         {
-            <div class="row">
-                <div class="form-group">
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" name="ProjectConfiguration.ConfigurationCollection[0].Key" placeholder=" Key">
-                    </div>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" name="ProjectConfiguration.ConfigurationCollection[0].Value" placeholder="Value">
-                    </div>
+            <div class="row form-group">
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="ProjectConfiguration.ConfigurationCollection[0].Key" placeholder=" Key">
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="ProjectConfiguration.ConfigurationCollection[0].Value" placeholder="Value">
                 </div>
             </div>
         }
@@ -60,14 +62,12 @@
             for (var i = 0; i < Model.ConfigurationCollection.Count; i++)
             {
                 var currentKey = Model.ConfigurationCollection.Keys.ToArray()[i];
-                <div class="row">
-                    <div class="form-group">
-                        <div class="col-sm-4">
-                            <input type="text" value="@currentKey" class="form-control" name="ConfigurationCollection[@i].Key" placeholder=" Key">
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="text" value="@Model.ConfigurationCollection[currentKey]" class="form-control" name="ConfigurationCollection[@i].Value" placeholder="Value">
-                        </div>
+                <div class="row form-group">
+                    <div class="col-sm-4">
+                        <input type="text" value="@currentKey" class="form-control" name="ConfigurationCollection[@i].Key" placeholder=" Key">
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" value="@Model.ConfigurationCollection[currentKey]" class="form-control" name="ConfigurationCollection[@i].Value" placeholder="Value">
                     </div>
                 </div>
             }
