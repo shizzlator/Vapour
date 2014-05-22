@@ -42,7 +42,7 @@ namespace Vapour.Web.Controllers
             return RedirectToAction("NewConfig", projectConfiguration);
         }
 
-        [Route("Test/{projectName}/{environment}/{testDescription}")]
+        [Route("RunTest/{projectName}/{environment}/{testDescription}")]
         public ActionResult RunTest(ProjectConfiguration projectConfiguration)
         {
             ViewBag.RunTestApiUrl = CreateApiUrlForTestRun(projectConfiguration);

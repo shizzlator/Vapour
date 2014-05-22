@@ -44,7 +44,7 @@
 <script>
     $(function() {
         $('.btn-run').click(function() {
-            window.location.assign('@Config.Current.VapourApiUrl/Test/' + CreateProjectUrl(this));
+            window.location.assign('../RunTest/' + CreateProjectUrl(this));
         });
         $('.btn-edit').click(function () {
             window.location.assign('/Edit/' + CreateProjectUrl(this));

@@ -6,23 +6,16 @@
 }
 <script>
     $(function () {
-        $('#myModal').modal();
         $.ajax({
             url: '@ViewBag.RunTestApiUrl',
+            dataType: 'jsonp',
+            crossDomain: true,
             type: 'GET',
-            success: function(data) {
-                //alert(data);
-            },
-            error: function (data) {
-                //alert(data);
+            success: function (data) {
+                $('#results').text(JSON.stringify(data));
             }
         });
     });
 </script>
-<div id="myModal"class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-    <div class="container text-center">
-        <img src="~/Content/Images/loader.gif" alt="testing..." />    
-    </div>
-    
-</div>
+<textarea id="results" style="width:500px; height:500px">Loading....</textarea>
 <h2></h2>

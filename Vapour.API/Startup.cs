@@ -1,6 +1,7 @@
 ﻿using System.Net.Http.Formatting;
 using System.Web.Http;
 using Owin;
+using WebApiContrib.Formatting.Jsonp;
 
 namespace Vapour.API
 {
@@ -15,6 +16,7 @@ namespace Vapour.API
         {
             var config = new HttpConfiguration();
             config.Formatters.Add(new BsonMediaTypeFormatter());
+            config.AddJsonpFormatter();
             config.MapHttpAttributeRoutes();
             app.UseWebApi(config);
         }
