@@ -68,6 +68,9 @@ input[type="checkbox"].input-validation-error {
     margin-top: 24px;
 }
 
+.navbar-brand { overflow: hidden; }
+.fa.logo-icon { margin-top: -20px; }
+
 .spinner {
   margin: 100px auto;
   width: 32px;
