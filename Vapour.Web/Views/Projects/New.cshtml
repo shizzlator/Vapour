@@ -1,4 +1,4 @@
-﻿@model dynamic
+﻿@model Vapour.Domain.Models.ProjectConfiguration
 
 @{
     Page.Title = "New Project";
@@ -33,6 +33,14 @@
             <input type="text" class="form-control" id="assemblyName" name="assemblyName" placeholder="Assembly Name">
         </div>
     </div>
+
+    @if (Model.HasErrors)
+    {
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>Error!</strong> Project data wasn't correct. Please fill form properly
+        </div>
+    }
 
     <div class="control-panel">
         <button id="save" type="submit" class="btn btn-success">Save changes</button>
