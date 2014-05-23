@@ -24,6 +24,9 @@ namespace Vapour.Domain.Models
         [DataMember]
         public IDictionary<string, string> ConfigurationCollection { get; set; }
 
+        [DataMember]
+        public bool HasErrors { get; set; }
+
 		public string GetAssemblyPathFor(string assemblyStorePath)
 		{
 			return Path.Combine(assemblyStorePath.TrimEnd(@"\".ToCharArray()),

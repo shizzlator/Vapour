@@ -13,27 +13,29 @@ namespace Vapour.Web.WebDomain
             _projectConfigurationService = projectConfigurationService;
         }
 
-        public ProjectsViewModelFactory() : this(new ProjectConfigurationService())
+        public ProjectsViewModelFactory()
+            : this(new ProjectConfigurationService())
         {
         }
 
         public ProjectsViewModel Create()
         {
-            var projectsViewModel = new ProjectsViewModel(){Projects = new Dictionary<string, ProjectDetail>()};
+            var projectsViewModel = new ProjectsViewModel { Projects = new Dictionary<string, ProjectDetail>() };
             var configurations = _projectConfigurationService.GetAll();
 
             foreach (var projectConfiguration in configurations)
             {
-                if (projectsViewModel.Projects.ContainsKey(projectConfiguration.ProjectName))
+                var projName = projectConfiguration.ProjectName;
+                if (projectsViewModel.Projects.ContainsKey(projName))
                 {
-                    projectsViewModel.Projects[projectConfiguration.ProjectName].Environments.Add(projectConfiguration.Environment);
-                    projectsViewModel.Projects[projectConfiguration.ProjectName].TestDescriptions.Add(projectConfiguration.TestDescription);
+                    projectsViewModel.Projects[projName].Environments.Add(projectConfiguration.Environment);
+                    projectsViewModel.Projects[projName].TestDescriptions.Add(projectConfiguration.TestDescription);
                 }
                 else
                 {
-                    projectsViewModel.Projects.Add(projectConfiguration.ProjectName, new ProjectDetail()
+                    projectsViewModel.Projects.Add(projName, new ProjectDetail
                     {
-                        Environments = new List<string> { projectConfiguration.Environment},
+                        Environments = new List<string> { projectConfiguration.Environment },
                         TestDescriptions = new HashSet<string> { projectConfiguration.TestDescription },
                     });
                 }

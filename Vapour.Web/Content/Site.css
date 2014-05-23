@@ -13,7 +13,7 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 360px;
 }
 
 /* styles for validation helpers */
@@ -39,4 +39,84 @@ input[type="checkbox"].input-validation-error {
 
 .validation-summary-valid {
     display: none;
+}
+
+/* Custom styles */
+
+.btn-icon {
+    padding: 2px 6px;
+}
+
+.panel-heading .btn-icon {
+    margin: -4px -6px;
+}
+
+.form-title {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #efefef;
+}
+
+.form-title .btn {
+    margin-top: -8px;
+}
+
+.control-panel {
+    border-top: 1px solid #ddd;
+    background: #f5f5f5;
+    padding: 16px;
+    text-align: center;
+    margin-top: 24px;
+}
+
+.navbar-brand { overflow: hidden; }
+.fa.logo-icon { margin-top: -20px; }
+
+.spinner {
+  margin: 100px auto;
+  width: 32px;
+  height: 32px;
+  position: relative;
+}
+
+.spinner .cube1, .spinner .cube2 {
+  background-color: #333;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  -webkit-animation: cubemove 1.8s infinite ease-in-out;
+  animation: cubemove 1.8s infinite ease-in-out;
+}
+
+.spinner .cube2 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+@-webkit-keyframes cubemove {
+  25% { -webkit-transform: translateX(42px) rotate(-90deg) scale(0.5) }
+  50% { -webkit-transform: translateX(42px) translateY(42px) rotate(-180deg) }
+  75% { -webkit-transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5) }
+  100% { -webkit-transform: rotate(-360deg) }
+}
+
+@keyframes cubemove {
+  25% {
+    transform: translateX(42px) rotate(-90deg) scale(0.5);
+    -webkit-transform: translateX(42px) rotate(-90deg) scale(0.5);
+  } 50% {
+    transform: translateX(42px) translateY(42px) rotate(-179deg);
+    -webkit-transform: translateX(42px) translateY(42px) rotate(-179deg);
+  } 50.1% {
+    transform: translateX(42px) translateY(42px) rotate(-180deg);
+    -webkit-transform: translateX(42px) translateY(42px) rotate(-180deg);
+  } 75% {
+    transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5);
+    -webkit-transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5);
+  } 100% {
+    transform: rotate(-360deg);
+    -webkit-transform: rotate(-360deg);
+  }
 }

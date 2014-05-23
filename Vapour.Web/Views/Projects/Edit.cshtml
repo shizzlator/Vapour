@@ -5,11 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("Save", "Projects", FormMethod.Post))
+@using (Html.BeginForm("Save", "Projects", FormMethod.Post, new { @class="form-horizontal"}))
 {
     @Html.HiddenFor(x => x.Id)
-    <fieldset>
-        <legend>Project Details</legend>
+    <div>
+        <h2 class="form-title">Project Details</h2>
         <div class="form-group">
             <label for="projectName" class="col-md-2 control-label">Project Name</label>
             <div class="col-md-10">
@@ -34,24 +34,26 @@
                 <input type="text" value="@Model.AssemblyName" class="form-control" id="assemblyName" name="AssemblyName" placeholder="Assembly Name">
             </div>
         </div>
-    </fieldset>
+    </div>
 
-    <fieldset id="configuration">
-        <div class="row">
-            <div class="col-sm-2"><h3>Configuration</h3></div>
-            <div class="col-sm-2"><button id="newRow" type="button" class="btn btn-sm">New Row</button></div>
-        </div>
-        <hr />
+    <div id="configuration">
+
+        <h3 class="form-title">
+            <button id="newRow" type="button" class="btn btn-default btn-sm pull-right">
+                <i class="fa fa-lupe"></i>
+                Add new row
+            </button>
+            Configuration entries
+        </h3>
+
         @if (Model.ConfigurationCollection == null || Model.ConfigurationCollection.Count == 0)
         {
-            <div class="row">
-                <div class="form-group">
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" name="ProjectConfiguration.ConfigurationCollection[0].Key" placeholder=" Key">
-                    </div>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" name="ProjectConfiguration.ConfigurationCollection[0].Value" placeholder="Value">
-                    </div>
+            <div class="row form-group">
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="ProjectConfiguration.ConfigurationCollection[0].Key" placeholder=" Key">
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="ProjectConfiguration.ConfigurationCollection[0].Value" placeholder="Value">
                 </div>
             </div>
         }
@@ -60,39 +62,24 @@
             for (var i = 0; i < Model.ConfigurationCollection.Count; i++)
             {
                 var currentKey = Model.ConfigurationCollection.Keys.ToArray()[i];
-                <div class="row">
-                    <div class="form-group">
-                        <div class="col-sm-4">
-                            <input type="text" value="@currentKey" class="form-control" name="ConfigurationCollection[@i].Key" placeholder=" Key">
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="text" value="@Model.ConfigurationCollection[currentKey]" class="form-control" name="ConfigurationCollection[@i].Value" placeholder="Value">
-                        </div>
+                <div class="row form-group">
+                    <div class="col-sm-4">
+                        <input type="text" value="@currentKey" class="form-control" name="ConfigurationCollection[@i].Key" placeholder=" Key">
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" value="@Model.ConfigurationCollection[currentKey]" class="form-control" name="ConfigurationCollection[@i].Value" placeholder="Value">
                     </div>
                 </div>
             }
         }
-    </fieldset>
+    </div>
 
-    <div class="row text-center">
+    <div class="control-panel">
         <button id="save" type="button" class="btn btn-success">Save</button>
-        <button id="cancel" type="button" class="btn btn-danger">Cancel</button>
+        <a href="@Url.Action("Index")" class="btn btn-default">Cancel</a>
     </div>
 }
-<style>
-    fieldset {
-        margin-bottom: 70px;
-    }
 
-    #configuration hr {
-        margin: 5px 0 20px;
-    }
-
-    h3 {
-        font-size: 21px;
-        margin: 5px 0 0;
-    }
-</style>
 <script>
     var count = @(Model.ConfigurationCollection == null ? 0 : Model.ConfigurationCollection.Count);
 
@@ -114,10 +101,5 @@
             $('form').submit();
         });
 
-        $('#cancel').click(function() {
-            if (confirm('Cancel all changes?')) {
-                window.location.assign('@Url.Action("Index")');
-            }
-        });
     });
 </script>
