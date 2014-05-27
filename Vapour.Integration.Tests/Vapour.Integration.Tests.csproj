@@ -68,6 +68,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Vapour.Integration.Tests.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FakeProject.Tests\FakeProject.Tests.csproj">
