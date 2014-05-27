@@ -33,6 +33,8 @@ $Platform          = "Any CPU"
 
 $env:Path = $env:Path + ";C:\Program Files (x86)\MSBuild\Microsoft\VisualStudio\v12.0\WebApplications"
 
+import-module WebAdministration
+
 # n.b. use C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\msbuild.exe if you don't have VS2013 installed
 # Build the sln file (VS2013 msbuild)
 & "C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe" $SolutionFile /p:Configuration=$Configuration /p:Platform=$Platform /target:Build
@@ -43,6 +45,11 @@ $env:Path = $env:Path + ";C:\Program Files (x86)\MSBuild\Microsoft\VisualStudio\
 
 # The current location should be the master/trunk root of Vapour
 $pwd = pwd
+
+if ((Test-Path -path iis:) -ne $True)
+{
+  throw "Must have IIS snap-in enabled. Use ImportSystemModules to load."
+}
 
 # Switch to the IIS7 snapin (built into IIS 7.5+)
 import-module WebAdministration
@@ -92,18 +99,22 @@ catch
 }
 
 # Create the sites
-New-Item iis:\Sites\Vapour -bindings @{protocol="http";bindingInformation=":8040:*"} -physicalPath $pwd\Vapour.Web -force
-New-Item iis:\Sites\Vapour.Api -bindings @{protocol="http";bindingInformation=":8041:*"} -physicalPath $pwd\Vapour.Api -force
+New-Item IIS:\Sites\Vapour -bindings @{protocol="http"; bindingInformation=":85:*"} -physicalPath $pwd\Vapour.Web -force
+New-Item IIS:\Sites\Vapour.Api -bindings @{protocol="http"; bindingInformation=":8040:*"} -physicalPath $pwd\Vapour.Api -force
 Write-Host "Vapour sites created on ports 8040 and 8041" -ForegroundColor Green
 
 # Create the app pools
-New-Item IIS:\AppPools\Vapour -force
-New-Item IIS:\AppPools\Vapour.Api -force
+$appPool = New-Item IIS:\AppPools\Vapour -force
+$appPool | Set-ItemProperty -Name "managedRuntimeVersion" -Value "v4.0"
+
+$appPool = New-Item IIS:\AppPools\Vapour.Api -force
+$appPool | Set-ItemProperty -Name "managedRuntimeVersion" -Value "v4.0"
+
 Write-Host "Vapour App pools created" -ForegroundColor Green
 
 # Set the app pools to use LocalService
-Set-ItemProperty iis:\apppools\Vapour -name processModel -value @{userName="LocalService";identitytype=1}
-Set-ItemProperty iis:\apppools\Vapour.Api -name processModel -value @{userName="LocalService";identitytype=1}
+Set-ItemProperty IIS:\apppools\Vapour -name processModel -value @{userName="LocalService";identitytype=1}
+Set-ItemProperty IIS:\apppools\Vapour.Api -name processModel -value @{userName="LocalService";identitytype=1}
 Write-Host "Assigned app pools to LocalService" -ForegroundColor Green
 
 # Assign the app pools to the sites

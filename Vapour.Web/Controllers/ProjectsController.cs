@@ -19,7 +19,8 @@ namespace Vapour.Web.Controllers
             _config = config;
         }
 
-        public ProjectsController() : this(new ProjectsViewModelFactory(), new ProjectConfigurationService(), new Config())
+        public ProjectsController()
+            : this(new ProjectsViewModelFactory(), new ProjectConfigurationService(), new Config())
         {
         }
 
@@ -31,13 +32,20 @@ namespace Vapour.Web.Controllers
         [HttpGet]
         public ActionResult New()
         {
-            return View();
+            return View(new ProjectConfiguration() );
         }
 
         [HttpPost]
         public ActionResult New(ProjectConfiguration projectConfiguration)
         {
-            //TODO: validate
+            projectConfiguration.HasErrors = false;
+
+            if (!ValidateProjectData(projectConfiguration))
+            {
+                projectConfiguration.HasErrors = true;
+                return View(projectConfiguration);
+            }
+
             projectConfiguration = _projectConfigurationService.Save(projectConfiguration);
             return RedirectToAction("NewConfig", projectConfiguration);
         }
@@ -76,6 +84,14 @@ namespace Vapour.Web.Controllers
         private string CreateApiUrlForTestRun(ProjectConfiguration projectConfiguration)
         {
             return string.Format("{0}/Test/{1}/{2}/{3}", _config.VapourApiUrl, projectConfiguration.ProjectName, projectConfiguration.Environment, projectConfiguration.TestDescription);
+        }
+
+        private bool ValidateProjectData(ProjectConfiguration projectConfiguration)
+        {
+            return !string.IsNullOrEmpty(projectConfiguration.ProjectName) &&
+                   !string.IsNullOrEmpty(projectConfiguration.AssemblyName)
+                   && !string.IsNullOrEmpty(projectConfiguration.Environment) &&
+                   !string.IsNullOrEmpty(projectConfiguration.TestDescription);
         }
     }
 }
