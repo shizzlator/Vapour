@@ -70,6 +70,7 @@
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -122,7 +123,10 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExtensionsClass.cs" />
+    <Compile Include="TeamCityAssemblyDownloader.cs" />
     <Compile Include="Controllers\AssemblyUploadController.cs" />
+    <Compile Include="IAssemblyDownloader.cs" />
     <Compile Include="Models\ITestOutputModelFactory.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Models\TestOutputModel.cs" />
