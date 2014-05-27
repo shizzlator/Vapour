@@ -1,12 +1,13 @@
 ﻿using System;
 using System.IO;
+using System.IO.Compression;
 using System.Net;
+using Vapour.Domain;
 using Vapour.Domain.Configuration;
 using Vapour.Domain.DataAccess;
 using Vapour.Domain.Models;
-using System.IO.Compression;
 
-namespace Vapour.API
+namespace Vapour.API.Helpers
 {
     public class TeamCityAssemblyDownloader : IAssemblyDownloader
     {
@@ -46,9 +47,13 @@ namespace Vapour.API
             }
         }
 
-        public string PrepareArtifactDownloadUrl(string artifactUrl, ProjectConfiguration projConfiguration)
+        private string PrepareArtifactDownloadUrl(string artifactUrl, ProjectConfiguration projConfiguration)
         {
-            return artifactUrl.Replace("VAPOUR_PROJ_NAME", projConfiguration.AssemblyName);
+            //remove trailing /
+            if (artifactUrl.StartsWith("/"))
+                artifactUrl = artifactUrl.TrimStart("/".ToCharArray());
+
+            return _config.TeamCityUrl + artifactUrl.Replace("VAPOUR_PROJ_NAME", projConfiguration.AssemblyName);
         }
 
         private void ExtractNuPkg(string nupkgPath, string destPath)

@@ -2,6 +2,7 @@
 using Moq;
 using NUnit.Framework;
 using Vapour.API;
+using Vapour.API.Helpers;
 using Vapour.Domain.Configuration;
 using Vapour.Domain.DataAccess;
 using Vapour.Domain.Models;

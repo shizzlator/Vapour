@@ -1,6 +1,6 @@
 ﻿using Vapour.Domain.Models;
 
-namespace Vapour.API
+namespace Vapour.Domain
 {
     public interface IAssemblyDownloader
     {

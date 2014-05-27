@@ -73,6 +73,8 @@
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="DataAccess\MongoDbSession.cs" />
     <Compile Include="DataAccess\ProjectConfigurationRepository.cs" />
+    <Compile Include="ExtensionsClass.cs" />
+    <Compile Include="IAssemblyDownloader.cs" />
     <Compile Include="TestRunner\IAssemblyConfigWriter.cs" />
     <Compile Include="Configuration\IConfig.cs" />
     <Compile Include="DataAccess\IProjectConfigurationRepository.cs" />

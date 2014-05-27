@@ -123,10 +123,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExtensionsClass.cs" />
-    <Compile Include="TeamCityAssemblyDownloader.cs" />
+    <Compile Include="Helpers\TeamCityAssemblyDownloader.cs" />
     <Compile Include="Controllers\AssemblyUploadController.cs" />
-    <Compile Include="IAssemblyDownloader.cs" />
     <Compile Include="Models\ITestOutputModelFactory.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Models\TestOutputModel.cs" />

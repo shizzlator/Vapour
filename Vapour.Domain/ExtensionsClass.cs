@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Vapour.API
+namespace Vapour.Domain
 {
     public static class ExtensionMethods
     {

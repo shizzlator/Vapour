@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Http;
+using Vapour.API.Helpers;
 using Vapour.API.Models;
 using Vapour.Domain.Configuration;
 using Vapour.Domain.DataAccess;
@@ -33,9 +34,11 @@ namespace Vapour.API.Controllers
             var queryString = HttpContext.Current.Request.QueryString;
             var artifactsUrl = queryString["artifactUrl"];
 
-            var tcAssemblyDownloader = new TeamCityAssemblyDownloader(_config, _projectConfigurationRepository);
-            tcAssemblyDownloader.DownloadAssembly(projectConfiguration, artifactsUrl);
-
+            if (artifactsUrl != null)
+            {
+                var tcAssemblyDownloader = new TeamCityAssemblyDownloader(_config, _projectConfigurationRepository);
+                tcAssemblyDownloader.DownloadAssembly(projectConfiguration, artifactsUrl);
+            }
             var testResult = _testRunner.RunTests(projectConfiguration);
 
             return _testOutputModelFactory.Create(testResult);
