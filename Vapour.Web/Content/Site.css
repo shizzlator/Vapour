@@ -71,10 +71,21 @@ input[type="checkbox"].input-validation-error {
 .navbar-brand { overflow: hidden; }
 .fa.logo-icon { margin-top: -20px; }
 
+.test-runner { position: relative; }
+
+.spinner-container {
+  padding: 24px;
+  border-radius: 4px;
+  box-shadow: 0 0 12px rgba(0,0,0,.25);
+  position: absolute;
+  top: 44px;
+  left: 45%;
+}
+
 .spinner {
-  margin: 100px auto;
-  width: 32px;
-  height: 32px;
+  margin: 0 auto;
+  width: 54px;
+  height: 54px;
   position: relative;
 }
 
