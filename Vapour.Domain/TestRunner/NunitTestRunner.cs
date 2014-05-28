@@ -36,7 +36,10 @@ namespace Vapour.Domain.TestRunner
             var testPackage = new TestPackage(pathToAssembly);
             remoteTestRunner.Load(testPackage);
 
-            return remoteTestRunner.Run(new NullListener(), TestFilter.Empty, false, LoggingThreshold.Error);
+            var testResult = remoteTestRunner.Run(new NullListener(), TestFilter.Empty, false, LoggingThreshold.Error);
+
+            CoreExtensions.Host.UnloadService();
+            return testResult;
         }
 
         private void WriteConfig(ProjectConfiguration projectConfiguration)
