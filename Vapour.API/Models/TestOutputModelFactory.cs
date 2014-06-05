@@ -14,12 +14,12 @@ namespace Vapour.API.Models
             return new TestOutputModel { Message = "Some Tests Failed!", Success = testResult.IsSuccess, FailedTests = PoulateFailedTestsCollection(GetFailedTests(GetTestResults(testResult))) };
         }
 
-        private List<TestResult> GetFailedTests(List<TestResult> testResults)
+        private IEnumerable<TestResult> GetFailedTests(IEnumerable<TestResult> testResults)
         {
             return testResults.Where(testResult => testResult.IsFailure).ToList();
         }
 
-        private static List<TestResult> GetTestResults(TestResult result)
+        private static IEnumerable<TestResult> GetTestResults(TestResult result)
         {
             while (true)
             {
@@ -31,7 +31,7 @@ namespace Vapour.API.Models
             }
         }
 
-        private static List<TestResultModel> PoulateFailedTestsCollection(List<TestResult> testResults)
+        private static List<TestResultModel> PoulateFailedTestsCollection(IEnumerable<TestResult> testResults)
         {
             return testResults.Select(testResult => new TestResultModel
             {

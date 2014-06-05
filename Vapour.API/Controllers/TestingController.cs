@@ -1,6 +1,5 @@
 ﻿using System.Web.Http;
 using Vapour.API.Models;
-using Vapour.Domain.DataAccess;
 using Vapour.Domain.Models;
 using Vapour.Domain.TestRunner;
 
@@ -17,7 +16,8 @@ namespace Vapour.API.Controllers
             _testOutputModelFactory = testOutputModelFactory;
         }
 
-        public TestingController() : this(new NunitTestRunner(), new TestOutputModelFactory())
+        public TestingController()
+            : this(new NunitTestRunner(), new TestOutputModelFactory())
         {
         }
 

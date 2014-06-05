@@ -1,31 +1,32 @@
 ﻿@model Vapour.Domain.Models.ProjectConfiguration
 
 @{
-    ViewBag.Title = Model.ProjectName;
+    Page.Title = Model.ProjectName;
     Layout = "../Shared/_Layout.cshtml";
 }
-<script>
-    $(function () {
-        $.ajax({
-            url: '@ViewBag.RunTestApiUrl',
-            dataType: 'jsonp',
-            crossDomain: true,
-            type: 'GET',
-            success: function (data) {
-                $('#results').text(JSON.stringify(data));
-            }
-        });
-    });
-</script>
 
-<h2>Running smoke test</h2>
+<div class="test-runner" ng-controller="testRunnerCtrl" ng-init="initialize('@ViewBag.RunTestApiUrl')">
+    <h2>Running smoke test</h2>
 
-<div class="spinner">
-  <div class="cube1"></div>
-  <div class="cube2"></div>
+    <div class="spinner-container" ng-show="loading">
+        <div class="spinner">
+          <div class="cube1"></div>
+          <div class="cube2"></div>
+        </div>
+    </div>
+
+    <div class="panel panel-default" ng-hide="loading" ng-class="{'panel-danger' : !results.success, 'panel-success' : results.success}">
+      <div class="panel-heading">
+        <h3 class="panel-title">Results</h3>
+      </div>
+      <div class="panel-body">
+        {{results.content}}
+      </div>
+    </div>
 </div>
 
 
-
-<textarea id="results" style="width:500px; height:500px">Loading....</textarea>
-
+@section scripts
+{
+    <script type="text/javascript" src="~/Scripts/vapour_testRunnerCtrl.js"></script>
+}
