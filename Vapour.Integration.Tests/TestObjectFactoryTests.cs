@@ -53,7 +53,7 @@ namespace Vapour.Integration.Tests
             _config.Setup(x => x.AssemblyStorePath).Returns(_testAssembliesDirectory);
             _testAssemblyConfigFile = _projectConfiguration.GetAssemblyConfigPathFor(_testAssembliesDirectory);
 
-            var assemblyWriter = new AssemblyConfigWriter(new StreamWriterWrapper(), new ProjectConfigurationRepository(), _config.Object);
+            var assemblyWriter = new AssemblyConfigWriter(new ProjectConfigurationRepository(), _config.Object);
             _nunitTestRunner = new NunitTestRunner(assemblyWriter, _config.Object, _projectConfigurationRepository);
         }
 

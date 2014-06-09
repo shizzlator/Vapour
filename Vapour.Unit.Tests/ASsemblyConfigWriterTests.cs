@@ -36,7 +36,7 @@ namespace Vapour.Unit.Tests
             _fakeStreamWriter = new Mock<IStreamWriterWrapper>();
             _fakeProjectConfigRepository = new Mock<IProjectConfigurationRepository>();
             _fakeConfig = new Mock<IConfig>();
-            _assemblyConfigWriter = new AssemblyConfigWriter(_fakeStreamWriter.Object, _fakeProjectConfigRepository.Object, _fakeConfig.Object);
+            _assemblyConfigWriter = new AssemblyConfigWriter(_fakeProjectConfigRepository.Object, _fakeConfig.Object);
 
             _fakeConfig.Setup(x => x.AssemblyStorePath).Returns("D:\\Vapour\\Projects\\");
             _fakeProjectConfigRepository.Setup(x => x.Get(_projectConfig)).Returns(_projectConfig);

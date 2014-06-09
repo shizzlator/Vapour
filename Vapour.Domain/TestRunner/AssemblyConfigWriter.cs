@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Xml;
+using System.Xml.Linq;
 using Vapour.Domain.Configuration;
 using Vapour.Domain.DataAccess;
 using Vapour.Domain.Models;
@@ -7,20 +10,18 @@ namespace Vapour.Domain.TestRunner
 {
     public class AssemblyConfigWriter : IAssemblyConfigWriter
     {
-        private readonly IStreamWriterWrapper _streamWriter;
         private readonly IProjectConfigurationRepository _projectConfigurationRepository;
         private readonly IConfig _config;
 
-        public AssemblyConfigWriter(IStreamWriterWrapper streamWriter, IProjectConfigurationRepository projectConfigurationRepository, IConfig config)
+        public AssemblyConfigWriter() : this(new ProjectConfigurationRepository(), new Config())
         {
-            _streamWriter = streamWriter;
-            _projectConfigurationRepository = projectConfigurationRepository;
-            _config = config;
         }
 
-        public AssemblyConfigWriter() : this(new StreamWriterWrapper(), new ProjectConfigurationRepository(), new Config())
-        {
-        }
+		internal AssemblyConfigWriter(IProjectConfigurationRepository projectConfigurationRepository, IConfig config)
+		{
+			_projectConfigurationRepository = projectConfigurationRepository;
+			_config = config;
+		}
 
         public void WriteConfigFor(ProjectConfiguration projectConfiguration)
         {
@@ -30,19 +31,24 @@ namespace Vapour.Domain.TestRunner
             WriteConfig(path, projectConfiguration.ConfigurationCollection);
         }
 
-        private void WriteConfig(string path, IDictionary<string, string> appSettings)
+        private void WriteConfig(string path, IDictionary<string, string> newAppSettings)
         {
-            using (_streamWriter.CreateFile(path))
-            {
-                _streamWriter.WriteLine(@"<?xml version=""1.0"" encoding=""utf-8""?><configuration><appSettings>");
-                foreach (var appSetting in appSettings)
-                {
-                    _streamWriter.WriteLine(string.Format(@"<add key=""{0}"" value=""{1}"" />", appSetting.Key, appSetting.Value));
-                }
-                _streamWriter.WriteLine(@"</appSettings></configuration>");
-            }
+			XDocument document = XDocument.Load(path);
+	        IEnumerable<XElement> appSettings = document.Root.Elements().Where(x => x.Name.LocalName == "appSettings");
+
+	        foreach (XElement element in appSettings.Descendants())
+	        {
+		        if (element.Name == "add")
+		        {
+			        string key = element.Attribute("key").Value;
+			        if (newAppSettings.ContainsKey(key))
+			        {
+				        element.Attribute("value").Value = newAppSettings[key];
+			        }
+		        }
+	        }
+
+	        document.Save(path);
         }
-
-
     }
 }
