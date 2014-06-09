@@ -49,7 +49,7 @@ namespace Vapour.Unit.Tests
 			_assemblyConfigWriter.WriteConfigFor(_projectConfig);
 
 			// then
-			_fakeStreamWriter.Verify(x => x.CreateFile("D:\\Vapour\\Projects\\AppYours\\Smoke\\AppYours.Smoke.Tests.dll.config"), Times.Once);
+			_fakeStreamWriter.Verify(x => x.CreateFile("D:\\Vapour\\Projects\\AppYours\\TeamDave\\Smoke\\AppYours.Smoke.Tests.dll.config"), Times.Once);
         }
 
         [Test]

@@ -85,7 +85,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="TestAssemblies\FakeProject\Smoke\FakeProject.Tests.dll">
+    <Content Include="TestAssemblies\FakeProject\Development\Smoke\FakeProject.Tests.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
