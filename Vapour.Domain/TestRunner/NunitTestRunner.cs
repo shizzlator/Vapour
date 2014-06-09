@@ -25,9 +25,25 @@ namespace Vapour.Domain.TestRunner
 
         public TestResult RunTests(ProjectConfiguration projectConfiguration)
         {
-            CoreExtensions.Host.InitializeService();
+			string projectName = projectConfiguration.ProjectName;
+			if (string.IsNullOrEmpty(projectName))
+				throw new ArgumentNullException("projectConfiguration", "The projectConfiguration contained an empty id");
 
+			string description = projectConfiguration.TestDescription;
+			if (string.IsNullOrEmpty(projectName))
+				throw new ArgumentNullException("projectConfiguration", "The projectConfiguration contained an empty description");
+
+			string environment = projectConfiguration.Environment;
+			if (string.IsNullOrEmpty(projectName))
+				throw new ArgumentNullException("projectConfiguration", "The projectConfiguration contained an empty environment");
+
+            CoreExtensions.Host.InitializeService();
+	        
+			// Look up the full object from MongoDB
             projectConfiguration = _projectConfigurationRepository.Get(projectConfiguration);
+	        if (projectConfiguration == null)
+		        throw new InvalidOperationException(string.Format("MongoDB returned a null projectConfiguration for: project name:{0}, description:{1}, environment: {2} ",
+					projectName, description, environment));
 
             WriteConfig(projectConfiguration);
             string pathToAssembly = projectConfiguration.GetAssemblyPathFor(_config.AssemblyStorePath);

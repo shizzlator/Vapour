@@ -31,6 +31,7 @@ namespace Vapour.Domain.Models
 		{
 			return Path.Combine(assemblyStorePath.TrimEnd(@"\".ToCharArray()),
 				ProjectName,
+				Environment,
 				TestDescription,
 				AssemblyName +".dll");
 		}

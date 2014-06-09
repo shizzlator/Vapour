@@ -60,8 +60,7 @@ namespace Vapour.API.Controllers
 
         private string GetAssemblyPathFor(ProjectConfiguration projectConfiguration)
         {
-            return string.Format("{0}\\{1}\\{2}\\", _config.AssemblyStorePath.TrimEnd("\\".ToCharArray()),
-                projectConfiguration.ProjectName, projectConfiguration.TestDescription);
+	        return projectConfiguration.GetAssemblyConfigPathFor(_config.AssemblyStorePath);
         }
     }
 }

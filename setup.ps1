@@ -45,6 +45,7 @@ import-module WebAdministration
 
 # The current location should be the master/trunk root of Vapour
 $pwd = pwd
+Write-Host "$pwd is the root folder for IIS." -ForegroundColor Green
 
 if ((Test-Path -path iis:) -ne $True)
 {
@@ -99,8 +100,8 @@ catch
 }
 
 # Create the sites
-New-Item IIS:\Sites\Vapour -bindings @{protocol="http"; bindingInformation=":85:*"} -physicalPath $pwd\Vapour.Web -force
-New-Item IIS:\Sites\Vapour.Api -bindings @{protocol="http"; bindingInformation=":8040:*"} -physicalPath $pwd\Vapour.Api -force
+New-Item IIS:\Sites\Vapour -bindings @{protocol="http"; bindingInformation=":85:"} -physicalPath $pwd\Vapour.Web -force
+New-Item IIS:\Sites\Vapour.Api -bindings @{protocol="http"; bindingInformation=":8040:"} -physicalPath $pwd\Vapour.Api -force
 Write-Host "Vapour sites created on ports 8040 and 8041" -ForegroundColor Green
 
 # Create the app pools
