@@ -40,5 +40,13 @@ namespace Vapour.API.Models
                 StackTrace = testResult.StackTrace
             }).ToList();
         }
+
+		private void ParseTestResult(TestResult testResult)
+	    {
+			while (testResult.Results.Count > 0 && testResult.Test != null && testResult.Test.TestType != "Method")
+			{
+				
+			}
+	    }
     }
 }
