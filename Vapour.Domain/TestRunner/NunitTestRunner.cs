@@ -6,25 +6,26 @@ using Vapour.Domain.Models;
 
 namespace Vapour.Domain.TestRunner
 {
-    public class NunitTestRunner : ITestRunner
+    public class NUnitTestRunner : ITestRunner
     {
         private readonly IAssemblyConfigWriter _assemblyConfigWriter;
         private readonly IConfig _config;
         private readonly IProjectConfigurationRepository _projectConfigurationRepository;
 
-        public NunitTestRunner(IAssemblyConfigWriter assemblyConfigWriter, IConfig config, IProjectConfigurationRepository projectConfigurationRepository)
+        public NUnitTestRunner(IAssemblyConfigWriter assemblyConfigWriter, IConfig config, IProjectConfigurationRepository projectConfigurationRepository)
         {
             _assemblyConfigWriter = assemblyConfigWriter;
             _config = config;
             _projectConfigurationRepository = projectConfigurationRepository;
         }
 
-        public NunitTestRunner() : this(new AssemblyConfigWriter(), new Config(), new ProjectConfigurationRepository())
+        public NUnitTestRunner() : this(new AssemblyConfigWriter(), new Config(), new ProjectConfigurationRepository())
         {
         }
 
         public TestResult RunTests(ProjectConfiguration projectConfiguration)
         {
+			// Guards
 			string projectName = projectConfiguration.ProjectName;
 			if (string.IsNullOrEmpty(projectName))
 				throw new ArgumentNullException("projectConfiguration", "The projectConfiguration contained an empty id");
@@ -36,32 +37,32 @@ namespace Vapour.Domain.TestRunner
 			string environment = projectConfiguration.Environment;
 			if (string.IsNullOrEmpty(projectName))
 				throw new ArgumentNullException("projectConfiguration", "The projectConfiguration contained an empty environment");
-
+			
             CoreExtensions.Host.InitializeService();
 	        
 			// Look up the full object from MongoDB
             projectConfiguration = _projectConfigurationRepository.Get(projectConfiguration);
 	        if (projectConfiguration == null)
-		        throw new InvalidOperationException(string.Format("MongoDB returned a null projectConfiguration for: project name:{0}, description:{1}, environment: {2} ",
-					projectName, description, environment));
+	        {
+		        throw new VapourException(
+			        string.Format("MongoDB returned a null projectConfiguration for: project name:{0}, description:{1}, environment: {2} ",
+									projectName, description, environment));
+	        }
 
-            WriteConfig(projectConfiguration);
+	        // Write the .config file
+			if (projectConfiguration.ConfigurationCollection != null && projectConfiguration.ConfigurationCollection.Count > 0)
+				_assemblyConfigWriter.WriteConfigFor(projectConfiguration);
+
             string pathToAssembly = projectConfiguration.GetAssemblyPathFor(_config.AssemblyStorePath);
 
             var remoteTestRunner = new RemoteTestRunner();
             var testPackage = new TestPackage(pathToAssembly);
             remoteTestRunner.Load(testPackage);
 
-            var testResult = remoteTestRunner.Run(new NullListener(), TestFilter.Empty, false, LoggingThreshold.Error);
+            TestResult testResult = remoteTestRunner.Run(new NullListener(), TestFilter.Empty, false, LoggingThreshold.Error);
 
             CoreExtensions.Host.UnloadService();
             return testResult;
-        }
-
-        private void WriteConfig(ProjectConfiguration projectConfiguration)
-        {
-            if(projectConfiguration.ConfigurationCollection != null && projectConfiguration.ConfigurationCollection.Count > 0)
-                _assemblyConfigWriter.WriteConfigFor(projectConfiguration);
         }
 
         public TestResult RunTests(ProjectConfiguration projectConfiguration, string testFixtureName)

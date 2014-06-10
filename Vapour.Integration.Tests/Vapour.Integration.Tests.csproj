@@ -59,11 +59,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyConfigWriterTests.cs" />
     <Compile Include="NunitTestRunnerTests.cs" />
     <Compile Include="ProjectConfigurationRepositoryTests.cs" />
-    <Compile Include="ProjectConfigurationServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestObjectFactoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

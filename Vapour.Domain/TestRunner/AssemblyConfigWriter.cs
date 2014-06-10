@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
@@ -27,13 +28,16 @@ namespace Vapour.Domain.TestRunner
         {
             projectConfiguration = _projectConfigurationRepository.Get(projectConfiguration);
             string path = projectConfiguration.GetAssemblyConfigPathFor(_config.AssemblyStorePath);
-
-            WriteConfig(path, projectConfiguration.ConfigurationCollection);
+	        if (!File.Exists(path))
+		        return;
+			
+			XDocument document = XDocument.Load(path);
+            UpdateKeys(document, projectConfiguration.ConfigurationCollection);
+			document.Save(path);
         }
 
-        private void WriteConfig(string path, IDictionary<string, string> newAppSettings)
+        internal void UpdateKeys(XDocument document, IDictionary<string, string> newAppSettings)
         {
-			XDocument document = XDocument.Load(path);
 	        IEnumerable<XElement> appSettings = document.Root.Elements().Where(x => x.Name.LocalName == "appSettings");
 
 	        foreach (XElement element in appSettings.Descendants())
@@ -47,8 +51,6 @@ namespace Vapour.Domain.TestRunner
 			        }
 		        }
 	        }
-
-	        document.Save(path);
         }
     }
 }

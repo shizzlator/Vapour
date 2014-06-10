@@ -29,11 +29,14 @@ namespace Vapour.Domain.Models
 
 		public string GetAssemblyPathFor(string assemblyStorePath)
 		{
-			return Path.Combine(assemblyStorePath.TrimEnd(@"\".ToCharArray()),
-				ProjectName,
-				Environment,
-				TestDescription,
-				AssemblyName +".dll");
+			// No trailing slash
+			assemblyStorePath = assemblyStorePath.TrimEnd(@"\".ToCharArray());
+
+			return Path.Combine(assemblyStorePath,
+								ProjectName,
+								Environment,
+								TestDescription,
+								AssemblyName +".dll");
 		}
 
 		public string GetAssemblyConfigPathFor(string assemblyStorePath)

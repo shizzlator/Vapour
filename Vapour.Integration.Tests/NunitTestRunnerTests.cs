@@ -19,17 +19,13 @@ namespace Vapour.Integration.Tests
         private ProjectConfiguration _projectConfiguration;
         private Dictionary<string, string> _configurationCollection;
         private Mock<IConfig> _config;
-        private NunitTestRunner _nunitTestRunner;
-	    private string _testAssembliesDirectory;
-		private string _testAssemblyConfigFile;
-
+	    private Mock<IAssemblyConfigWriter> _mockAssemblyWriter;
+        private NUnitTestRunner _nunitTestRunner;
+	    private string _assemblyPath;
         
         [SetUp]
         public void SetUp()
         {
-			// .\ProjectName\Description\FakeProject.Tests.dll is copied as content on the build
-	        _testAssembliesDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestAssemblies");
-
             _configurationCollection = new Dictionary<string, string>()
             {
 	            { "baseUrl", "blah.com" }, 
@@ -49,19 +45,18 @@ namespace Vapour.Integration.Tests
             _projectConfigurationRepository = new ProjectConfigurationRepository(_databaseSession);
             _projectConfigurationRepository.Save(_projectConfiguration);
 
+	        _assemblyPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestAssemblies");
             _config = new Mock<IConfig>();
-			_config.Setup(x => x.AssemblyStorePath).Returns(_testAssembliesDirectory);
-	        _testAssemblyConfigFile = _projectConfiguration.GetAssemblyConfigPathFor(_testAssembliesDirectory);
+			_config.Setup(x => x.AssemblyStorePath).Returns(_assemblyPath);
 
-	        var assemblyWriter = new AssemblyConfigWriter(new ProjectConfigurationRepository(), _config.Object);
-			_nunitTestRunner = new NunitTestRunner(assemblyWriter, _config.Object, _projectConfigurationRepository);
+			_mockAssemblyWriter = new Mock<IAssemblyConfigWriter>();
+			_nunitTestRunner = new NUnitTestRunner(_mockAssemblyWriter.Object, _config.Object, _projectConfigurationRepository);
         }
 
 	    [TearDown]
         public void TearDown()
         {
             _databaseSession.GetCollection<ProjectConfiguration>().RemoveAll();
-		    //File.Delete(_testAssemblyConfigFile);
         }
 
         [Test]
@@ -78,31 +73,11 @@ namespace Vapour.Integration.Tests
         [Test]
 		public void RunTests_should_write_appconfig_file()
         {
-			// given
-			string configPath = _projectConfiguration.GetAssemblyConfigPathFor(_testAssembliesDirectory);
-
-			// when
+			// given + when
 			_nunitTestRunner.RunTests(_projectConfiguration);
 
 			// then
-			Assert.That(File.Exists(configPath), Is.True);
-        }
-
-        [Test]
-		[Ignore("TODO: Fix")]
-		public void RunTests_should_not_write_appconfig_file_when_no_projects_configuration_exists()
-        {
-			// given
-			_databaseSession.GetCollection<ProjectConfiguration>().RemoveAll();
-			_projectConfiguration.ConfigurationCollection.Clear();
-			_projectConfigurationRepository.Save(_projectConfiguration);
-			string configPath = _projectConfiguration.GetAssemblyConfigPathFor(_testAssembliesDirectory);
-
-			// when
-			_nunitTestRunner.RunTests(_projectConfiguration);
-
-			// then
-			Assert.That(File.Exists(configPath), Is.False);
+			_mockAssemblyWriter.Verify(x => x.WriteConfigFor(It.IsAny<ProjectConfiguration>()));
         }
     }
 }

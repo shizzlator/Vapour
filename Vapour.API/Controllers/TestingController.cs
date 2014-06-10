@@ -17,7 +17,7 @@ namespace Vapour.API.Controllers
             _testOutputModelFactory = testOutputModelFactory;
         }
 
-        public TestingController() : this(new NunitTestRunner(), new TestOutputModelFactory())
+        internal TestingController() : this(new NUnitTestRunner(), new TestOutputModelFactory())
         {
         }
 

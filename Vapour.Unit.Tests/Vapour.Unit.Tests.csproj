@@ -64,6 +64,7 @@
     <Compile Include="AssemblyConfigWriterTests.cs" />
     <Compile Include="ProjectsViewModelFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestObjectFactoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -73,6 +74,10 @@
     <ProjectReference Include="..\Vapour.API.Client\Vapour.API.Client.csproj">
       <Project>{90F2D168-195E-4A44-B7CB-7FD833BAA123}</Project>
       <Name>Vapour.API.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Vapour.API\Vapour.API.csproj">
+      <Project>{1933bb33-c356-4a31-b952-9d7d4ae3b54a}</Project>
+      <Name>Vapour.API</Name>
     </ProjectReference>
     <ProjectReference Include="..\Vapour.Domain\Vapour.Domain.csproj">
       <Project>{5D9C4651-7E27-422A-B574-C9FC2CE3F5AB}</Project>

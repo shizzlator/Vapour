@@ -1,77 +1,96 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Xml.Linq;
 using Moq;
 using NUnit.Framework;
 using Vapour.Domain.Configuration;
 using Vapour.Domain.DataAccess;
 using Vapour.Domain.Models;
 using Vapour.Domain.TestRunner;
+using System.Linq;
+using System.Xml;
 
 namespace Vapour.Unit.Tests
 {
-    [TestFixture]
-    public class AssemblyConfigWriterTests
-    {
-        private ProjectConfiguration _projectConfig;
-        private Mock<IStreamWriterWrapper> _fakeStreamWriter;
-        private Mock<IProjectConfigurationRepository> _fakeProjectConfigRepository;
-        private Mock<IConfig> _fakeConfig;
-        private AssemblyConfigWriter _assemblyConfigWriter;
+	[TestFixture]
+	public class AssemblyConfigWriterTests
+	{
+		private const string _xml = @"<?xml version=""1.0"" encoding=""utf-8"" ?>
+<configuration>
+	<appSettings>
+		<!-- A comment-->
+		<add key=""Host"" value=""localhost"" />
+		<add key=""Port"" value=""5051"" />
 
-        [SetUp]
-        public void SetUp()
-        {
-            _projectConfig = new ProjectConfiguration
-            {
-                ProjectName = "AppYours",
-                AssemblyName = "AppYours.Smoke.Tests",
-                Environment = "TeamDave",
-                TestDescription = "Smoke",
-                ConfigurationCollection = new Dictionary<string, string>
-                {
-	                { "baseUrl", "www.something.com" }, 
-					{ "somekey", "somevalue" }
-                }
-            };
+		<add key=""Folder"" value=""d:\mailroot\pickup"" />
 
-            _fakeStreamWriter = new Mock<IStreamWriterWrapper>();
-            _fakeProjectConfigRepository = new Mock<IProjectConfigurationRepository>();
-            _fakeConfig = new Mock<IConfig>();
-            _assemblyConfigWriter = new AssemblyConfigWriter(_fakeProjectConfigRepository.Object, _fakeConfig.Object);
+		<!-- Urls for webdriver tests -->
+		<add key=""Url"" value=""http://localhost:8072/bar.asmx"" />
+		<add key=""OtherUrl"" value=""http://localhost:8001/"" />
+		<add key=""CurrentUrl"" value=""http://localhost:8001/foo.aspx"" />
+	</appSettings>
 
-            _fakeConfig.Setup(x => x.AssemblyStorePath).Returns("D:\\Vapour\\Projects\\");
-            _fakeProjectConfigRepository.Setup(x => x.Get(_projectConfig)).Returns(_projectConfig);
-        }
+	<system.serviceModel><thisShouldExist/></system.serviceModel></configuration>";
 
-        [Test]
-		public void WriteConfigFor_should_write_file_to_configured_path()
-        {
-			// given + when
-			_assemblyConfigWriter.WriteConfigFor(_projectConfig);
+		private ProjectConfiguration _projectConfig;
+		private Mock<IProjectConfigurationRepository> _fakeProjectConfigRepository;
+		private Mock<IConfig> _fakeConfig;
 
-			// then
-			_fakeStreamWriter.Verify(x => x.CreateFile("D:\\Vapour\\Projects\\AppYours\\TeamDave\\Smoke\\AppYours.Smoke.Tests.dll.config"), Times.Once);
-        }
+		[SetUp]
+		public void SetUp()
+		{
+			_projectConfig = new ProjectConfiguration();
 
-        [Test]
-		public void WriteConfigFor_should_writeout_appsettings_from_given_project_configuration_object()
-        {
-			// given + when
-            _assemblyConfigWriter.WriteConfigFor(_projectConfig);
+			_fakeProjectConfigRepository = new Mock<IProjectConfigurationRepository>();
+			_fakeConfig = new Mock<IConfig>();
+		}
+
+		[Test]
+		public void UpdateKeys_should_keep_existing_elements()
+	    {
+			// given
+			var assemblyConfigWriter = new AssemblyConfigWriter(_fakeProjectConfigRepository.Object, _fakeConfig.Object);
+
+			StringReader reader = new StringReader(_xml);
+		    XDocument document = XDocument.Load(reader);
+
+			var appSettings = new Dictionary<string, string>();
+
+			// when
+			assemblyConfigWriter.UpdateKeys(document, appSettings);
 
 			// then
-            _fakeStreamWriter.Verify(x => x.WriteLine(@"<add key=""baseUrl"" value=""www.something.com"" />"), Times.Once);
-            _fakeStreamWriter.Verify(x => x.WriteLine(@"<add key=""somekey"" value=""somevalue"" />"), Times.Once);
-        }
+			XElement element = document.Root.Descendants().FirstOrDefault(x => x.Name.LocalName == "thisShouldExist");
+			Assert.That(element, Is.Not.Null);
+	    }
 
-        [Test]
-		public void WriteConfigFor_should_write_out_beginning_and_end_of_configfile()
-        {
-			// given + when
-            _assemblyConfigWriter.WriteConfigFor(_projectConfig);
+		[Test]
+		public void UpdateKeys_should_replace_appsetting_values()
+		{
+			// given
+			var assemblyConfigWriter = new AssemblyConfigWriter(_fakeProjectConfigRepository.Object, _fakeConfig.Object);
+
+			StringReader reader = new StringReader(_xml);
+			XDocument document = XDocument.Load(reader);
+
+			var appSettings = new Dictionary<string, string>()
+		    {
+			    { "Folder", @"new folder"},
+				{ "CurrentUrl", "A new url" }
+		    };
+
+			// when
+			assemblyConfigWriter.UpdateKeys(document, appSettings);
 
 			// then
-            _fakeStreamWriter.Verify(x => x.WriteLine(@"<?xml version=""1.0"" encoding=""utf-8""?><configuration><appSettings>"), Times.Once);
-            _fakeStreamWriter.Verify(x => x.WriteLine(@"</appSettings></configuration>"), Times.Once);
-        }
-    }
+			IEnumerable<XElement> elements = document.Root.Descendants().Where(x => x.Name.LocalName == "add");
+
+			XElement addElement = elements.FirstOrDefault(x => x.Attribute("key").Value == "Folder");
+			Assert.That(addElement.Attribute("value").Value, Is.EqualTo("new folder"));
+
+			addElement = elements.FirstOrDefault(x => x.Attribute("key").Value == "CurrentUrl");
+			Assert.That(addElement.Attribute("value").Value, Is.EqualTo("A new url"));
+		}
+	}
 }
