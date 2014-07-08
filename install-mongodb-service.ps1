@@ -1,7 +1,7 @@
 # Create the logs and database data folders
 cd "C:\Program Files\MongoDB 2.6 Standard\"
-md logs
-md data\db
+md logs -F
+md data\db -F
 cd bin
 
 # Create the YAML config file
@@ -14,5 +14,5 @@ $config += "`n    logAppend: true"
 $config | Out-File mongod.cfg
 
 # Install Mongo as a service
-.\mongod --config "C:\Program Files\MongoDB 2.6 Standard\bin\mongod.cfg" --install --dbpath="C:\Program Files\MongoDB 2.6 Standard\data\db"
+.\mongod --config "C:\Program Files\MongoDB 2.6 Standard\bin\mongod.cfg" --install --smallfiles --dbpath="C:\Program Files\MongoDB 2.6 Standard\data\db"
 sc.exe start "MongoDB"

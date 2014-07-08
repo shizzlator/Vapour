@@ -34,6 +34,10 @@
     <br />
     <div class="container" role="main">
         @RenderBody()
+		
+	    <footer>
+		    Version: @VapourApplication.Version
+	    </footer>
     </div>
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

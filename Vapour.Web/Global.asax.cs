@@ -8,8 +8,16 @@ using System.Web.Routing;
 
 namespace Vapour.Web
 {
-    public class MvcApplication : System.Web.HttpApplication
+	public class VapourApplication : System.Web.HttpApplication
     {
+	    public static string Version
+	    {
+		    get
+		    {
+				return typeof(VapourApplication).Assembly.GetName().Version.ToString();
+		    }
+	    }
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
